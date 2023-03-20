@@ -1,0 +1,586 @@
+CHAPTER 10 - Basics of Mendeleev package
+
+Fetching properties of element
+from mendeleev import element
+print (element(27))		# fetching element from atomic number
+print(element('Mn').atomic_radius)
+print(element('Fe').molar_heat_capacity)
+print(element('C').phase_transitions)
+print(element('Si').lattice_constant)
+print(element('Cl').electron_affinity)
+>>>
+27 Co Cobalt	
+140.0
+25.1
+[6 Tm=4762.15 Tb=4098.15, 6 Tm=4713.15 Tb=None]
+5.43
+3.612725
+
+Following properties can be fetched from mendeleev import element.
+
+abundance_crust
+abundance_sea
+annotation
+atomic_number
+atomic_radius
+atomic_volume
+atomic_weight
+block
+cas
+covalent_radius_bragg
+cpk_color
+density
+description
+dipole_polarizability
+discoverers
+discovery_location
+discovery_year
+ec			# Electronic Configuration
+econf
+electron_affinity
+en_pauling		# electronegativity Pauling’s scale
+evaporation_heat
+fusion_heat
+gas_basicity
+geochemical_class
+goldschmidt_class
+group
+group_id
+heat_of_formation
+
+from mendeleev import element
+print(element('Mn').description)
+print(element('Mn').ec)
+print(element('Mn').econf)
+>>>
+Grey brittle metallic transition element. Rather electropositive, combines with some non-metals when heated. Discovered in 1774 by Scheele.
+1s2 2s2 2p6 3s2 3p6 3d5 4s2
+[Ar] 3d5 4s2
+
+Fetching oxidation states of an element
+With .oxistates, possible oxidation states of an element can be fetched.
+from mendeleev import element
+print(element('S').oxistates)
+print(element('Mn').oxistates)
+print(element('O').oxistates)
+>>>
+[-2, 2, 4, 6]
+[2, 3, 4, 6, 7]
+[-2]
+
+Ionization energies of an element
+from pprint import pprint
+from mendeleev import element
+pprint(element('He').ionenergies)
+print('')	
+pprint(element('Ru').ionenergies)
+>>>
+{1: 24.587387936, 2: 54.41776311}
+
+{1: 7.3605,
+ 2: 16.76,
+ 3: 28.47,
+ 4: 45.0,
+ 5: 59.0,
+ 6: 76.0,
+ 7: 93.0,
+ 8: 110.0,
+ 9: 178.4,
+ 10: 198.0,
+ 11: 219.9,
+ 12: 245.0,
+ 13: 271.0,
+ 14: 295.9,
+ 15: 348.0,
+ 16: 376.25,
+ 17: 670.0,
+ 18: 723.0,
+ 19: 784.0,
+ 20: 845.0,
+ 21: 905.0,
+ 22: 981.0,
+ 23: 1048.0,
+ 24: 1115.0,
+ 25: 1187.0,
+ 26: 1253.0,
+ 27: 1447.0,
+ 28: 1506.7,
+ 29: 1577.0,
+ 30: 1659.0,
+ 31: 1743.0,
+ 32: 1794.0,
+ 33: 1949.0,
+ 34: 2013.037,
+ 35: 4758.0,
+ 36: 4939.0,
+ 37: 5136.0,
+ 38: 5330.0,
+ 39: 5647.0,
+ 40: 5862.0,
+ 41: 6137.0,
+ 42: 6311.72,
+ 43: 26229.894,
+ 44: 27033.5}
+From this, specific ionization energy can be segregated based on the key value.
+
+Fetching Isotopic parameters
+With .isotopes, possible ionization energies of an element can be fetched.
+Following parameters can be fetched:
+abundance
+abundance_uncertainty
+atomic_number
+discovery_year
+g_factor
+g_factor_uncertainty
+half_life
+half_life_uncertainty
+half_life_unit
+is_radioactive
+mass
+mass_number
+mass_uncertainty
+parity
+quadrupole_moment
+quadrupole_moment_uncertainty
+spin
+from pprint import pprint
+from mendeleev import element
+pprint(element('U').isotopes)
+>>>
+[<Isotope(Z=92, A=215, mass=215.0267(1), abundance=None)>,
+ <Isotope(Z=92, A=216, mass=216.02476(3), abundance=None)>,
+ <Isotope(Z=92, A=217, mass=217.02466(9), abundance=None)>,
+ <Isotope(Z=92, A=218, mass=218.02350(1), abundance=None)>,
+ <Isotope(Z=92, A=219, mass=219.02501(1), abundance=None)>,
+ <Isotope(Z=92, A=220, mass=220.0247(1), abundance=None)>,
+ <Isotope(Z=92, A=221, mass=221.02632(8), abundance=None)>,
+ <Isotope(Z=92, A=222, mass=222.02606(6), abundance=None)>,
+ <Isotope(Z=92, A=223, mass=223.02796(6), abundance=None)>,
+ <Isotope(Z=92, A=224, mass=224.02764(2), abundance=None)>,
+ <Isotope(Z=92, A=225, mass=225.02939(1), abundance=None)>,
+ <Isotope(Z=92, A=226, mass=226.02934(1), abundance=None)>,
+ <Isotope(Z=92, A=227, mass=227.031181(9), abundance=None)>,
+ <Isotope(Z=92, A=228, mass=228.03137(1), abundance=None)>,
+ <Isotope(Z=92, A=229, mass=229.033506(6), abundance=None)>,
+ <Isotope(Z=92, A=230, mass=230.033940(5), abundance=None)>,
+ <Isotope(Z=92, A=231, mass=231.036292(3), abundance=None)>,
+ <Isotope(Z=92, A=232, mass=232.037155(2), abundance=None)>,
+ <Isotope(Z=92, A=233, mass=233.039634(2), abundance=None)>,
+ <Isotope(Z=92, A=234, mass=234.040950(1), abundance=0.0054(5))>,
+ <Isotope(Z=92, A=235, mass=235.043928(1), abundance=0.7204(6))>,
+ <Isotope(Z=92, A=236, mass=236.045566(1), abundance=None)>,
+ <Isotope(Z=92, A=237, mass=237.048728(1), abundance=None)>,
+ <Isotope(Z=92, A=238, mass=238.050787(2), abundance=99.274(1))>,
+ <Isotope(Z=92, A=239, mass=239.054292(2), abundance=None)>,
+ <Isotope(Z=92, A=240, mass=240.056592(3), abundance=None)>,
+ <Isotope(Z=92, A=241, mass=241.0603(2), abundance=None)>,
+ <Isotope(Z=92, A=242, mass=242.0629(2), abundance=None)>,
+ <Isotope(Z=92, A=243, mass=243.0671(3), abundance=None)>]
+
+# Fetching decay modes
+from pprint import pprint
+from mendeleev import isotope
+pprint(isotope("U", mass_number=235).decay_modes)	
+>>>
+[<IsotopeDecayMode(id=5003, isotope_id=3160, mode='A', intensity=100.0)>,
+ <IsotopeDecayMode(id=5004, isotope_id=3160, mode='SF', intensity=7.0)>,
+ <IsotopeDecayMode(id=5005, isotope_id=3160, mode='20Ne', intensity=8.0)>,
+ <IsotopeDecayMode(id=5006, isotope_id=3160, mode='25Ne', intensity=8.0)>,
+ <IsotopeDecayMode(id=5007, isotope_id=3160, mode='28Mg', intensity=8.0)>]
+
+
+
+
+
+
+ASCII  notations for various radioactive decay modes 
+
+from mendeleev import isotope
+print(isotope("U", mass_number=235))
+>>>
+atomic_number=   92, mass_number=  235, mass=235.043928(1), abundance=0.7204(6)
+
+Fetching ionic radii and crystal radii 
+from mendeleev import element
+from mendeleev import IonicRadius 
+for x in element('Fe').ionic_radii:
+    print(x)
+>>>
+charge=   2, coordination=IV   , crystal_radius=77.000, ionic_radius=63.000
+charge=   2, coordination=IVSQ , crystal_radius=78.000, ionic_radius=64.000
+charge=   2, coordination=VI   , crystal_radius=75.000, ionic_radius=61.000
+charge=   2, coordination=VI   , crystal_radius=92.000, ionic_radius=78.000
+charge=   2, coordination=VIII , crystal_radius=106.000, ionic_radius=92.000
+charge=   3, coordination=IV   , crystal_radius=63.000, ionic_radius=49.000
+charge=   3, coordination=V    , crystal_radius=72.000, ionic_radius=58.000
+charge=   3, coordination=VI   , crystal_radius=69.000, ionic_radius=55.000
+charge=   3, coordination=VI   , crystal_radius=78.500, ionic_radius=64.500
+charge=   3, coordination=VIII , crystal_radius=92.000, ionic_radius=78.000
+charge=   4, coordination=VI   , crystal_radius=72.500, ionic_radius=58.500
+charge=   6, coordination=IV   , crystal_radius=39.000, ionic_radius=25.000
+
+# import IonicRadius can fetch the related elemental properties
+from pprint import pprint
+from mendeleev import element
+from mendeleev import IonicRadius 
+pprint(element('Fe').nvalence)
+>>>
+<bound method Element.nvalence of Element(
+	abundance_crust=56300.0,
+ 	abundance_sea=0.002,
+ 	annotation='',
+ 	atomic_number=26,
+ 	atomic_radius=140.0,
+ 	atomic_radius_rahm=237.0,
+ 	atomic_volume=7.1,
+ 	atomic_weight=55.845,
+ 	atomic_weight_uncertainty=0.002,
+ 	block='d',
+ 	c6=482.0,
+ 	c6_gb=548.0,
+ 	cas='7439-89-6',
+ 	covalent_radius_bragg=140.0,
+ 	covalent_radius_cordero=142.0,
+ 	covalent_radius_pyykko=115.99999999999999,
+ 	covalent_radius_pyykko_double=109.0,
+ 	covalent_radius_pyykko_triple=102.0,
+ 	cpk_color='#ffa500',
+ 	density=7.87,
+  	dipole_polarizability=62.0,
+ 	dipole_polarizability_unc=4.0,
+ 	discoverers='Known to the ancients.',
+ 	discovery_location=None,
+ 	discovery_year=None,
+ 	ec=<ElectronicConfiguration(conf="1s2 2s2 2p6 3s2 3p6 3d6 4s2")>,
+ 	econf='[Ar] 3d6 4s2',
+ 	electron_affinity=0.151,
+ 	en_allen=10.64,
+ 	en_ghosh=0.13925320000000002,
+ 	en_pauling=1.83,
+ 	evaporation_heat=340.0,
+ 	fusion_heat=13.8,
+ 	gas_basicity=731.1,
+ 	geochemical_class='major',
+ 	glawe_number=71,
+ 	goldschmidt_class='siderophile',
+ 	group=<Group(symbol=VIIIB, name=)>,
+ 	group_id=8,
+ 	heat_of_formation=415.5,
+ 	ionic_radii=[IonicRadius(
+	atomic_number=26,
+ 	charge=2,
+ 	coordination='IV',
+ 	crystal_radius=77.0,
+ 	econf='3d6',
+ 	id=149,
+ 	ionic_radius=63.0,
+ 	most_reliable=False,
+ 	origin='',
+ 	spin='HS',
+), IonicRadius(
+	atomic_number=26,
+ 	charge=2,
+ 	coordination='IVSQ',
+ 	crystal_radius=78.0,
+ 	econf='3d6',
+ 	id=150,
+ 	ionic_radius=64.0,
+ 	most_reliable=False,
+ 	origin='',
+ 	spin='HS',
+), IonicRadius(
+	atomic_number=26,
+ 	charge=2,
+ 	coordination='VI',
+ 	crystal_radius=75.0,
+ 	econf='3d6',
+ 	id=151,
+ 	ionic_radius=61.0,
+ 	most_reliable=False,
+ 	origin='estimated, ',
+ 	spin='LS',
+), IonicRadius(
+	atomic_number=26,
+ 	charge=2,
+ 	coordination='VI',
+ 	crystal_radius=92.0,
+ 	econf='3d6',
+ 	id=152,
+ 	ionic_radius=78.0,
+ 	most_reliable=True,
+ 	origin='from r^3 vs V plots, ',
+ 	spin='HS',
+), IonicRadius(
+	atomic_number=26,
+ 	charge=2,
+ 	coordination='VIII',
+ 	crystal_radius=106.0,
+ 	econf='3d6',
+ 	id=153,
+ 	ionic_radius=92.0,
+ 	most_reliable=False,
+ 	origin='calculated, ',
+ 	spin='HS',
+), IonicRadius(
+	atomic_number=26,
+ 	charge=3,
+ 	coordination='IV',
+ 	crystal_radius=63.0,
+ 	econf='3d5',
+ 	id=154,
+ 	ionic_radius=49.0,
+ 	most_reliable=True,
+ 	origin='',
+ 	spin='HS',
+), IonicRadius(
+	atomic_number=26,
+ 	charge=3,
+ 	coordination='V',
+ 	crystal_radius=72.0,
+ 	econf='3d5',
+ 	id=155,
+ 	ionic_radius=57.99999999999999,
+ 	most_reliable=False,
+ 	origin='',
+ 	spin='',
+), IonicRadius(
+	atomic_number=26,
+ 	charge=3,
+ 	coordination='VI',
+ 	crystal_radius=69.0,
+ 	econf='3d5',
+ 	id=156,
+ 	ionic_radius=55.00000000000001,
+ 	most_reliable=False,
+ 	origin='from r^3 vs V plots, ',
+ 	spin='LS',
+), IonicRadius(
+	atomic_number=26,
+ 	charge=3,
+ 	coordination='VI',
+ 	crystal_radius=78.5,
+ 	econf='3d5',
+ 	id=157,
+ 	ionic_radius=64.5,
+ 	most_reliable=True,
+ 	origin='from r^3 vs V plots, ',
+ 	spin='HS',
+), IonicRadius(
+	atomic_number=26,
+ 	charge=3,
+ 	coordination='VIII',
+ 	crystal_radius=92.0,
+ 	econf='3d5',
+ 	id=158,
+ 	ionic_radius=78.0,
+ 	most_reliable=False,
+ 	origin='',
+ 	spin='HS',
+), IonicRadius(
+	atomic_number=26,
+ 	charge=4,
+ 	coordination='VI',
+ 	crystal_radius=72.5,
+ 	econf='3d4',
+ 	id=159,
+ 	ionic_radius=58.5,
+ 	most_reliable=False,
+ 	origin='from r^3 vs V plots, ',
+ 	spin='',
+), IonicRadius(
+	atomic_number=26,
+ 	charge=6,
+ 	coordination='IV',
+ 	crystal_radius=39.0,
+ 	econf='3d2',
+ 	id=160,
+ 	ionic_radius=25.0,
+ 	most_reliable=False,
+ 	origin='from r^3 vs V plots, ',
+ 	spin='',
+)],
+ 	is_monoisotopic=None,
+ 	is_radioactive=False,
+ 	isotopes=[<Isotope(Z=26, A=45, mass=45.0155(3), abundance=None)>, <Isotope(Z=26, A=46, mass=46.0013(3), abundance=None)>, <Isotope(Z=26, A=47, mass=46.9923(5), abundance=None)>, <Isotope(Z=26, A=48, mass=47.98067(10), abundance=None)>, <Isotope(Z=26, A=49, mass=48.97343(3), abundance=None)>, <Isotope(Z=26, A=50, mass=49.962988(9), abundance=None)>, <Isotope(Z=26, A=51, mass=50.956855(2), abundance=None)>, <Isotope(Z=26, A=52, mass=51.9481134(2), abundance=None)>, <Isotope(Z=26, A=53, mass=52.945306(2), abundance=None)>, <Isotope(Z=26, A=54, mass=53.9396082(4), abundance=5.8(1))>, <Isotope(Z=26, A=55, mass=54.9382912(3), abundance=None)>, <Isotope(Z=26, A=56, mass=55.9349355(3), abundance=91.8(1))>, <Isotope(Z=26, A=57, mass=56.9353920(3), abundance=2.12(3))>, <Isotope(Z=26, A=58, mass=57.9332736(3), abundance=0.28(1))>, <Isotope(Z=26, A=59, mass=58.9348735(4), abundance=None)>, <Isotope(Z=26, A=60, mass=59.934070(4), abundance=None)>, <Isotope(Z=26, A=61, mass=60.936746(3), abundance=None)>, <Isotope(Z=26, A=62, mass=61.936792(3), abundance=None)>, <Isotope(Z=26, A=63, mass=62.940273(5), abundance=None)>, <Isotope(Z=26, A=64, mass=63.940988(5), abundance=None)>, <Isotope(Z=26, A=65, mass=64.945015(5), abundance=None)>, <Isotope(Z=26, A=66, mass=65.946250(4), abundance=None)>, <Isotope(Z=26, A=67, mass=66.950930(4), abundance=None)>, <Isotope(Z=26, A=68, mass=67.9529(2), abundance=None)>, <Isotope(Z=26, A=69, mass=68.9579(2), abundance=None)>, <Isotope(Z=26, A=70, mass=69.9604(3), abundance=None)>, <Isotope(Z=26, A=71, mass=70.9657(4), abundance=None)>, <Isotope(Z=26, A=72, mass=71.9686(5), abundance=None)>, <Isotope(Z=26, A=73, mass=72.9742(5), abundance=None)>, <Isotope(Z=26, A=74, mass=73.9778(5), abundance=None)>, <Isotope(Z=26, A=75, mass=74.9842(6), abundance=None)>, <Isotope(Z=26, A=76, mass=75.9886(6), abundance=None)>],
+ 	jmol_color='#e06633',
+ 	lattice_constant=2.87,
+ 	lattice_structure='BCC',
+ 	mendeleev_number=59,
+ 	metallic_radius=117.0,
+ 	metallic_radius_c12=126.0,
+ 	molar_heat_capacity=25.1,
+ 	molcas_gv_color='#e06633',
+ 	name='Iron',
+ 	name_origin='Anglo-Saxon: iron; symbol from Latin: ferrum (iron).',
+ 	period=4,
+ 	pettifor_number=61,
+ 	phase_transitions=[26 Tm=1811.15 Tb=3134.15],
+ 	proton_affinity=754.0,
+ 	screening_constants=[<ScreeningConstant(Z=  26, n=  1, s=s, screening=    0.6190)>, <ScreeningConstant(Z=  26, n=  2, s=p, screening=    3.9112)>, <ScreeningConstant(Z=  26, n=  2, s=s, screening=    7.4010)>, <ScreeningConstant(Z=  26, n=  3, s=d, screening=   14.8202)>, <ScreeningConstant(Z=  26, n=  3, s=p, screening=   13.2221)>, <ScreeningConstant(Z=  26, n=  3, s=s, screening=   12.3239)>, <ScreeningConstant(Z=  26, n=  4, s=s, screening=   20.5660)>],   
+ 	sources='Obtained from iron ores. Pure metal produced in blast furnaces by layering limestone, coke and iron ore and forcing hot gasses into the bottom.  This heats the coke red hot and the iron is reduced from its oxides and liquified where it flows to the bottom'.
+ 	specific_heat_capacity=0.449,
+ 	symbol='Fe',
+ 	thermal_conductivity=80.4,
+ 	uses='Used in steel and other alloys. Essential for humans. It is the chief constituent of hemoglobin which carries oxygen in blood vessels. Its oxides are used in magnetic tapes and disks.',
+ 	vdw_radius=204.0,
+ 	vdw_radius_alvarez=244.0,
+ 	vdw_radius_batsanov=204.99999999999997,
+ 	vdw_radius_bondi=None,
+ 	vdw_radius_dreiding=None,
+ 	vdw_radius_mm3=223.0,
+ 	vdw_radius_rt=None,
+ 	vdw_radius_truhlar=None,
+ 	vdw_radius_uff=291.2,
+)>
+
+Effective nuclear charge 
+Calculate the effective nuclear charge for the electron in 4s orbital of Ca.
+Atomic number (Z) of Ca is 20. Electronic configuration is: 1s2 2s2 2p6 3s2 3p6 4s2
+It has 10 electrons in inner core (n = 1 & n = 2) or 2 electrons in n = 1 and 8 electrons in n = 2 and has 8 electrons in n = 3. Hence n = 4, (n–1) = 3 and (n–2) = 2... 
+Hence, (1s)2(2s,2p)8(3s,3p)8(4s,4p)2-1
+S = 1.00(#e-)n-2 + 0.85(#e-)n-1 + 0.35(#e-)n
+S = (2 x 1.00) + (8 x 1.00) + (8 x 0.85) + (1 x 0.35 = 17.15)
+Zeff = (Z – S) 20 - 17.15 = 2.85
+
+from mendeleev import element
+from mendeleev import IonicRadius
+print(element('Ca').zeff(n = 4, o ='s'))  # o for orbital sub shell
+>>>
+2.849999999999998
+
+Zeff for 6s1 electron in platinum (Z = 78)
+1s2 2s2 2p6 3s2 3p6 4s2 3d10 4p6 5s2 4d10 5p6 6s1 4f14 5d9
+(1s)2 (2s,2p)8 (3s,3p)8 (3d)10(4s, 4p)8 (4d)10 (4f)14 (5s,5p)8 (5d)9 (6s)1-1
+S = (1.00x2) + (1.00x8) + (1.00x8) + (1.00x10) + (1.00x8) + (1.00x10) + (1.00x14) + (0.85x17) = 74.45.
+Zeff = 78 - 74.45 = 3.55
+
+from mendeleev import element
+from mendeleev import IonicRadius
+print(element('Pt').zeff(n = 6, o ='s'))
+>>>
+3.549999999999997
+
+Zeff for 3d electron in Cu (Z = 29)
+1s2 2s2 2p6 3s2 3p6 3d10 4s1 
+(1s)2(2s,2p)8(3s,3p)8(3d)10-1(4s,4p)1 
+S = (2x1.00) + (8x1.00) + (8x1.00) + (9x0.35) = 21.15
+In this, ‘S’ value for 4s = 21.15 must be ignored, since its outer orbital.
+Zeff = 29 - 21.15 = 3.55
+
+from mendeleev import element
+from mendeleev import IonicRadius
+print(element('Cu').zeff(n = 3, o ='d'))
+>>>
+7.850000000000001
+
+With .zeff(n=n, o='orbital', method='clementi'),  Zeff values based on Clemneti's and Raimondi's exponents can be estimated.
+
+Based on Clemneti's and Raimondi's exponents Zeff for 3d electron in Cu (Z = 29)
+from mendeleev import element
+from mendeleev import IonicRadius
+print(element('Cu').zeff(n = 3, o ='d', method='clementi'))
+>>>
+13.2006
+
+Electronegativity 
+from mendeleev import element
+from mendeleev import electronegativity
+print("Pauling")
+print("F", element('F').electronegativity(scale='pauling'))
+print("Li", element('Li').electronegativity(scale='pauling')) 
+print("")
+print("Mulliken")
+print("F", element('F').electronegativity(scale='mulliken'))
+print("F(-1)", element('F').electronegativity(scale='mulliken', charge = 1)) 
+print("Li", element('Li').electronegativity(scale='mulliken'))
+print("Li(+1)", element('Li').electronegativity(scale='mulliken', charge = 1))   
+print("")
+print("Allred-Rochow")
+print("F", element('F').electronegativity(scale='allred-rochow'))
+print("Li", element('Li').electronegativity(scale='allred-rochow'))
+>>>
+Pauling
+F 3.98
+Li 0.98
+
+Mulliken
+F 8.71141
+F(-1) 17.485405
+Li 2.6958573805
+Li(+1) 37.82004685
+
+Allred-Rochow
+F 0.00126953125
+Li 7.34920006783877e-05
+
+Fetching elemental data
+from mendeleev import element
+from mendeleev.fetch import fetch_table
+x = fetch_table('elements')
+cols = ['symbol', 'specific_heat_capacity', 'lattice_structure', 'en_pauling']
+                        		#en _pauling - Pauling's scale for electronegativity
+print(x[cols].head(21)) 		# 21 elements
+>>>
+   symbol  specific_heat_capacity lattice_structure  en_pauling
+0       H                  14.304               HEX        2.20
+1      He                   5.193               HEX         NaN
+2      Li                   3.582               BCC        0.98
+3      Be                   1.825               HEX        1.57
+4       B                   1.026               TET        2.04
+5       C                   0.709               DIA        2.55
+6       N                   1.040               HEX        3.04
+7       O                   0.918               CUB        3.44
+8       F                   0.824               MCL        3.98
+9      Ne                   1.030               FCC         NaN
+10     Na                   1.228               BCC        0.93
+11     Mg                   1.023               HEX        1.31
+12     Al                   0.897               FCC        1.61
+13     Si                   0.712               DIA        1.90
+14      P                   0.769               CUB        2.19
+15      S                   0.708               ORC        2.58
+16     Cl                   0.479               ORC        3.16
+17     Ar                   0.520               FCC         NaN
+18      K                   0.757               BCC        0.82
+19     Ca                   0.647               FCC        1.00
+20     Sc                   0.568               HEX        1.36
+
+# different electronegativity scales
+from mendeleev.fetch import fetch_electronegativities
+x = fetch_electronegativities()
+print(x.head(21))
+>>>
+Allen Allred-Rochow  ...  Pauling  Sanderson
+atomic_number                         ...                    
+1              13.610       0.000977  ...     2.20   2.187771
+2              24.590       0.000803  ...      NaN   1.000000
+3               5.392       0.000073  ...     0.98   0.048868
+4               9.323       0.000187  ...     1.57   0.126847
+5              12.130       0.000360  ...     2.04   0.254627
+6              15.050       0.000578  ...     2.55   0.427525
+7              18.130       0.000774  ...     3.04   0.577482
+8              21.360       0.001146  ...     3.44   0.941649
+9              24.800       0.001270  ...     3.98   1.017681
+10             28.310       0.001303  ...      NaN   1.000000
+11              5.140       0.000092  ...     0.93   0.094598
+12              7.646       0.000148  ...     1.31   0.152421
+13              9.539       0.000220  ...     1.61   0.236093
+14             11.330       0.000308  ...     1.90   0.346816
+15             13.330       0.000390  ...     2.19   0.451027
+16             15.310       0.000514  ...     2.58   0.639725
+17             16.970       0.000622  ...     3.16   0.812377
+18             19.170       0.000732  ...      NaN   1.000000
+19              4.340       0.000057  ...     0.82   0.121838
+20              6.113       0.000097  ...     1.00   0.190158
+21              7.042       0.000137  ...     1.36   0.303867
+
+[21 rows x 11 columns]
+
+
+
+
+
+
+
+
+ 
+

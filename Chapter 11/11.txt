@@ -1,0 +1,464 @@
+CHAPTER 11 - Basics of pyEQL
+
+Density of the solutions
+.get_density() returns the density values in kilogram/liter. Depending on the input conditions, warnings may also be given.
+import pyEQL
+print("T = 25 degC")
+x = pyEQL.Solution([['K+','0.05 mol/kg'],['Cl-','0.05 mol/kg']],pH=7.2,temperature = '25 degC', volume='0.5 L')
+print(x.get_density())
+
+print("")
+print("T = 40 degC")
+x = pyEQL.Solution([['K+','0.05 mol/kg'],['Cl-','0.05 mol/kg']],pH=7.2,temperature = '40 degC', volume='0.5 L')
+print(x.get_density())
+
+print("")
+print("High concentration of K+ & Cl-")
+x = pyEQL.Solution([['K+','0.5 mol/kg'],['Cl-','0.5 mol/kg']],pH=7.2,temperature = '25 degC', volume='0.5 L')
+print(x.get_density())
+>>>
+T = 25 degC
+0.9994227756116689 kg/l
+
+T = 40 degC
+(pyEQL.activity_correction) - WARNING - Debye-Huckel limiting slope for volume is approximate when T is not equal to 25 degC
+0.9945812279244826 kg/l
+
+High concentration of K+ & Cl-
+1.0205716720612885 kg/l
+
+Specific conductance 
+import pyEQL
+print("T = 25 degC")
+x = pyEQL.Solution([['K+','0.05 mol/kg'],['Cl-','0.05 mol/kg']],pH=7.2,temperature = '25 degC', volume='0.5 L')
+print(x.get_conductivity())
+
+print("")
+print("T = 40 degC")
+x = pyEQL.Solution([['K+','0.05 mol/kg'],['Cl-','0.05 mol/kg']],pH=7.2,temperature = '40 degC', volume='0.5 L')
+print(x.get_conductivity())
+
+print("")
+print("Low concentration of K+ & Cl-")
+x = pyEQL.Solution([['K+','0.005 mol/kg'],['Cl-','0.005 mol/kg']],pH=7.2,temperature = '25 degC', volume='0.5 L')
+print(x.get_conductivity())
+>>>
+T = 25 degC
+0.6600714987538301 S/m
+
+T = 40 degC
+(pyEQL.activity_correction) - WARNING - Debye-Huckel limiting slope for volume is approximate when T is not equal to 25 degC
+0.8911500682726172 S/m
+
+Low concentration of K+ & Cl-
+0.07133804304935282 S/m
+
+Ionic strength 
+Calculate the ionic strength of 0.25 M K2SO4 and 0.25 M KCl solutions.
+Ionization: K2SO4 → 2K+ + SO42–
+K+ : Concentration (CK) = 0.5 M; Valence (ZK) = 1
+SO42– : Concentration (C SO42–) = 0.25 M; Valence (Z SO42–) = 2
+μ = ½ × ([CK × ZK2] + [C SO42– × (Z SO42–)2]) = ½ × ([0.5 × 12] + [0.25– × 22]) = ½ × ([0.5] + [1]) = 0.75.
+
+Ionization: KCl → K+ + Cl–
+K+ : Concentration (CK) = 0.25 M; Valence (ZK) = 1
+Cl– : Concentration (C Cl–) = 0.25 M; Valence (Z Cl–) = 1
+μ = ½ × ([CK × ZK2] + [C Cl–– × (Z Cl–)2]) = ½ × ([0.25 × 12] + [0.25 × 12]) = ½ × ([0.25] + [0.25]) = 0.25.
+By importing the function, get_ionic_strength(), μ can be returned in mol/kg. 
+
+import pyEQL
+print("K2SO4")
+print("Volume = 1 L")
+x = pyEQL.Solution([['K+','0.5 mol/kg'],['SO42-','0.25 mol/kg']],pH=7.2,temperature = '25 degC', volume='1.0 L')
+print(x.get_ionic_strength())
+
+print("")
+print("KCl")
+x = pyEQL.Solution([['K+','0.25 mol/kg'],['Cl-','0.25 mol/kg']],pH=7.2,temperature = '25 degC', volume='1.0 L')
+print(x.get_ionic_strength())
+>>>
+K2SO4
+Volume = 1 L
+0.3750001111212791 mol/kg
+
+KCl
+0.2500001111212791 mol/kg
+
+Weight of the ionic components 
+Wright of the ion (g/l) = (Mm × M × V)/1000
+Mm = Molar mass / Atomic mass
+M = Molarity (mol/litre)
+V = Volume of the solution
+
+#[KCl] = 0.025 mol/L
+# Fetching amount of K and Cl ions in g/L
+import pyEQL
+x = pyEQL.Solution([['K+','1 mol/l'],['Cl-', '1 mol/l']])
+print("Atomic mass of K+", x.get_amount('K+','g/l'),"\nAtomic mass of Cl-",x.get_amount('Cl-','g/l'))
+
+print("")
+x = pyEQL.Solution([['K+','0.025 mol/l'],['Cl-', '0.025 mol/l']])
+print("Amount of K+",x.get_amount('K+','g/l'),"\nAmount of Cl-",x.get_amount('Cl-','g/l'))
+print("")
+Atomic mass of K+ 39.0983 g/l 
+Atomic mass of Cl- 35.453 g/l
+
+Amount of K+ 0.9774575000000001 g/l 
+Amount of Cl- 0.8863250000000001 g/l
+
+Activity coefficients 
+import pyEQL
+print("Activities & Activity coefficients for K and Cl ions at different concentrations")
+print("")
+print("Activity: 2 mol/L")
+x = pyEQL.Solution([['K+','2 mol/l'],['Cl-', '2 mol/l']])
+print("K+",x.get_activity('K+'),"\nCl-",x.get_activity('Cl-'))
+
+print("")
+print("Activity: 1 mol/L")
+x = pyEQL.Solution([['K+','1 mol/l'],['Cl-', '1 mol/l']])
+print("K+",x.get_activity('K+'),"\nCl-",x.get_activity('Cl-'))
+
+print("")
+print("Activity: 0.0025 mol/L")
+x = pyEQL.Solution([['K+','0.0025 mol/l'],['Cl-', '0.0025 mol/l']])
+print("K+",x.get_activity('K+'),"\nCl-",x.get_activity('Cl-'))
+
+print("")
+print("Activity: 0.00001 mol/L")
+x = pyEQL.Solution([['K+','0.00001 mol/l'],['Cl-', '0.00001 mol/l']])
+print("K+",x.get_activity('K+'),"\nCl-",x.get_activity('Cl-'))
+
+print("")
+print("Activity Coefficient: 2 mol/L")
+x = pyEQL.Solution([['K+','2 mol/l'],['Cl-', '2 mol/l']])
+print("K+",x.get_activity_coefficient('K+'),"\nCl-",x.get_activity_coefficient('Cl-'))
+
+print("")
+print("Activity Coefficient: 1 mol/L")
+x = pyEQL.Solution([['K+','1 mol/l'],['Cl-', '1 mol/l']])
+print("K+",x.get_activity_coefficient('K+'),"\nCl-",x.get_activity_coefficient('Cl-'))
+
+print("")
+print("Activity Coefficient: 0.0025 mol/L")
+x = pyEQL.Solution([['K+','0.0025 mol/l'],['Cl-', '0.0025 mol/l']])
+print("K+",x.get_activity_coefficient('K+'),"\nCl-",x.get_activity_coefficient('Cl-'))
+
+print("")
+print("Activity Coefficient: 0.00001 mol/L")
+x = pyEQL.Solution([['K+','0.00001 mol/l'],['Cl-', '0.00001 mol/l']])
+print("K+",x.get_activity_coefficient('K+'),"\nCl-",x.get_activity_coefficient('Cl-'))
+>>>
+Activities & Activity coefficients for K and Cl ions at different concentrations
+
+Activity: 2 mol/L
+K+ 1.2173961666536603 
+Cl- 1.2173961666536603
+
+Activity: 1 mol/L
+K+ 0.6227391396211777 
+Cl- 0.6227391396211777
+Activity: 0.0025 mol/L
+K+ 0.002372614675248202 
+Cl- 0.002372614675248202
+
+Activity: 0.00001 mol/L
+K+ 9.992386610278437×10⁻⁶ 
+Cl- 9.992386610278437×10⁻⁶
+
+Activity Coefficient: 2 mol/L
+K+ 0.574367557687531 
+Cl- 0.574367557687531
+
+Activity Coefficient: 1 mol/L
+K+ 0.6042567327994741 
+Cl- 0.6042567327994741
+
+Activity Coefficient: 0.0025 mol/L
+K+ 0.9461747203171886 
+Cl- 0.9461747203171886
+
+Activity Coefficient: 0.00001 mol/L
+K+ 0.9962821468440191 
+Cl- 0.9962821468440191
+
+
+Diffusion coefficients
+import pyEQL
+print("Diffusion coefficients for K+ at different concentrations in KCl")
+print("")
+print("2 mol/L")
+x = pyEQL.Solution([['K+','2 mol/l'], ['Cl-', '2 mol/l']])
+print(x.get_property('K+','diffusion_coefficient'))
+
+print("")
+print("1 mol/L")
+x = pyEQL.Solution([['K+','1 mol/l'],['Cl-', '1 mol/l']])
+print(x.get_property('K+','diffusion_coefficient'))
+print("")
+print("0.0025 mol/L")
+x = pyEQL.Solution([['K+','0.0025 mol/l'],['Cl-', '0.0025 mol/l']])
+print(x.get_property('K+','diffusion_coefficient'))
+
+print("")
+print("0.00001 mol/L")
+x = pyEQL.Solution([['K+','0.00001 mol/l'],['Cl-', '0.00001 mol/l']])
+print(x.get_property('K+','diffusion_coefficient'))
+>>>
+Diffusion coefficients for K+ at different concentrations in KCl
+
+2 mol/L
+0.019328780045976397 cm²·l/m³/s
+
+1 mol/L
+0.019577945453720255 cm²·l/m³/s
+
+0.0025 mol/L
+0.01957029141051373 cm²·l/m³/s
+
+0.00001 mol/L
+0.01957000108984077 cm²·l/m³/s
+
+Functions related to molecular formula
+Fetching various atomic and molecular parameters from the given molecular formula based on the stoichiometry can be carried out with the function pyEQL.chemical_formula.
+ Following demonstrations are based on the compound Ni(OH)2.MnO2.
+
+import pyEQL
+Formula = "Ni(OH)2.MnO2"
+x=str('Ni(OH)2MnO2')
+print(pyEQL.chemical_formula.get_element_names(x))
+>>>
+['Nickel', 'Oxygen', 'Hydrogen', 'Manganese']
+
+import pyEQL
+Formula = "Ni(OH)2.MnO2"
+x=str('Ni(OH)2MnO2')
+print(pyEQL.chemical_formula.get_elements(x))
+>>>
+['Ni', 'O', 'H', 'Mn']
+
+# Fetching atomic numbers for individual constituent elements
+import pyEQL
+Formula = "Ni(OH)2.MnO2"
+x=str('Ni(OH)2MnO2')
+print(pyEQL.chemical_formula.get_element_numbers(x))
+>>>
+[28, 8, 1, 25]		# fetched order in list as: ['Ni', 'O', 'H', 'Mn']
+
+import pyEQL
+Formula = "Ni(OH)2.MnO2"
+x=str('Ni(OH)2MnO2')
+y = pyEQL.chemical_formula.get_elements(x)	# number of elements 
+print(pyEQL.chemical_formula.get_element_mole_ratio(x, "O"))	# Number of O = 4
+print(pyEQL.chemical_formula.get_element_mole_ratio(x, y[1])) # from 1 of list index 
+>>>
+4
+4
+
+import pyEQL
+Formula = "Ni(OH)2.MnO2"
+x=str('Ni(OH)2MnO2')
+y = pyEQL.chemical_formula.get_elements(x)
+print(pyEQL.chemical_formula.get_element_weight(x, 'O')) 
+# Number of O = 4	# Atomic mass of O = 15.9994	#element weight = 4x15.9994
+print(pyEQL.chemical_formula.get_element_weight(x, y[1]))
+>>>
+63.9976
+63.9976
+
+# Calculating weight fraction of O in 'Ni(OH)2.MnO2
+Number of elements:
+Ni – 1; O – 4; H – 2, Mn – 1
+Atomic mass:
+Ni – 58.6934; O – 15.9994; H – 1.008, Mn – 54.9380
+Weights: 
+Ni = 1 x 58.6934 = 58.6934
+O = 4 x 15.994 = 63.9976
+H = 2 x 1.008 =2.016
+Mn – 1 x 54.9380
+Total weight (based on the formula) = 179.645
+Total weight of O = 63.9976
+So, weight fraction of O = 63.9976/179.645 = 0.356244
+Or Weight percent of O is 35.6244
+
+import pyEQL
+x=str('Ni(OH)2MnO2')
+y = pyEQL.chemical_formula.get_elements(x)
+print(pyEQL.chemical_formula.get_element_weight_fraction(x, 'O'))
+print(pyEQL.chemical_formula.get_element_weight_fraction(x, y[1]))
+print("Wt. % of O = ", pyEQL.chemical_formula.get_element_weight_fraction(x, y[1])*100)
+>>>
+0.3562449569617409
+0.3562449569617409
+Wt. % of O =  35.624495696174094
+
+# hill order for formula
+# this function can be used to get the empirical formula
+import pyEQL
+Formula = "Ni(OH)2.MnO2"
+x=str('Ni(OH)2MnO2')
+print(pyEQL.chemical_formula.hill_order(x))
+>>>
+H2MnNiO4
+
+# LaTeX formatting
+import pyEQL
+Formula = "Ni(OH)2.MnO2"
+x=str('Ni(OH)2MnO2')
+pyEQL.chemical_formula.print_latex(x) 		# Note: print not in ()
+pyEQL.chemical_formula.print_latex('NH4+')
+>>>
+Ni(OH)_2MnO_2
+NH_4^+
+
+Simulation of ionic conductance
+Theoretical specific and molar conductivities of K+ ions in the electrolyte KCl, before and after the addition of K+.
+import pyEQL
+print("[KCl] = 0.1 mol/L")  
+x = pyEQL.Solution([['K+','0.1 mol/L'],['Cl-','0.1 mol/L']],temperature='20 degC',volume='500 mL')
+print("")
+print("Initial concentration of K+")
+
+print(x.get_amount('K+',  'mol/L'))         
+print("Initial Specific conductance of K+")
+print(x.get_conductivity())                 
+print("Initial Molar conductance of K+")
+print(x.get_molar_conductivity('K+'))
+
+print("")
+print("Addition of K+ (0.3 mol/L)")
+x.add_amount('K+', '0.3 mol/L')             
+print("Concentration of K+, after the addition")
+print(x.get_amount('K+',  'mol/L'))
+print("Specific conductance after the addition of K+")
+print(x.get_conductivity())                 
+print("Molar conductance after the addition of K+")
+print(x.get_molar_conductivity('K+'))
+>>>
+[KCl] = 0.1 mol/L
+(pyEQL.activity_correction) - WARNING - Debye-Huckel limiting slope for volume is approximate when T is not equal to 25 degC
+
+Initial concentration of K+
+0.1 mol/l
+Initial Specific conductance of K+
+1.1394703799882002 S/m
+Initial Molar conductance of K+
+65.40261928836038 l·mS/cm/mol
+
+Addition of K+ (0.3 mol/L)
+Concentration of K+, after the addition
+0.4 mol/l
+Specific conductance after the addition of K+
+(pyEQL.solution) - WARNING - No salts found that contain solute H+. Returning unit activity coefficient.
+2.72320804216951 S/m
+Molar conductance after the addition of K+
+65.5954308820406 l·mS/cm/mol
+
+Transport number
+import pyEQL
+print("[KF] = 0.72 mol/L")  
+x = pyEQL.Solution([['K+','0.7 mol/L'],['F-','0.7 mol/L']])
+
+print("")
+print("Transport number of K+")
+print(x.get_transport_number('K+')); print("")
+print("Transport number of F-"); print(x.get_transport_number('F-'))
+>>>
+[KF] = 0.72 mol/L
+
+Transport number of K+
+(pyEQL.solution) - WARNING - Diffusion coefficient not found for species H2O. Assuming zero.
+(pyEQL.solution) - WARNING - Viscosity coefficients for KF not found. Viscosity will be approximate.
+0.5702210990632489
+
+Transport number of F-
+0.4297782938775125
+
+Osmotic pressure
+import pyEQL
+print("[KF] = 0.31 mol/L")  
+x = pyEQL.Solution([['K+','0.31 mol/L'],['F-','0.31 mol/L']])
+print(x.get_osmotic_pressure())
+[KF] = 0.31 mol/L
+1400634.857346733 Pa
+
+import pyEQL
+print("[KF] = 0.431 mol/L")  
+x = pyEQL.Solution([['K+','0.431 mol/L'],['F-','0.431 mol/L']])
+print(x.get_osmotic_pressure())
+>>>
+[KF] = 0.431 mol/L
+1949355.8077209773 Pa
+
+Data for kinematic and dynamic viscosities
+import pyEQL
+x = pyEQL.Solution([['K+','0.431 mol/L'],['Cl-','0.431 mol/L']])
+print("Kinematic viscosity for KCl = 0.431 mol/L")
+print(x.get_viscosity_kinematic())
+x = pyEQL.Solution([['K+','0.13 mol/L'],['Cl-','0.13 mol/L']])
+print("Kinematic viscosity for KCl = 0.13 mol/L")
+print(x.get_viscosity_kinematic())
+
+print("")
+x = pyEQL.Solution([['K+','0.431 mol/L'],['Cl-','0.431 mol/L']])
+print("Dynamic viscosity for KCl = 0.431 mol/L")
+print(x.get_viscosity_dynamic())
+x = pyEQL.Solution([['K+','0.13 mol/L'],['Cl-','0.13 mol/L']])
+print("Dynamic viscosity for KCl = 0.13 mol/L")
+print(x.get_viscosity_dynamic()); print("")
+x = pyEQL.Solution([['K+','0.431 mol/L'],['Cl-','0.431 mol/L']])
+print("Relative viscosity for KCl = 0.431 mol/L")
+print(x.get_viscosity_relative())
+
+x = pyEQL.Solution([['K+','0.13 mol/L'],['Cl-','0.13 mol/L']])
+print("Relative viscosity for KCl = 0.13 mol/L")
+print(x.get_viscosity_relative())
+>>>
+Kinematic viscosity for KCl = 0.431 mol/L
+8.704957125215512×10⁻⁷ m²/s
+Kinematic viscosity for KCl = 0.13 mol/L
+8.837888903646227×10⁻⁷ m²/s
+
+Dynamic viscosity for KCl = 0.431 mol/L
+8.85865607484187×10⁻⁷ kg·m²/l/s
+Dynamic viscosity for KCl = 0.13 mol/L
+8.866695813523619×10⁻⁷ kg·m²/l/s
+Relative viscosity for KCl = 0.431 mol/L
+0.0009984039111933672 m³/l
+Relative viscosity for KCl = 0.13 mol/L
+0.0009993100200294046 m³/l
+
+Units for ionic concentration
+import pyEQL
+print("[KCl] = 0.1 mol/L; Volume: 500 mL")  
+x = pyEQL.Solution([['K+','0.1 mol/L'],['Cl-','0.1 mol/L']],temperature='20 degC',volume='500 mL');print("")
+print("Initial concentration of K+"); print(x.get_amount('K+',  'mol/L'))
+print(x.get_amount('K+',  'g/L'))
+print(x.get_amount('K+',  'kg'))
+print(x.get_total_amount('K',  'mol/L'));print("")
+
+print("Addition of K+ - 0.3 mol/L")
+x.add_amount('K+', '0.3 mol/L'); print("")
+
+print("Concentration of K+ after the addition")
+print(x.get_amount('K+',  'mol/L'))
+print(x.get_amount('K+',  'g/L'))
+print(x.get_amount('K+',  'kg'))
+print(x.get_total_amount('K',  'mol/L'))
+>>>
+[KCl] = 0.1 mol/L; Volume: 500 mL
+(pyEQL.activity_correction) - WARNING - Debye-Huckel limiting slope for volume is approximate when T is not equal to 25 degC
+
+Initial concentration of K+
+0.1 mol/l
+3.9098300000000004 g/l
+0.001954915 kg
+0.1 mol/l
+
+Addition of K+ - 0.3 mol/L
+Concentration of K+ after the addition
+0.4 mol/l
+15.639320000000001 g/l
+0.00781966 kg
+0.4 mol/l
+

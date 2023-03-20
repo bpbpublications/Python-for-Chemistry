@@ -1,0 +1,381 @@
+CHAPTER 6
+Beginning with Cheminformatics
+
+
+# Generate structure from SMILES
+from rdkit import Chem
+from rdkit.Chem import Draw
+smiles = input("Enter SMILES notation:  ")
+smiles = str(smiles)
+struc = Chem.MolFromSmiles(smiles)
+Draw.MolToFile(struc,'molecule.png')		# saved externally as molecule.png
+>>>
+Enter SMILES notation:  NC(Cc1ccccc1)C(=O)O
+Phenylalanine structure as output, 'molecule.png':
+	
+Structure of molecule from .mol file
+# Reading .mol file for getting the structure
+from rdkit import Chem
+from rdkit.Chem import Draw
+struc = Chem.MolFromMolFile('x.mol')
+Draw.MolToFile(struc,'molecule.png')
+  
+Conversion of .mol to SMILES
+from rdkit import Chem
+struc = Chem.MolFromMolFile('x.mol')	 # x.mol has Arginine molecule.
+print(Chem.MolToSmiles(struc))
+>>>
+N=C(N)NCCCC(N)C(=O)O
+
+It must be emphasized that improper SMILES input or invalid .mol file leads to an error. 
+
+Kekule form of SMILES
+For the Kekule form of SMILES, the molecule must be Kekulized first with Chem.Kekulize.
+
+from rdkit import Chem
+from rdkit.Chem import Draw
+struc = Chem.MolFromMolFile('x.mol')	 
+# x.mol has Tyrosine (Figure 6.4) molecule.
+print(Chem.MolToSmiles(struc))
+Chem.Kekulize(struc)
+print(Chem.MolToSmiles(struc,kekuleSmiles=True))
+Draw.MolToFile(struc,'molecule.png')
+
+>>>
+NC(Cc1ccc(O)cc1)C(=O)O
+NC(CC1=CC=C(O)C=C1)C(=O)O
+
+ SMILES to .mol blocks
+The function, Chem.MolFromSmiles(), returns MDL .mol blocks from SMILES.     
+# SMILES for 3-(chloromethyl)benzene-1-sulfonic acid  is O=S(=O)(O)c1cccc(CCl)c1
+from rdkit import Chem
+from rdkit.Chem import Draw
+smiles = input("Enter SMILES notation:  ")
+smiles = str(smiles)
+struc = Chem.MolFromSmiles(smiles)
+Draw.MolToFile(struc,'molecule.png')
+x = Chem.MolFromSmiles(smiles)
+print(Chem.MolToMolBlock(x))
+>>>
+Enter SMILES notation:  O=S(=O)(O)c1cccc(CCl)c1
+     RDKit          2D
+ 12 12  0  0  0  0  0  0  0  0999 V2000
+    3.0000   -1.5000    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    3.0000    0.0000    0.0000 S   0  0  0  0  0  0  0  0  0  0  0  0
+    3.0000    1.5000    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    4.5000    0.0000    0.0000 O   0  0  0  0  0  0  0  0  0  0  0  0
+    1.5000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+    0.7500   -1.2990    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+   -0.7500   -1.2990    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+   -1.5000    0.0000    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+   -0.7500    1.2990    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+   -1.5000    2.5981    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+   -0.7500    3.8971    0.0000 Cl  0  0  0  0  0  0  0  0  0  0  0  0
+    0.7500    1.2990    0.0000 C   0  0  0  0  0  0  0  0  0  0  0  0
+  1  2  2  0
+  2  3  2  0
+  2  4  1  0
+  2  5  1  0
+  5  6  2  0
+  6  7  1  0
+  7  8  2  0
+  8  9  1  0
+  9 10  1  0
+ 10 11  1  0
+  9 12  2  0
+ 12  5  1  0
+M  END
+Output as molecule.png
+
+Saving .mol in local directory
+.mol data from SMILES can be saved in the directory by the command, 
+file = open('directory\file_name.mol','w+')).
+from rdkit import Chem
+smiles = input("Enter SMILES notation:  ")
+smiles = str(smiles)
+x = Chem.MolFromSmiles(smiles)
+print(Chem.MolToMolBlock(x),file=open('x.mol','w+'))
+# SMILES for 3-(chloromethyl)benzene-1-sulfonic acid
+>>>
+Enter SMILES notation:  O=S(=O)(O)c1cccc(CCl)c1
+
+Fetching number of atoms
+By the function, .GetNumAtoms() total number of atoms excluding H can be fetched. 
+Example: 
+1-choloro-4-nitrobenzene (Figure 6.6).
+SMILES notation: O=[N+]([O-])c1ccc(Cl)cc1
+
+from rdkit import Chem
+smiles = input('Enter SMILES ')
+smiles = str(smiles)
+mol = Chem.MolFromSmiles(smiles)
+print(mol.GetNumAtoms())		# excluding H
+>>>
+Enter SMILES O=[N+]([O-])c1ccc(Cl)cc1
+10
+
+# To fetch H atoms
+from rdkit import Chem
+smiles = input('Enter SMILES ')
+smiles = str(smiles)
+mol = Chem.MolFromSmiles(smiles)
+mol = Chem.AddHs(mol)	# to include H
+print(mol.GetNumAtoms())
+>>>
+Enter SMILES O=[N+]([O-])c1ccc(Cl)cc1
+14Since, 1-choloro-4-nitrobenzene has 4 H atoms. Numbering of atoms is given in Figure 6.7.
+
+
+
+Fetching individual atoms
+from rdkit import Chem
+smiles = input('Enter SMILES ')
+smiles = str(smiles)
+mol = Chem.MolFromSmiles(smiles)
+n = mol.GetNumAtoms()
+print(n)
+while n > 0:
+    n = n - 1
+    print(mol.GetAtomWithIdx(n).GetSymbol())
+>>>
+Enter SMILES O=[N+]([O-])c1ccc(Cl)cc1
+10
+C
+C
+Cl
+C
+C
+C
+C
+O
+N
+O
+
+
+# To get atomic number with index of the individual element
+from rdkit import Chem
+smiles = input('Enter SMILES ')
+smiles = str(smiles)
+mol = Chem.MolFromSmiles(smiles)
+n = mol.GetNumAtoms()
+print(n)
+while n > 0:
+    n = n - 1
+    print(n, " ", mol.GetAtomWithIdx(n).GetSymbol(), " At. #: ",
+ mol.GetAtomWithIdx(n).GetAtomicNum())
+>>>
+Enter SMILES O=[N+]([O-])c1ccc(Cl)cc1
+10
+9   C  At. #:  6
+8   C  At. #:  6
+7   Cl  At. #:  17
+6   C  At. #:  6
+5   C  At. #:  6
+4   C  At. #:  6
+3   C  At. #:  6
+2   O  At. #:  8
+1   N  At. #:  7
+0   O  At. #:  8 
+
+Fetching bond types
+# nature of bonds in p-choloro nitrobenzene as shown in Figure 6.9:
+from rdkit import Chem
+smiles = input('Enter SMILES ')
+smiles = str(smiles)
+mol = Chem.MolFromSmiles(smiles)
+n = mol.GetNumAtoms()
+print(n)
+while n > 0:
+    n = n - 1
+    print(n, " ",mol.GetAtomWithIdx(n).GetSymbol(), mol.GetBonds()[n].GetBondType())
+>>>
+Enter SMILES O=[N+]([O-])c1ccc(Cl)cc1
+10
+9   C AROMATIC
+8   C AROMATIC
+7   Cl AROMATIC
+6   C SINGLE
+5   C AROMATIC
+4   C AROMATIC
+3   C AROMATIC
+2   O SINGLE
+1   N SINGLE
+0   O DOUBLE
+
+
+# To get the nature of the bond between two adjacent atoms in a molecule.
+# p-choloro nitrobenzene
+from rdkit import Chem
+smiles = input('Enter SMILES ')
+smiles = str(smiles)
+mol = Chem.MolFromSmiles(smiles)
+n = mol.GetNumAtoms()
+print(mol.GetBondBetweenAtoms(0,1).GetBondType())
+>>>
+Enter SMILES O=[N+]([O-])c1ccc(Cl)cc1
+DOUBLE
+
+from rdkit import Chem
+smiles = input('Enter SMILES ')
+smiles = str(smiles)
+mol = Chem.MolFromSmiles(smiles)
+n = mol.GetNumAtoms()
+print(mol.GetBondBetweenAtoms(6,8).GetBondType())	#  between 6 and 8
+>>>
+Enter SMILES O=[N+]([O-])c1ccc(Cl)cc1
+AROMATIC
+
+Position in ring (Boolean)
+# p-choloro nitrobenzene
+from rdkit import Chem
+smiles = input('Enter SMILES ')
+smiles = str(smiles)
+mol = Chem.MolFromSmiles(smiles)
+n = mol.GetNumAtoms()
+print(mol.GetAtomWithIdx(5).IsInRing())
+print(mol.GetAtomWithIdx(6).IsInRing())
+print(mol.GetAtomWithIdx(7).IsInRing())
+>>>
+Enter SMILES O=[N+]([O-])c1ccc(Cl)cc1
+True
+True
+False
+ Ring size (Boolean)
+# p-choloro nitrobenzene
+from rdkit import Chem
+smiles = input('Enter SMILES ')
+smiles = str(smiles)
+mol = Chem.MolFromSmiles(smiles)
+n = mol.GetNumAtoms()
+print(mol.GetAtomWithIdx(6).IsInRingSize(5))		# 5 member ring
+print(mol.GetAtomWithIdx(6).IsInRingSize(6))   	# 6 member ring
+>>>
+Enter SMILES O=[N+]([O-])c1ccc(Cl)cc1
+False
+True
+
+# Molecule: furo[3,2-b]pyridine
+from rdkit import Chem
+from rdkit.Chem import Draw
+smiles = input('Enter SMILES ')
+smiles = str(smiles)
+struc = Chem.MolFromSmiles(smiles)
+Draw.MolToFile(struc,'molecule.png')		# saved externally as molecule.png
+mol = Chem.MolFromSmiles(smiles)
+n = mol.GetNumAtoms()
+print(n)
+while n > 0:
+    n = n - 1
+    print(n, " ",mol.GetAtomWithIdx(n).GetSymbol(), mol.GetBonds()[n].GetBondType())
+print("Location of N")
+print(mol.GetAtomWithIdx(3).IsInRingSize(5))	
+print(mol.GetAtomWithIdx(3).IsInRingSize(6))
+print("Location of O")
+print(mol.GetAtomWithIdx(7).IsInRingSize(5))	
+print(mol.GetAtomWithIdx(7).IsInRingSize(6))
+>>>
+Enter SMILES c1ccnc2ccoc12
+9
+8   C AROMATIC					
+7   O AROMATIC
+6   C AROMATIC			
+5   C AROMATIC
+4   C AROMATIC
+3   N AROMATIC
+2   C AROMATIC
+1   C AROMATIC
+0   C AROMATIC
+Location of N
+False
+True
+Location of O
+True
+False
+
+
+Working with .sdf formats
+from rdkit import Chem
+from rdkit.Chem import AllChem
+from rdkit.Chem import Draw
+with Chem.SDMolSupplier('sample.sdf') as molecule:
+    molec = [x for x in molecule if x is not None]
+    for structure in molec:
+        temp = AllChem.Compute2DCoords(structure)
+        Draw.MolToFile(molec[5],'6.png') 		# index 5 for sixth molecule
+        Draw.MolToFile(molec[7],'8.png') 		# index 7 for eighth molecule
+        Draw.MolToFile(molec[8],'9.png') 		# index 8 for ninth molecule
+        break
+
+# To get grid of images of multiple molecules
+# From the sample.sdf, fetching molecules with 2 to 14 indices
+# It also fetches the number for individual molecule along with its structure
+
+from rdkit import Chem
+from rdkit.Chem import AllChem
+from rdkit.Chem import Draw
+
+with Chem.SDMolSupplier('sample.sdf') as molecule:
+    molec = [x for x in molecule if x is not None]
+    for structure in molec:
+ temp = AllChem.Compute2DCoords(structure)
+img=Draw.MolsToGridImage(molec[2:14],molsPerRow=4,subImgSize=(200,200),legends=[x.GetProp("_Name") for x in molec[2:14]])
+# images per row 4
+# each molecular struructure is in square shape with the size 200 x 200
+# 12 images 4 in each row and has 4 columns
+# To align common cores with the specific matching this should be modified as:
+# AllChem.GenerateDepictionMatching2DStructure()
+	
+print(img)  	# PIL image      
+img.save('multi.png') # to save in the local directory as multi.png
+        break
+>>>
+<PIL.PngImagePlugin.PngImageFile image mode=RGB size=800x600 at 0x1F6E482CDC0>
+
+Stereochemical notation in molecules
+# SMILES: OC/C(=C/[N@](C)C[C@@](C)(Cl)O)c1ccccc1
+from rdkit import Chem; from rdkit.Chem import Draw
+from rdkit.Chem.Draw import rdMolDraw2D
+mol = Chem.MolFromSmiles('OC/C(=C/[N@](C)C[C@@](C)(Cl)O)c1ccccc1')
+structure = rdMolDraw2D.MolDraw2DCairo(500, 400) # or MolDraw2DSVG to get SVGs
+mol.GetAtomWithIdx(2).SetProp('atomNote', 'a')		# atom note
+mol.GetAtomWithIdx(11).SetProp('atomNote', 'b')
+mol.GetBondWithIdx(0).SetProp('bondNote', 'c')			# bond note
+mol.GetBondWithIdx(7).SetProp('bondNote', 'd')
+structure.drawOptions().addStereoAnnotation = True		# stereochemical notation
+structure.drawOptions().addAtomIndices = True			# indexing the atoms
+structure.DrawMolecule(mol)
+structure.FinishDrawing()
+structure.WriteDrawingText('molecule.png')
+
+Highlighting bonds and atoms
+# Molecule: (2E)-3-[(2-chloro-2-hydroxypropyl)(methyl)amino]-2-phenylprop-2-en-1-ol
+# SMILES: OC/C(=C/[N@](C)C[C@@](C)(Cl)O)c1ccccc1
+# With Stereo chemical notation and highlighting the sub-structure
+from rdkit import Chem
+from rdkit.Chem import Draw
+from rdkit.Chem.Draw import rdMolDraw2D
+mol = Chem.MolFromSmiles('OC/C(=C/[N@](C)C[C@@](C)(Cl)O)c1ccccc1')
+structure = rdMolDraw2D.MolDraw2DCairo(500, 400) 
+
+# I part - Stereochemical notation
+mol.GetAtomWithIdx(2).SetProp('atomNote', 'a')
+mol.GetAtomWithIdx(11).SetProp('atomNote', 'b')
+mol.GetBondWithIdx(0).SetProp('bondNote', 'c')
+mol.GetBondWithIdx(7).SetProp('bondNote', 'd')
+structure.drawOptions().addStereoAnnotation = True
+structure.drawOptions().addAtomIndices = True
+
+# II part (Highlight sub–structure)	# SMILE for sub-structure (highlight): c1ccccc1
+highlight = Chem.MolFromSmarts('c1ccccc1')
+atoms = list(mol.GetSubstructMatch(highlight))
+bonds = []
+for bond in highlight.GetBonds():
+    i = atoms[bond.GetBeginAtomIdx()]
+    j = atoms[bond.GetEndAtomIdx()]
+    bonds.append(mol.GetBondBetweenAtoms(i,j).GetIdx())
+rdMolDraw2D.PrepareAndDrawMolecule(structure, mol,
+ highlightAtoms=atoms,highlightBonds=bonds)
+structure.WriteDrawingText('molecule.png')
+>>>
+molecule.png
+

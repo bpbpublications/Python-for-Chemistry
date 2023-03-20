@@ -1,0 +1,1022 @@
+CHAPTER 3 
+Basics of SciPy
+
+
+Built-in scientific constants
+	from scipy import constants
+print(constants.Boltzmann)			# to print Boltzmann constant
+print(constants.k)					# either with Boltzmann or k
+print(constants.Avogadro)				# to print Avogadro constant
+print(constants.N_A) 				# either with Avogadro or N_A
+>>>
+1.380649e-23
+1.380649e-23
+6.02214076e+23
+6.02214076e+23
+
+3.4 Default unit for physical & chemical constants
+	Default unit for the constants can be obtained by the specific key value for the constants and it is different from symbols.
+# Value and unit for Gas constant		
+# symbol: R 	
+# key for unit: 'molar gas constant'
+from scipy import constants
+print(constants.R, constants.unit('molar gas constant'))
+>>>
+8.314462618 J mol^-1 K^-1
+
+# Value and unit for elementary charge
+# symbol: e					
+# key for unit: 'elementary charge'
+from scipy import constants
+print(constants.e, constants.unit('elementary charge'))
+>>>
+1.602176634e-19 C
+
+# Value and unit for Standard atmosphere
+# symbol: atm				
+# key for unit: 'standard atmosphere'
+from scipy import constants
+print(constants.atm, constants.unit('standard atmosphere'))
+>>>
+101325.0 Pa
+
+# Value and unit for electron Volt		Symbol: eV				
+# key for unit: 'electron volt'
+from scipy import constants
+print(constants.eV, constants.unit('electron volt'))
+>>>
+1.602176634e-19 J
+
+# Value and unit for Planck’s constant
+# two units are available for Planck’s constant
+from scipy import constants
+print(constants.h,constants.unit('Planck constant'))
+print(constants.h,constants.unit('Planck constant in eV/Hz'))
+>>>
+6.62607015e-34 J Hz^-1
+6.62607015e-34 eV Hz^-1
+
+
+List of constants available in SciPy module can be returned by the syntax: dir(constants).
+from scipy import constants
+print(dir(constants))
+>>>
+['Avogadro', 'Boltzmann', 'Btu', 'Btu_IT', 'Btu_th', 'ConstantWarning', 'G', 'Julian_year', 'N_A', 'Planck', 'R', 'Rydberg', 'Stefan_Boltzmann', 'Wien', '__all__', '__builtins__', '__cached__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__path__', '__spec__', '_codata', '_constants', '_obsolete_constants', 'acre', 'alpha', 'angstrom', 'arcmin', 'arcminute', 'arcsec', 'arcsecond', 'astronomical_unit', 'atm', 'atmosphere', 'atomic_mass', 'atto', 'au', 'bar', 'barrel', 'bbl', 'blob', 'c', 'calorie', 'calorie_IT', 'calorie_th', 'carat', 'centi', 'codata', 'constants', 'convert_temperature', 'day', 'deci', 'degree', 'degree_Fahrenheit', 'deka', 'dyn', 'dyne', 'e', 'eV', 'electron_mass', 'electron_volt', 'elementary_charge', 'epsilon_0', 'erg', 'exa', 'exbi', 'femto', 'fermi', 'find', 'fine_structure', 'fluid_ounce', 'fluid_ounce_US', 'fluid_ounce_imp', 'foot', 'g', 'gallon', 'gallon_US', 'gallon_imp', 'gas_constant', 'gibi', 'giga', 'golden', 'golden_ratio', 'grain', 'gram', 'gravitational_constant', 'h', 'hbar', 'hectare', 'hecto', 'horsepower', 'hour', 'hp', 'inch', 'k', 'kgf', 'kibi', 'kilo', 'kilogram_force', 'kmh', 'knot', 'lambda2nu', 'lb', 'lbf', 'light_year', 'liter', 'litre', 'long_ton', 'm_e', 'm_n', 'm_p', 'm_u', 'mach', 'mebi', 'mega', 'metric_ton', 'micro', 'micron', 'mil', 'mile', 'milli', 'minute', 'mmHg', 'mph', 'mu_0', 'nano', 'nautical_mile', 'neutron_mass', 'nu2lambda', 'ounce', 'oz', 'parsec', 'pebi', 'peta', 'physical_constants', 'pi', 'pico', 'point', 'pound', 'pound_force', 'precision', 'proton_mass', 'psi', 'pt', 'short_ton', 'sigma', 'slinch', 'slug', 'speed_of_light', 'speed_of_sound', 'stone', 'survey_foot', 'survey_mile', 'tebi', 'tera', 'test', 'ton_TNT', 'torr', 'troy_ounce', 'troy_pound', 'u', 'unit', 'value', 'week', 'yard', 'year', 'yobi', 'yocto', 'yotta', 'zebi', 'zepto', 'zero_Celsius', 'zetta']
+
+3.5 Base units for physical & chemical constants
+All the default base units are based on these fundamental units only.
+
+length in meters
+energy in joules
+time in seconds
+pressure in pascals
+temperature in Kelvin
+angle in radians
+area in square meters
+volume in cubic meters
+mass in kilograms
+speed in meters per second
+power in watts
+force in newton
+
+For example, if the mass of the proton is fetched, it returns the value in kilogram only.
+
+from scipy import constants
+print(constants.m_p)					# mass of the proton
+print(constants.unit('proton mass'))
+>>>
+1.67262192369e-27
+kg
+
+If the speed of the light in vacuum is fetched, it returns the value in meters per second only.
+
+from scipy import constants
+print(constants.c)
+print(constants.unit('speed of light in vacuum'))
+>>>
+299792458.0
+m s^-1
+
+If the charge of an electron is fetched, it returns the value in coulombs.
+
+from scipy import constants
+print(constants.e)
+print(constants.unit('elementary charge'))
+>>>
+1.602176634e-19
+C
+
+If two or more units are fetched, they are also based on the default base units.
+
+from scipy import constants
+print(constants.k)			# Boltzmann constant is returned in Joule per Kelvin.
+print(constants.unit('Boltzmann constant'))
+>>>
+1.380649e-23
+J K^-1
+
+3.6 Interconversion of units
+	Unit values can be converted to a specific value form the base value. 
+from scipy import constants
+# to convert meter to inch
+print("meter to inch:", constants.inch)
+
+# to convert meter to angstrom
+print("meter to angstrom:", constants.angstrom)
+
+# to convert pascal to mmHg
+print("pascal to mmHg:", constants.mmHg)
+
+# to convert pascal to atmosphere
+print("pascal to atmosphere:", constants.atm)
+
+# to convert cubic meters to liter
+print("cubic meters to liter:",constants.liter)            
+print("cubic meters to litre:", constants.litre)
+
+# to convert meters per second to miles per hour
+print("meters per second to miles per hour:",constants.mph)
+
+# to convert meters per second to mach
+print("meters per second to mach:",constants.mach)
+
+# to convert Kelvin to Celsius
+print("Kelvin to Celsius", constants.zero_Celsius)
+
+# to convert Kelvin to Fahrenheit
+print("Kelvin to Fahrenheit:", constants.degree_Fahrenheit)
+# to convert Joules to electron Volt
+print("Joules to electron Volt:", constants.eV)
+
+# to convert Joules to calorie
+print("Joules to calorie:", constants.calorie)
+
+# to convert Joules to British Thermal Unit
+print("Joules to British Thermal Unit:", constants.Btu)
+
+# to convert Joules to erg
+print("Joules to erg:", constants.erg)
+
+# to convert watts to horse power
+print("watts to horse power:", constants.hp)
+
+# to convert newton to dyn
+print("newton to dyn:", constants.dyn)
+
+>>>
+meter to inch: 0.0254
+meter to angstrom: 1e-10
+pascal to mmHg: 133.32236842105263
+pascal to atmosphere: 101325.0
+cubic meters to liter: 0.001
+cubic meters to litre: 0.001
+meters per second to miles per hour: 0.44703999999999994
+meters per second to mach: 340.5
+Kelvin to Celsius 273.15
+Kelvin to Fahrenheit: 0.5555555555555556
+Joules to electron Volt: 1.602176634e-19
+Joules to calorie: 4.184
+Joules to British Thermal Unit: 1055.05585262
+Joules to erg: 1e-07
+watts to horse power: 745.6998715822701
+newton to dyn: 1e-05
+
+3.7 SI prefixes
+Specific keywords for prefix values are used for the interconversion of unit dimensions.
+from scipy import constants
+print(constants.yotta)    
+>>>
+1e+24
+
+print(constants.zetta)    
+>>>
+
+1e+21
+print(constants.exa)      
+>>>
+1e+18
+
+print(constants.peta)     
+>>>
+1000000000000000.0
+
+print(constants.tera)     
+>>>
+1000000000000.0
+
+print(constants.giga)     
+>>>
+1000000000.0
+
+print(constants.mega)     
+>>>
+1000000.0
+
+print(constants.kilo)     
+>>>
+1000.0
+
+print(constants.hecto)    
+>>>
+100.0
+
+print(constants.deka)     
+>>>
+10.0
+
+print(constants.deci)     
+>>>
+0.1
+
+print(constants.centi)    
+>>>
+0.01
+
+print(constants.milli)    
+>>>
+0.001
+
+print(constants.micro)    
+>>>
+1e-06
+
+print(constants.nano)     
+>>>
+1e-09
+
+print(constants.pico)     
+>>>
+1e-12
+
+print(constants.femto)    
+>>>
+1e-15
+
+print(constants.atto)     
+>>>
+1e-18
+
+print(constants.zepto)    
+>>>
+1e-21
+
+
+3.8 Binary prefixes
+Binary units are returned based on the base unit byte.
+
+from scipy import constants
+
+print(constants.kibi)    
+>>>
+1024
+
+print(constants.mebi)    
+>>>
+1048576
+
+print(constants.gibi)    
+>>>
+1073741824
+
+print(constants.tebi)    
+>>>
+1099511627776
+
+print(constants.pebi)    
+>>>
+1125899906842624
+
+print(constants.exbi)    
+>>>
+1152921504606846976
+
+print(constants.zebi)    
+>>>
+1180591620717411303424
+
+print(constants.yobi)    
+>>>
+1208925819614629174706176
+
+3.9 Current density – Electrochemical deposition of Cu
+	In the electrodeposition of copper from CuSO4 solution, 250 mA is applied for 30 minutes between anode and cathode, each electrode of having an area 12.5 cm2. Find the current density values in A.m–2 and A.inch–2. 
+Report the cathodic current efficiency in percent, if the weight of copper deposited at cathode is 134 mg.
+
+# Applied current, I = 250 mA; Convert: 250/1000 = 0.25 A.
+# 100 cm = 1 m; 1002 cm2 = 1 m2 = 10000 cm2 = 1 m2
+# Cathode area, A = 12.5 cm2; Convert: 12.5/104 = 0.00125 m2
+# 2.54 cm = 1 inch; 1 cm = 1/2.54 = 0.3937 inch
+# 1 cm2 = 0.39372 inch2 = 0.155 inch2 
+# 12.5 cm2 = 12.5 × 0.155 = 1.9375 inch2 
+# Current density, i = I/A = 0.25 A / 0.00125 m2 = 200 A/m2
+# i = 0.25 A / 1.9375 inch2 = 0.129032 A/inch2
+# Deposit weight, W; Convert: 134 mg = 134/1000 = 0.134 g
+# 1 Faraday, F = elementary charge × Avogadro number
+# F = 1.602176634e-19 C × 6.02214076e+23 mol–1
+# 1 Faraday, F = 96485.3321 C.mol–1
+# Deposition duration, t = 30 min = 1800 s
+# Gram equivalent weight of Cu, E = Atomic mass / valence
+# E = 63.55/2 = 31.775 g
+# If 1 F = 96485.3321 C = 96485.3321 A/s charge is given, one-gram equivalent weight of Cu = is deposited.
+# If 96485.3321 A is applied in 1 s for 1800 s, then 31.775 g of Cu is deposited.
+# If 9648.53321 A is applied in 10 s for 1800 s, then 31.775 g of Cu is deposited.
+# Theoretical weight, Wt = (I × t × E)/F
+# I = 0.25 A, t = 1800 s, E 31.775 g, F = 96485.332 C.mol–1
+# Wt = 0.148196 g
+# Cathodic current efficiency, CE = W/Wt × 100
+# Wt = 0.148 g; W = 0.134 g; 
+# CE = 0.134 / 0.148 × 100 = 90.54 %
+
+from scipy import constants
+
+# Applied current
+I = input("Enter applied current, mA: ")
+I = float(I)
+I = I/1000 # mA to A
+
+# Deposition duration
+t = input("Enter deposition, minutes: ")
+t = float(t)
+t = t*60 # min. to s
+
+# Weight of the deposit
+W = input("Enter weight of the deposit, mg: ")
+W = float(W)
+W = W/1000
+
+# Area of the electrode
+A = input("Enter area of the cathode, cm^2: ")
+A = float(A)		 
+m_cm = A/10000				# cm^2 to m^2
+
+inch = constants.inch*100		# inch^2 to cm^2
+inch_cm = (A/inch**2)
+
+# Current density in A / m^2
+i1 = I / m_cm   # current in A per m^2
+print("\nCurrent density, A.m^2 ", i1)
+
+# Current density in A/inch^2
+i2 = I / inch_cm # current in A per inch^2
+print("\nCurrent density, A.inch^2 ", i2)
+print("\n")
+
+# Gram Equivalent weight
+E = input("\tEnter gram equivalent weight, g: ")
+E = float (E)
+
+# Faraday's constant, F
+F = constants.e*constants.N_A
+print("\n")
+
+# Theoretical weight, Wt = (I × t × E)/F
+Wt = (I * t * E)/F
+print("\tTheoretical weight, g ", round(Wt, 4))
+print("\n")
+
+# Cathodic current efficiency, CE = W/Wt × 100
+CE = (W/Wt) * 100
+print("\tCathodic current efficiency, % ", round(CE,2))
+>>>
+Enter applied current, mA: 250
+Enter deposition, minutes: 30
+Enter weight of the deposit, mg: 134
+Enter area of the cathode, cm^2: 12.5
+
+Current density, A.m^2  200.0
+
+Current density, A.inch^2  0.129032
+
+	Enter gram equivalent weight, g: 31.775
+
+	Theoretical weight, g  0.1482
+
+	Cathodic current efficiency, %  90.42
+
+3.10 Interconversion of units of pressure
+# Conversion is based on pascals
+
+from scipy import constants
+
+# In atmosphere
+print(constants.atm)         
+>>>
+101325.0
+
+print(constants.atmosphere)  
+>>>
+101325.0
+
+# In bar
+print(constants.bar)         
+>>>
+100000.0
+
+# In torr
+print(constants.torr)        
+>>>
+133.32236842105263
+
+# In mmHg
+print(constants.mmHg)        
+>>>
+133.32236842105263
+
+# In pounds per square inch
+print(constants.psi)         
+>>>
+6894.757293168361
+
+3.11 Interconversion of units of mass
+# Conversion is based on kilogram
+
+from scipy import constants
+
+# In gram
+print(constants.gram)        
+>>>
+0.001
+
+# In ton
+print(constants.metric_ton)  
+>>>
+1000.0
+
+# In grain
+print(constants.grain)       
+>>>
+6.479891e-05
+
+# In pound
+print(constants.lb)          
+>>>				
+0.45359236999999997
+
+# In ounce
+print(constants.oz)          
+>>>				
+0.028349523124999998
+
+# In atomic mass unit
+print(constants.m_u)         
+>>>				
+1.66053904e-27
+
+# In atomic mass unit
+print(constants.u)           
+>>>
+1.66053904e-27
+
+3.12 Interconversion of units of time
+# Conversion is based on seconds
+
+from scipy import constants
+
+# In minute
+print(constants.minute)      
+>>>
+60.0
+
+# In hour
+print(constants.hour)        
+>>>
+3600.0
+
+# In day
+print(constants.day)         
+>>>
+86400.0
+
+# In week
+print(constants.week)        
+>>>
+604800.0
+
+# In year
+print(constants.year)        
+>>>
+31536000.0
+
+3.13 Interconversion of units of length
+# Conversion is based on meter
+
+from scipy import constants
+# In inch
+print(constants.inch)              
+>>>
+0.0254
+
+# In foot
+print(constants.foot)              
+>>>
+0.30479999999999996
+
+# In yard
+print(constants.yard)              
+>>>
+0.9143999999999999
+
+# In mile
+print(constants.mile)              
+>>>
+1609.3439999999998
+
+# In mil
+print(constants.mil)               
+>>>
+2.5399999999999997e-05
+
+# In nautical mile
+print(constants.nautical_mile)     
+>>>
+1852.0
+
+# In fermi
+print(constants.fermi)             
+>>>
+1e-15
+
+# In Angstrom
+print(constants.angstrom)          
+>>>
+1e-10
+
+# In micron
+print(constants.micron)            
+>>>
+1e-06
+
+# In light year
+print(constants.light_year)        
+>>>
+9460730472580800.0
+
+3.14 Interconversion of units of angle
+# Conversion is based on radians
+
+from scipy import constants
+
+# In degree
+print(constants.degree)     
+>>>
+0.017453292519943295
+
+# In arc minute
+print(constants.arcmin)     
+>>>
+0.0002908882086657216
+
+print(constants.arcminute)  
+>>>
+0.0002908882086657216
+
+# In arc second
+print(constants.arcsec)     
+>>>
+4.84813681109536e-06
+
+print(constants.arcsecond)  
+>>>
+4.84813681109536e-06
+
+3.15 Interconversion of units of temperature
+# Conversion is based on kelvin
+from scipy import constants
+# In Celsius
+print(constants.zero_Celsius)      
+>>>
+273.15
+
+# In Fahrenheit
+print(constants.degree_Fahrenheit) 
+>>>
+0.5555555555555556
+
+3.16 Interconversion of units of energy
+# Conversion is based on joules
+
+from scipy import constants
+
+# In electron Volt
+print(constants.eV)            
+>>>
+1.6021766208e-19
+
+# In calorie
+print(constants.calorie)       
+>>>
+4.184
+
+# In erg
+print(constants.erg)           
+>>>
+1e-07
+
+# In British Thermal Unit
+print(constants.Btu)           
+>>>
+1055.05585262
+
+# In Ton TNT
+print(constants.ton_TNT)       
+>>>
+4184000000.0
+
+3.17 Interconversion of units of power
+# Conversion is based on watts (Joules per second)
+
+from scipy import constants
+# In horsepower (hp)
+print(constants.hp)    
+>>>
+745.6998715822701
+
+3.18 Interconversion of units of force
+# Conversion is based on newton 
+
+from scipy import constants
+
+# In dyne
+print(constants.dyn)             
+>>>		# dyne
+1e-05
+
+# In pound force
+print(constants.lbf)             
+>>>
+4.4482216152605
+
+# In # kilogram force
+print(constants.kgf)             
+>>>	
+9.80665
+
+3.19 Interconversion of units of different dimensions
+Based on the base unit, interconversions for different dimensions can be carried out.
+
+# Interconversion of 5 eV to calorie 
+from scipy import constants
+print(5*(constants.eV/constants.calorie))
+>>>
+1.9146470291586996e-19
+
+# Interconversion of 2 Coulombs to Ampere-Hour (A.h)
+from scipy import constants
+print(2*(constants.e/(1.602176634e-19*3600)))
+# 1 Coulomb = (constants.e)/1.602176634e-19
+>>>
+0.0005555555555555556
+
+# Interconversion of 8.2 Angstrom to nano meter 
+from scipy import constants
+print(8.2*(constants.angstrom)/1e-9)
+>>>
+0.82
+
+# Interconversion of 85.2 mmHg to atmosphere 
+from scipy import constants
+print(85.2*(constants.mmHg/constants.atmosphere))
+>>>
+0.11210526315789474
+
+
+For the conversion of different units other than fundamental units, intercorrelations can be used as a simplified formula.
+
+# Example watts to calories/s
+# Conversion of 20 watts to calories/s
+# 1 watt = 1 Joule/s
+# 1 calorie = 4.184 J	
+# 1 J = 1/4.184 = 0.239 calorie
+# 1 watt = 0.239 calorie/s
+# 20 watt = 20 * 0.239 calorie/s
+
+from scipy import constants
+from scipy import constants
+a = input ("Enter watts:  ")
+a = float (a)
+print(a, "watts = ", a*(1/constants.calorie), " calorie/s")  
+>>>
+Enter watts:  20
+20.0 watts = 4.780114722753346  calorie/s
+
+
+Interconversion of temperature units
+For the interconversion of °C & °F, no need to import the SciPy constants, since it requires simple correlation.
+
+# Interconversion of 43.1 Fahrenheit to Celsius, without scipy import constants
+C = (43.1 - 32)* (5/9); 	print(C)
+>>>
+6.166666666666668
+
+# Interconversion of 43.1 Celsius to Fahrenheit, without scipy import constants
+F = 43.1 *(9/5) + 32;	print(F)
+>>>
+109.58
+	 
+3.22 Integration with quad
+\int_{\mathrm{a}}^{\mathrm{b}}\left(\mathrm{m}\mathrm{x}^\mathrm{2}\mathrm{\ +\ n} \right)\mathrm{\ dx}
+from scipy.integrate import quad
+def integrate(x, a, b):
+    return m*x**2 + n
+from scipy.integrate import quad
+def integrate(x, a, b):
+    return m*x**2 + n
+m = 3; n = -1; a = 2; b = 4
+result = quad(integrate, a, b, args = (m,n))
+print(result)
+>>>
+(53.99999999999999, 5.995204332975844e-13)
+
+
+3.23 Integration with romberg
+from scipy.integrate import romberg
+def integrate (x, a, b):
+    return m*x**2 + n
+m = 3; n = -1; a = 2; b = 4
+result = romberg(integrate, a, b, args = (m,n))
+print(result)
+>>>
+54
+
+3.24 Integration in NMR spectra – number of H atoms 
+# 3rd order polynomial fit for nmr.csv data with NumPy
+from numpy import genfromtxt
+import numpy.polynomial as poly
+import numpy as np
+data = genfromtxt('nmr.csv', delimiter=',',  dtype = float, skip_header = 0)	# nmr.csv has no header values
+n = len(data)
+a = 0
+x = []
+y = []
+while a<len(data):
+    x.append(data[a,0]) # List for x
+    y.append(data[a,1]) # List for y
+    a = a + 1
+print("\nx =", x)
+print("\ny =",y)
+c = poly.Polynomial.fit(x, y, deg = 2)	# order = 3
+c = c.convert().coef
+print("\ncoefficients: a  b  c ")
+print("\n",np.flip(c)) # flipping the array with a, b, c
+>>>
+x = [0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8]
+
+y = [0.0, 0.146, 0.284, 0.414, 0.536, 0.65, 0.756, 0.854, 0.944, 1.026, 1.1, 1.166, 1.224, 1.274, 1.316, 1.35, 1.376, 1.394, 1.404, 1.406, 1.4, 1.386, 1.364, 1.334, 1.296, 1.25, 1.196, 1.134, 1.064, 0.986, 0.9, 0.806, 0.704, 0.594, 0.476, 0.35, 0.216, 0.074, -0.076]
+
+coefficients: a  b  c 
+
+ [-4.00000000e-01  1.50000000e+00  1.11022302e-15]
+
+# Integration based on the III order polynomial fit 
+from scipy.integrate import quad
+def integrate(x, L, U): 					# L & U are lower & upper limits
+    return a*x**2 + b*x
+a = -0.4; b = 1.5; L = 0; U = 3.8 
+result = quad(integrate, L, U, args = (a, b))
+print(result)
+>>>
+(3.5137333333333327, 3.9042387699947916e-14)
+
+from scipy.integrate import romberg
+def integrate(x, L, U): 					# L & U are lower & upper limits
+    return a*x**2 + b*x
+a = -0.4; b = 1.5; L = 0; U = 3.8 
+result = romberg(integrate, L, U, args = (a,b))
+print(result)
+>>>
+3.5137333333333323
+
+3.25 Roots of an equation
+# Equation: x2 + (x+2) = 25 and x = 4.321825...
+from scipy.optimize import root
+def equn(x):
+  return x**2 + (x+2) - 25	
+a = root(equn, 0)
+print(a)
+>>>
+    fjac: array([[-1.]])
+     fun: array([0.])
+ message: 'The solution converged.'
+    nfev: 12
+     qtf: array([2.47446508e-11])
+       r: array([-9.64365091])
+  status: 1
+ success: True
+       x: array([4.32182538])
+
+3.26 Interpolation of viscosity of glycerol
+from numpy import genfromtxt
+import numpy as np
+from scipy.interpolate import interp1d
+data = genfromtxt('glycerol.csv', delimiter=',',  dtype = float, skip_header = 1)
+n = len(data)
+xL = input ("Enter the x data for interpolation: ")
+xL = float (xL)
+a = 0
+x = []
+y = []
+while a<len(data):
+    x.append(data[a,0])
+    y.append(data[a,1])
+    a =  a + 1
+print("x =", x)
+print("y =",y)
+interp_func = interp1d(x, y)
+ip = interp_func(xL)
+print("\n",ip) 
+>>>
+Enter the x data for interpolation: 95.5
+x = [100.0, 99.0, 98.0, 97.0, 96.0, 95.0, 94.0, 93.0, 92.0, 91.0]
+y = [622.0, 509.0, 423.0, 353.0, 296.0, 248.0, 201.0, 163.0, 134.0, 113.0]
+
+272.0
+
+# However, if extrapolation is exceeding the boundary limits, it throws an error.
+
+>>>
+Enter the x data for Lagrange interpolation: 89.5
+x = [100.0, 99.0, 98.0, 97.0, 96.0, 95.0, 94.0, 93.0, 92.0, 91.0]
+y = [622.0, 509.0, 423.0, 353.0, 296.0, 248.0, 201.0, 163.0, 134.0, 113.0]
+Traceback (most recent call last):
+  File "C:\Users\...", line 20, in <module>
+    ip = interp_func(xL)
+  File "C:\Users\...\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\interpolate\_polyint.py", line 78, in __call__
+    y = self._evaluate(x)
+  File "C:\Users\...\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\interpolate\_interpolate.py", line 707, in _evaluate
+    below_bounds, above_bounds = self._check_bounds(x_new)
+  File "C:\Users\...\AppData\Local\Programs\Python\Python310\lib\site-packages\scipy\interpolate\_interpolate.py", line 736, in _check_bounds
+    raise ValueError("A value in x_new is below the interpolation "
+ValueError: A value in x_new is below the interpolation range.
+
+3.27 Spline interpolation for numerical analysis 
+
+3.28 Cubic Spline interpolation – Viscosity of glycerol
+import UnivariateSpline 
+# Interpolating viscosity at 95.5 weight % (Refer 3.26).
+from scipy.interpolate import UnivariateSpline
+from numpy import genfromtxt
+import numpy as np
+data = genfromtxt('glycerol.csv', delimiter=',',  dtype = float, skip_header = 1)
+n = len(data)
+xS = input ("Enter the x data for spline interpolation: ")
+xS = float (xS)
+a = 0
+x = []
+y = []
+while a < len(data):
+    x.append(data[a,0])
+    y.append(data[a,1])
+    a =  a + 1
+print ("x =", x)
+print ("y =",y)
+x = np.flip(x)  # ascending order
+y = np.flip(y)
+spline_interp = UnivariateSpline(x, y)
+ip = spline_interp(xS)
+print("\n",ip)
+>>>
+Enter the x data for spline interpolation: 95.5
+x = [100.0, 99.0, 98.0, 97.0, 96.0, 95.0, 94.0, 93.0, 92.0, 91.0]
+y = [622.0, 509.0, 423.0, 353.0, 296.0, 248.0, 201.0, 163.0, 134.0, 113.0]
+270.0954597269341
+
+# Based on the available data sets, extrapolation is also possible in the spline function, but with limited accuracy.
+>>>
+Enter the x data for spline interpolation: 89.5	# Extrapolation
+x = [100.0, 99.0, 98.0, 97.0, 96.0, 95.0, 94.0, 93.0, 92.0, 91.0]
+y = [622.0, 509.0, 423.0, 353.0, 296.0, 248.0, 201.0, 163.0, 134.0, 113.0]
+
+95.39851706406164
+
+It must be emphasized that unlike Lagrange extrapolation, no error is returned for the extrapolated value at x = 89.5.
+
+3.29 Solving system of linear equations
+from scipy import linalg
+from scipy.linalg import lstsq
+import numpy as np
+x = np.array([2, 3, 4, 5, 6])
+y = np.array([18,31,48,69,94])
+
+M = x[:, np.newaxis]**[0, 1]   			 # y = mx + c
+equn = lstsq(M, y)[0]
+
+print("\n y-intercept: ", equn[0])
+print("\n Slope: ", equn[1])
+>>>
+y-intercept:  -24.00000000000002
+
+Slope:  19.0
+
+For larger data,.csv file can be used. Reading the data, row by row, the ‘x’ and ‘y’ values can be collected as a list. .csv files  are text files and can be integrated with MS Excel or Google Sheets.
+
+Example
+In a second order reaction between methyl p–toluene sulfonate (MPTS) and sodium iodide, decrease in the concentration of the MPTS is recorded with time. 
+Predict the change in the concentration with time as well as the initial concentration of MPTS.
+
+import numpy as np
+from scipy import linalg
+from numpy import genfromtxt
+from scipy.linalg import lstsq
+data = genfromtxt('mpts.csv', delimiter=',',  dtype = float, skip_header = 1)
+n = len(data)
+a = 0
+x = []
+y = []
+while a<len(data):
+    x.append(data[a,0])
+    y.append(data[a,2])
+    a =  a + 1
+x = np.array(x)
+y = np.array(y)
+print ("\nx: ", x)
+print ("\ny: ", y)
+M = x[:, np.newaxis]**[0, 1]    # y = mx+c
+equn = lstsq(M, y)[0]
+print("\n y-intercept: ", equn[0])
+print("\n Slope: ", equn[1])
+>>>
+x:  [0.5 1.  2.  3.  4.  5.  6.  7.  8. ]
+
+y:  [20.6186 21.1864 22.3214 23.4742 24.8139 25.9067 27.027  28.169  29.4118]
+
+y-intercept:  20.017051086956524
+
+Slope:  1.1719326086956525
+
+Initial concentration (as 1/Conc.) is ~20.0 ≈ 0.05 mol. dm-3
+Change in concentration is 1.1719 dm3 mol.–1 hour–1. 
+
+3.31 Balancing chemical equations with matrices – Combustion of hexane
+Complete combustion of hexane (C6H12) in a closed vessel: 
+C6H12 + O2 → CO2 + H2O
+Assume the stoichiometric coefficients are: x1, x2 x3 and x4.
+x1 (C6H12) + x2 (O2) → x3 (CO2) + x4 (H2O) 
+import numpy as np
+from scipy import linalg
+a = np.array([[6, 0, -1], [12, 0, 0], [0, 2, -2]])
+b = np.array([0, 2, 1])
+x = linalg.solve(a, b)
+print(x)
+>>>
+[0.16666667 1.5        1.        ]
+
+So, the observed values are:  x1 = 0.16666667, x2 = 1.5 and  x3 = 1.
+
+3.32 Finding minima for a function – Vapor pressure
+from scipy.optimize import minimize
+def fn(x):
+return x**2 -(4* x) + 3
+minim = minimize(fn,0)			# minimize function is deployed
+print(minim.x)
+>>>
+[2.00000002]
+So, at 2.0 °C, vapor pressure is minimum (–1 Pa).
+
+3.33 Statistical functions
+import scipy
+from scipy.stats import randint
+from scipy import stats
+a = stats.uniform(-3, 28).rvs(25) 				# generating 25 random data for a 
+# a from -3 to 28
+print("a :", a)
+print("\nMean: ",stats.tmean(a)) 				# mean
+print("\nStandard deviation: ",stats.tstd(a)) 		# standard deviation
+print("\nMinimum: ",stats.tmin(a)) 				# minimum 
+print("\nMaximum: ",stats.tmax(a)) 				# maximum 
+print("\nVariance: ",stats.tvar(a)) 				# variance
+print("\nSkewness: ",stats.skew(a)) 					# skewness
+print("\nCoefficient of variation: ",stats.variation(a)) # coefficient of variation
+print("\nGeometric mean: ",stats.gmean(a[2])) 			# geometric mean
+print("\nHarmonic mean: ",stats.hmean(a[2])) 			# harmonic mean mean
+print("\nKurtosis: ",stats.kurtosis(a)) 				# kurtosis – Fisher / Pearson
+>>>
+a : [ 6.2134837  24.94916978 12.98181473 11.43552684  3.00926118 12.08609385   15.23119028  5.76271834 -2.05900855 18.90068771  6.7504702   9.80211038    2.40724081 -2.4805944  20.12810341 -0.50442051 22.49431436 19.0964474   3.65538515 20.46878436  0.21037513  9.91359709 17.10445928 24.69371734  3.36511634]
+
+Mean:  10.624641767828953
+
+Standard deviation:  8.645999854895896
+
+Minimum:  -2.480594401965208
+
+Maximum:  24.949169777385478
+
+Variance:  74.75331349085987
+
+Skewness:  0.13116921477416407
+
+Coefficient of variation:  0.7973271352940847
+
+Geometric mean:  12.981814731812676
+
+Harmonic mean:  12.981814731812676
+
+Kurtosis:  -1.2331738784345472
+
+# Student’s t-test
+import scipy
+a = (1.3, 3.1, 4.1, 4.3)
+from scipy.stats import t
+print("Student’s t-test: ",t.stats(a))
+>>>
+Student’s t-test:  (array([0., 0., 0., 0.]), array([       inf, 2.81818182, 1.95238095, 1.86956522]))
+

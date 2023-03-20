@@ -1,0 +1,652 @@
+Chapter 4
+Basics of SymPy
+
+Basics of symbolic calculations
+from sympy import *
+x, y, func = symbols('x y func')
+a = (x**y)+func
+print (a)
+>>>
+func + x**y
+
+from sympy import symbols 
+ɑ, β = symbols('ɑ β ')
+print(ɑ/β)
+>>>
+ɑ/β
+
+from sympy.abc import a,b,c 
+print((a*c)**b) 
+>>>
+(a*c)**b
+
+Substitution with subs()
+By using the function, subs() one symbol can be replaced by the other.
+from sympy import *
+x, y, func = symbols('x y func')
+a = x/y
+b = a.subs(x, func)
+print(a, "\n", b)
+>>>
+x/y 
+ func/y
+
+sympify(string, evaluate=True) 
+It is used to evaluate an expression present in the string format. 
+ 
+
+evalf()
+It evaluates the given expression.
+from sympy.abc import x, y, z
+a = x**y;  print(a)
+b = a.evalf(subs={x:z}) 		# substitution
+print(b)
+c = a.evalf(subs={x:5, y:2}); print(c)
+>>>
+x**y
+z**y
+25.0000000000000
+
+prpint()
+For a better display, init_printing()along with pprint() (pretty printing) are used.
+from sympy import *
+init_printing() 
+a,b  = symbols('a b')
+print(Integral(sqrt(b/a**2), a)) ; print("\n")
+pprint(Integral(sqrt(b/a**2), a)) ;print("\n")
+pprint(Integral(sqrt(b/a**2), a),use_unicode = False)
+>>>
+Integral(sqrt(b/a**2), a)
+
+⌠             
+⎮      ____   
+⎮     ╱ b     
+⎮    ╱  ──  da
+⎮   ╱    2    
+⎮ ╲╱    a     
+⌡             
+
+  /            
+ |             
+ |      ____   
+ |     / b     
+ |    /  --  da
+ |   /    2    
+ | \/    a     
+ |             
+/              
+
+lambdify()
+This function has a single expression and used to get Python function from SymPy expressions and evaluates the given function.
+from sympy import *
+x, y = symbols('x y')
+a = x**y; print(a)
+lam = lambdify([x,y],a)	# single expression
+print(lam(2,8))
+>>>
+x**y
+256
+simplify()
+It is used to simplify an equation.
+Example: Simplifying the equation: x2 + x(3x–x2)
+x2 + x(3x–x2)  =  x2 + 3x2 − x3  = 4x2  − x3  =  x2 (4 – x)
+from sympy import *
+x = symbols('x')
+print(simplify((x**2) + (x*(3*x-x**2))))
+>>>
+x**2*(4 - x)
+
+from sympy import *
+x, y = symbols('x y')
+init_printing() 
+pprint(simplify(x**2*x**5))
+>>>
+  7
+x
+
+powsimp()
+This is used for simplification of equation with powers, if feasible.
+from sympy import *
+x, y, z = symbols('x y z')
+print(powsimp(x**y*x**z))
+print(powsimp(x**y*x**y))
+>>>
+x**(y + z)
+x**(2*y)
+trigsimp()
+This function used for trigonometric simplifications.
+from sympy import *
+x = symbols('x')
+print(trigsimp(2*cos(x)**2+sin(x)**2))
+print(trigsimp(2*sin(x)**2 + 3*cos(x)**2))
+>>>
+cos(x)**2 + 1
+cos(x)**2 + 2
+
+expand()
+This is used to expand an equation.
+from sympy import *
+a, b = symbols('a b')
+print(expand((a-b)**6))
+>>>
+a**6 - 6*a**5*b + 15*a**4*b**2 - 20*a**3*b**3 + 15*a**2*b**4 - 6*a*b**5 + b**6
+
+from sympy import *
+i, j, n = symbols('i j n')
+print(expand((i-j+n)**3))
+>>>
+i**3 - 3*i**2*j + 3*i**2*n + 3*i*j**2 - 6*i*j*n + 3*i*n**2 - j**3 + 3*j**2*n - 3*j*n**2 + n**3
+
+expand_trig()
+This function used to expand trigonometric expressions.
+from sympy import *
+x, y = symbols('x y')
+print(expand_trig(cos(x+y)))
+>>>
+-sin(x)*sin(y) + cos(x)*cos(y)
+
+factor()
+returns a polynomial equation into an irreducible form.
+a3 – 9a2 + 27a – 27 = (a – 3)3
+from sympy import *
+a = symbols('a')
+print(factor(a**3-9*a**2+27*a-27))
+>>>
+(a - 3)**3
+
+factorial()
+returns the factorial value
+from sympy import *
+init_printing() 
+a = symbols('a')
+pprint(factorial(a))
+a = 5; pprint(factorial(a))
+>>>
+a!
+120
+Logarithms:
+Natural logarithm is also given in ln and it returns as log.
+from sympy import *
+x, a, b = symbols('x a b')
+print(ln(x**a)*ln(x**b))
+print(log(b**x))
+>>>
+log(x**a)*log(x**b)
+log(b**x)
+
+Without importing math module, natural logarithms can be returned by the function ln. 
+
+Calculating pH from the concentration of H ions:
+pH = –log10 [H+]
+loge = 2.303 × log10
+
+from sympy import *
+a = input ("Enter the concentration of H ions (N): ")
+a = float (a)
+print (ln(a) /-2.303)
+>>>
+Enter the concentration of H ions (N): 0.03
+1.52260438442031
+
+Differential derivatives with diff() module
+from sympy import *
+x = symbols('x')
+print(diff(x**5, x))	    		# differentiation of x^5
+print(diff(x**5, x, x))	    	# second derivative
+print(diff(x**5, x, x, x))  	# third derivative
+print(diff(x**5, x, x, x, x))
+>>>
+5*x**4
+20*x**3
+60*x**2
+120*x
+
+It can also be implemented as,
+from sympy import *
+x = symbols('x')
+for n in range(1,5):
+    print (diff(x**5,x,n)) 
+>>>
+5*x**4
+20*x**3
+60*x**2
+120*x
+
+Integration with integrate() module
+from sympy import *
+x = symbols ('x')
+print (integrate(x**5))	    		# integration of x^5
+print (integrate(x**5, (x, 1, 3))) 	# limits between 1 and 3
+print (integrate(2**5, (x, 1, 3)))
+print (integrate(sin(x)))
+>>>
+x**6/6
+364/3
+64
+-cos(x) 
+
+Symbolic integration:
+from sympy import *
+x, a = symbols ('x a')
+print (integrate(x**a, x))
+print (integrate(x**-a, x))
+print (integrate(x**a, a))
+>>>
+Piecewise((x**(a + 1)/(a + 1), Ne(a, -1)), (log(x), True))
+Piecewise((x**(1 - a)/(1 - a), Ne(a, 1)), (log(x), True))
+Piecewise((x**a/log(x), Ne(log(x), 0)), (a, True))
+
+from sympy import *
+x, a = symbols('x a')
+print (integrate(x**a, (x, 1, 3))) 	# limits between 1 and 3
+>>>
+Piecewise((3**(a + 1)/(a + 1) - 1/(a + 1), (a > -oo) & (a < oo) & Ne(a, -1)), (log(3), True))
+
+Solving equations 
+from sympy import *
+x, y = symbols('x y')
+print (solveset(Eq(x**2 - 14, 2), x)) 		# output as dictionary
+print (solve(Eq(x**2 - 14, 2), x))			# output as list
+print (solve(Eq(x**2 - 14, 2), x)[0])		# Index for first value, 0
+print (solve(x - y, x))					# Eq() is not used
+>>>
+{-4, 4}
+[-4, 4]
+-4
+[y]
+
+So ‘x’ can take two values as –4  and 4, in x2 –14 = 2.
+
+Solving linear equations:
+Simultaneous linear equations can be solved by the function linsolve()
+from sympy import *
+x, y = symbols ('x y')
+# y - 2x = 7; 3y - 7x = 2
+print(linsolve([(y - (2*x) - 7), (3*y - (7*x) - 2)], (x, y)))
+>>>
+{(19, 45)}
+Solved values for ‘x’ and ‘y’ are 19 and 45 respectively.
+
+Solving non-linear equations:
+Two equations are: 3x – 4y = 0 and 9x – 8y = 12
+from sympy import *
+x, y, z = symbols('x y z')
+# 3x + 4y = 0; 9x – 8y = 12
+print(nonlinsolve([Eq(3*x - 4*y,0), Eq(9*x - 8*y,12) ], (x, y)))
+print(nonlinsolve([Eq(x - y, z), Eq(x + y, z) ], (x, y)))
+>>>
+{(4, 3)}
+{(z, 0)}
+
+from sympy import *
+x, y = symbols('x y')
+print(nonlinsolve([x**2 + x, x - y], [x, y]))
+>>>
+{(-1, -1), (0, 0)}
+
+Matrix operations
+# Constructing a 3×2 matrix
+from sympy import *
+from sympy.matrices import Matrix
+init_printing() 			# pretty print
+a, b, c, d, e, f  = symbols('a b c d e f')
+mat = Matrix([[a, b],[c, d], [e, f]])
+print(mat)
+print("Shape: ", mat.shape)	# to get the shape of a matrix
+print(mat.shape[0]) 			# Index = 0
+print(mat.shape[1]) 			# Index = 1
+print("\n")
+pprint(mat)				# pretty print
+>>>
+Matrix([[a, b], [c, d], [e, f]])
+Shape:  (3, 2)
+3
+2
+
+⎡a  b⎤
+⎢    ⎥
+⎢c  d⎥
+⎢    ⎥
+⎣e  f⎦
+
+Constructing matrix from a list:
+Using a list, matrix can be created by specifying rows and columns.
+
+Syntax: Matrix(number_of_rows, number_of_columns, [list of elements])
+from sympy import *
+from sympy.matrices import Matrix
+a, b, c, d, e, f  = symbols('a b c d e f')
+mat= Matrix(2,3,[a,b,c,d,e,f])				# 2×3 matrix
+print(mat)
+print(mat.shape)
+>>>
+Matrix([[a, b, c], [d, e, f]])
+(2, 3)
+
+Fetching rows and columns in a matrix:
+Index values of the row or column is specified to get the values. Negative indexing is also done.
+from sympy import *
+from sympy.matrices import Matrix
+init_printing() 		# pretty print
+a, b, c, d, e, f  = symbols('a b c d e f')
+mat = Matrix([[a, b],[c, d], [e, f]])
+pprint(mat.col)			# pretty print
+print("\n")
+print(mat.col(0))		# index at 0 (I column)
+print(mat.row(1))		# index at 1 (II row)
+>>>
+<bound method MatrixShaping.col of Matrix([
+                  [a, b],                  
+                  [c, d],                  
+                 [e, f]])>                 
+
+Matrix([[a], [c], [e]])
+Matrix([[c, d]])
+
+from sympy import *
+from sympy.matrices import Matrix
+a, b, c, d, e, f  = symbols('a b c d e f')
+mat = Matrix([[a, b],[c, d], [e, f]])
+print(mat.col)			
+print("Last column:", mat.col(-1))         	# negative indexing		
+print("Before the last row:", mat.row(-2)) 	# negative indexing
+>>>
+<bound method MatrixShaping.col of Matrix([
+[a, b],
+[c, d],
+[e, f]])>
+Last column: Matrix([[b], [d], [f]])
+Before the last row: Matrix([[c, d]])
+
+Modifying the elements of a matrix. From the indices of the elements, their values can be modified:
+
+from sympy import *
+from sympy.matrices import Matrix
+a, b, c, d, e, f, X, Y, Z, R = symbols('a b c d e f X Y Z R')
+mat = Matrix(2,3,[a,b,c,d,e,f])
+print(mat)
+mat[0] = (X, Y)			# Modifying the I column with x and y
+print(mat)
+mat[0, 0] = (Z)         	# Modifying the element at 1 x 1 with Z
+print(mat)
+>>>
+Matrix([[a, b, c], [d, e, f]])
+Matrix([[X, b, c], [Y, e, f]])
+Matrix([[Z, b, c], [Y, e, f]])
+
+Inserting row or column:
+from sympy import *
+from sympy.matrices import Matrix
+a, b, c, d, e, f  = symbols('a b c d e f')
+mat = Matrix([[a,b],[c,d],[e,f]])
+print(mat)
+print(mat.shape)
+print('\n')
+print(mat.row_insert(1, Matrix([[2, 1]])))  		# new row 2, 1 at index = 1
+new_mat = (mat.col_insert(0, Matrix([[-3], [-1], [-4]]))) 
+# new column -3, -4, -1 at index = 0
+print('\n')
+print(new_mat)
+print(new_mat.shape)
+>>>
+Matrix([[a, b], [c, d], [e, f]])
+(3, 2)
+
+Matrix([[a, b], [2, 1], [c, d], [e, f]])
+
+Matrix([[-3, a, b], [-1, c, d], [-4, e, f]])
+(3, 3)
+
+Deleting rows or columns:
+from sympy import *
+from sympy.matrices import Matrix
+a, b, c, d, e, f  = symbols('a b c d e f ')
+mat = Matrix(2,3,[a,b,c,d,e,f])
+print(mat)
+mat.col_del(0)          # deleting the I column
+print(mat)
+mat.row_del(-1)         # deleting the last row
+print(mat)
+>>>
+Matrix([[a, b, c], [d, e, f]])
+Matrix([[b, c], [e, f]])
+Matrix([[b, c]])
+
+Arithmetic operations:
+from sympy import *
+from sympy.matrices import Matrix
+a, b, c, d, e, f  = symbols('a b c d e f ')
+g, h, i, j, k  = symbols('g h i j k')
+mat_1 = Matrix(2,3,[a, b, c, d, e, f])
+mat_2 = Matrix(2,3,[a, g, h, i, j, k])
+print(mat_1)
+print(mat_2)
+print(mat_1 - mat_2)				# subtracting mat_2 from mat_1
+>>>
+Matrix([[a, b, c], [d, e, f]])
+Matrix([[a, g, h], [i, j, k]])		# note the first element in both matrices
+Matrix([[0, b - g, c - h], [d - i, e - j, f - k]])
+
+# Matrix multiplication
+from sympy import *
+from sympy.matrices import Matrix
+a, b, c, d, e, f  = symbols('a b c d e f ')
+g, h, i, j, k  = symbols('g h i j k')
+mat_1 = Matrix(2,3,[a, b, c, d, e, f])  	# shape of the mat_1 is  2 x 3
+mat_2 = Matrix(3,2,[a, g, h, i, j, k])  	# shape of the mat_2 is  3 x 2
+print(mat_1)
+print(mat_2)
+print(mat_1 * mat_2)					# note the first element in both matrices
+>>>
+Matrix([[a, b, c], [d, e, f]])
+Matrix([[a, g], [h, i], [j, k]])
+Matrix([[a**2 + b*h + c*j, a*g + b*i + c*k], [a*d + e*h + f*j, d*g + e*i + f*k]])
+
+# with numbers
+from sympy import *
+from sympy.matrices import Matrix
+mat_1 = Matrix(2,3,[19, 18, 17, 16, 15, 14])  
+mat_2 = Matrix(2,3,[9, 8, 7, 6, 5, 4])  
+print(mat_1)
+print(mat_2)
+print(mat_1 - mat_2)
+>>>
+Matrix([[19, 18, 17], [16, 15, 14]])
+Matrix([[9, 8, 7], [6, 5, 4]])
+Matrix([[10, 10, 10], [10, 10, 10]])
+
+
+Inverse of a matrix:
+from sympy import *
+from sympy.matrices import Matrix
+a, b, c, d  = symbols('a b c d ')
+mat = Matrix(2,2,[a, b, c, d])  			# 2 x 2 matrix
+print(mat)
+print(mat**-1)
+>>>
+Matrix([[a, b], [c, d]])
+Matrix([[d/(a*d - b*c), -b/(a*d - b*c)], [-c/(a*d - b*c), a/(a*d - b*c)]])
+
+from sympy import *
+from sympy.matrices import Matrix
+mat = Matrix(2,2,[1, 2, 3, 4])  			# 2 x 2 matrix
+print(mat)
+print(mat**-1)
+>>>
+Matrix([[1, 2], [3, 4]])
+Matrix([[-2, 1], [3/2, -1/2]])
+
+
+Transposing a matrix:
+from sympy import *
+from sympy.matrices import Matrix
+a, b, c, d, e, f  = symbols('a b c d e f')
+mat = Matrix(2,3,[a, b, c, d, e, f])  	# shape is 2 x 3
+print(mat)
+print(mat.T)						# shape becomes 3 x 2
+>>>
+Matrix([[a, b, c], [d, e, f]])
+Matrix([[a, d], [b, e], [c, f]])
+
+
+Determinant of a matrix
+from sympy import *
+from sympy.matrices import Matrix
+a, b, c, d, e, f, g, h, i  =  symbols ('a, b, c, d, e, f, g, h, i')
+mat = Matrix(3,3,[a, b, c, d, e, f, g, h, i])  	
+print(mat)
+print(mat.det())
+>>>
+Matrix([[a, b, c], [d, e, f], [g, h, i]])
+a*e*i - a*f*h - b*d*i + b*f*g + c*d*h - c*e*g
+
+Binomial functions
+Pascal’s triangle with binomial function can be obtained from the following code:
+from sympy import *
+for a in range(9):		# 9 rows
+    print ([binomial(a,b) for b in range(a+1)])
+>>>
+[1]
+[1, 1]
+[1, 2, 1]
+[1, 3, 3, 1]
+[1, 4, 6, 4, 1]
+[1, 5, 10, 10, 5, 1]
+[1, 6, 15, 20, 15, 6, 1]
+[1, 7, 21, 35, 35, 21, 7, 1]
+[1, 8, 28, 56, 70, 56, 28, 8, 1]
+# Getting Fibonacci series
+from sympy import *
+print ([fibonacci(a) for a in range(20)])		# 20 values
+>>>
+[0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181] 
+
+Sets
+from sympy import FiniteSet
+a = 'Chemistry'			
+print(FiniteSet(*a))				# return the letters in alphabetical order
+print(FiniteSet(*range(1,21,3)))	# from 1 to 21 with step size of 3
+>>>
+{C, e, h, i, m, r, s, t, y}
+{1, 4, 7, 10, 13, 16, 19}
+
+# Union of sets
+from sympy import FiniteSet
+from sympy import Union
+List1 = ['ZnO', 'FeO', 'MnO', 'NiO']
+List2 = ['CuO', 'MnO', 'CoO'] 
+a = FiniteSet(*List1)
+b = FiniteSet(*List2)
+print(Union(a, b))
+>>>
+{CoO, CuO, FeO, MnO, NiO, ZnO}
+
+# Intersection of sets
+from sympy import FiniteSet
+from sympy import Intersection 
+List1 = [-1.43, 2.13, 3.14]
+List2 = [2.13, 8.27, 0.11] 
+a = FiniteSet(*List1)
+b = FiniteSet(*List2)
+print(Intersection(a, b))
+>>>
+{2.13}
+
+# Getting uncommon elements in the sets – Symmetric difference values
+from sympy import FiniteSet
+from sympy import SymmetricDifference  
+List1 = ['ZnO', 'FeO', 'MnO', 'NiO']
+List2 = ['CuO', 'MnO', 'CoO'] 
+a = FiniteSet(*List1)
+b = FiniteSet(*List2)
+print(SymmetricDifference(a,b))
+>>>
+Union(Complement({CoO, CuO}, {FeO, NiO, ZnO}), Complement({FeO, NiO, ZnO}, {CoO, CuO}))
+
+# With Complement (sets) function
+from sympy import FiniteSet
+from sympy import Complement  
+List1 = ['ZnO', 'FeO', 'MnO', 'NiO']
+List2 = ['CuO', 'MnO', 'CoO'] 
+a = FiniteSet(*List1)
+b = FiniteSet(*List2)
+print(Complement(a,b))
+print(Complement(b,a))
+>>>
+Complement({FeO, NiO, ZnO}, {CoO, CuO})
+Complement({CoO, CuO}, {FeO, NiO, ZnO})
+
+Rate of a formation of CH3COOH  by fermentation from I derivative
+
+from sympy import *
+h = symbols('h')
+print(diff(0.0011*h**2 + 0.031, h))
+>>>
+0.0022*h
+Estimation of charge in an electrochemical cell – 
+from sympy import *
+h, Q = symbols('h Q')
+print ("Integral value :",integrate(((h**2)+(2*h)+3))) 	   	# general output
+print ("\n Charge in mA.h :", integrate(((h**2)+(2*h)+3), (h, 2, 8))) 	
+# limits between 2 and 8
+Q = integrate(((h**2)+(2*h)+3), (h, 2, 8)) * 3.6
+print ("\nCharge in C :", Q)
+>>>
+Integral value : h**3/3 + h**2 + 3*h
+
+Charge in mA.h : 246
+
+Charge in C : 885.600000000000
+
+Stoichiometric coefficient of a reaction – Matrix row echelon form
+The reaction between tetrachloroethylene and calcium hydroxide is given as:
+C2H2Cl4 + Ca(OH)2 → C2HCl3 + CaCl2 + H2O
+Assume the stoichiometric coefficients for this reaction are: x1, x2 x3, x4 and x5.
+x1 C2H2Cl4  +  x2 Ca(OH)2  →  x3  C2HCl3  +  x4 CaCl2 + x5 H2O
+from sympy import *
+M = Matrix([[2,0,2,0,0], [2,2,1,0,2],[4,0,3,2,0],[ 0,1,0,1,0], [0,2,0,0,1]])
+print (M.rref()[0])
+>>>
+Matrix([[1, 0, 0, 0, 1], [0, 1, 0, 0, 1/2], [0, 0, 1, 0, -1], [0, 0, 0, 1, -1/2], [0, 0, 0, 0, 0]])
+
+#The observed stoichiometric coefficients, x1, x2, x3 and x4 are:
+x1 = 1		x2 = ½ 		x3 = – 1		x4 = – ½ 
+Solving simultaneous arbitrary equations for concentrations
+from sympy import *
+A, B, C = symbols('A B C')
+print(nonlinsolve([Eq(3*A + B, 2*C), Eq(A + 5*B, 6*C)], (A, B)))
+>>>
+{(2*C/7, 8*C/7)}\ 
+# To get numerical values of [A] and [B] 
+
+from sympy import *
+A, B = symbols('A B ')
+print(nonlinsolve([Eq(3*A + B, 2), Eq(A + 5*B, 6)], (A, B)))
+>>>
+{(2/7, 8/7)}
+
+Equilibrium reactions & quadratic equation
+	
+from sympy import Symbol, solve
+from sympy import Float		# To convert rational value to float
+x = Symbol('x')
+Q = (15*x**2)-144*x + 288
+a = solve(Q, dict = False)
+print(a)
+print('\n x :', float(a[0]))	# To separate the first value from list
+print('\n x :', float(a[1]))
+print('\n[H2] :', (6-float(a[0])))	 
+print('\n[I2] :', (3-float(a[0])))
+print('\n[HI] :', (2*float(a[0])))
+>>>
+[24/5 - 4*sqrt(6)/5, 4*sqrt(6)/5 + 24/5]
+
+ x : 2.8404082057734574
+ x : 6.759591794226543
+
+[H2] : 3.1595917942265426
+
+[I2] : 0.15959179422654257
+
+[HI] : 5.680816411546915
+

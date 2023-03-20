@@ -1,0 +1,1223 @@
+CHAPTER 2
+Basic functions of numpy
+
+Dimension in arrays
+#Dimension value of the array can be known with .ndim command.
+
+import numpy as np
+zero_d = np.array(0)
+print("\n",zero_d)
+print("\n Zero Dim.: ", zero_d.ndim) 
+one_d = np.array([0, 1])
+print("\n",one_d)
+print("\n One Dim.: ", one_d.ndim)
+two_d = np.array([[0, 1], [2, 3]] , dtype = float)
+print("\n",two_d)		# Note: dtype is given as float
+print("\n Two Dim.: ", two_d.ndim)
+three_d = np.array([[[0, 1], [2, 3]], [[4, 5], [6,7]]])
+print("\n",three_d)
+print("\n Three Dim.: ",three_d.ndim)
+>>>
+0
+ Zero Dim.:  0
+ [0 1]
+ One Dim.:  1
+ [[0. 1.]
+ [2. 3.]]
+
+Two Dim.:  2
+
+ [[[0 1]
+  [2 3]]
+ [[4 5]
+  [6 7]]]
+
+ Three Dim.:  3
+
+Indexing for arrays
+import numpy as np
+sample = np.array([[(0,1), (2,3)], [(4,5), (6, 7)]], dtype = float) 	
+# dtype = float refers floating values
+print(sample); print(sample.ndim); print(sample[1, 1, 0])
+>>>
+[[[0. 1.]
+  [2. 3.]]
+ [[4. 5.]
+  [6. 7.]]]
+3
+ 6.0
+
+
+import numpy as np
+sample = np.array
+([
+[[0.1, 0.2, 0.3 ], [0.4, 0.5, 0.6 ],[0.7, 0.8, 0.9 ]],
+[[1.0, 2.0, 3.0 ], [4.0, 5.0, 6.0],[7.0, 8.0, 9.0]],
+[[10.0, 20.0, 30.0 ],[40.0, 50.0, 60.0 ],[70.0, 80.0, 90.0]]
+])
+print(sample); print ("Dimension: ", sample.ndim)
+print (sample[0, 1, 0])   
+print (sample[2, 1, 1]) 
+print (sample[1, 1, 0]) 
+print (sample[1, 1, 1]) 
+print (sample[2, 0, 1]) 
+print (sample[2, 1, 2])
+>>>
+[[[ 0.1  0.2  0.3]
+  [ 0.4  0.5  0.6]
+  [ 0.7  0.8  0.9]]
+
+ [[ 1.   2.   3. ]
+  [ 4.   5.   6. ]
+  [ 7.   8.   9. ]]
+
+ [[10.  20.  30. ]
+  [40.  50.  60. ]
+  [70.  80.  90. ]]]
+Dimension:  3
+ 0.4
+ 50.0
+ 4.0
+ 5.0
+ 20.0
+ 60.0
+
+
+3–D array
+import numpy as np
+sample = np.array
+([
+[[0.1, 0.2, 0.3 ],[0.4, 0.5, 0.6 ],[0.7, 0.8, 0.9 ]],
+[[1.0, 2.0, 3.0 ],[4.0, 5.0, 6.0],[7.0, 8.0, 9.0]],
+[[10.0, 20.0, 30.0 ],[40.0, 50.0, 60.0 ],[70.0, 80.0, 90.0]]
+])
+print(sample); print("Dimension: ", sample.ndim)
+print("\n",sample[2, 1, 1]) 
+print("\n",sample[2, 1]) 
+print("\n",sample[2])
+>>>
+[[[ 0.1  0.2  0.3]
+  [ 0.4  0.5  0.6]
+  [ 0.7  0.8  0.9]]
+ [[ 1.   2.   3. ]
+  [ 4.   5.   6. ]
+  [ 7.   8.   9. ]]
+ [[10.  20.  30. ]
+  [40.  50.  60. ]
+  [70.  80.  90. ]]]
+
+Dimension:  3
+ 
+50.0
+ 
+ [40. 50. 60.]
+
+ [[10. 20. 30.]
+ [40. 50. 60.]
+ [70. 80. 90.]]
+
+2–D array
+import numpy as np
+sample = np.array
+([
+[0.1, 0.2, 0.3 ],[0.4, 0.5, 0.6 ],[0.7, 0.8, 0.9],
+[1.0, 2.0, 3.0 ],[4.0, 5.0, 6.0],[7.0, 8.0, 9.0]
+])
+print(sample); print("Dimension: ", sample.ndim)
+print("\n",sample[0, 2])
+print("\n",sample[2]);  print("\n",sample[5,2])
+>>>
+[[0.1 0.2 0.3]
+ [0.4 0.5 0.6]
+ [0.7 0.8 0.9]
+ [1.  2.  3. ]
+ [4.  5.  6. ]
+ [7.  8.  9. ]]
+Dimension:  2
+
+ 0.3
+
+ [0.7 0.8 0.9]
+9.0
+
+
+
+Negative indexing
+import numpy as np
+sample = np.array
+([
+[0.1, 0.2, 0.3 ],[0.4, 0.5, 0.6 ],[0.7, 0.8, 0.9],
+[1.0, 2.0, 3.0 ],[4.0, 5.0, 6.0],[7.0, 8.0, 9.0]
+])
+print(sample); print("Dimension: ", sample.ndim)
+print("\n",sample[0, -1]);print("\n",sample[2])
+print("\n",sample[5,-3])
+>>>
+[[0.1 0.2 0.3]
+ [0.4 0.5 0.6]
+ [0.7 0.8 0.9]
+ [1.  2.  3. ]
+ [4.  5.  6. ]
+ [7.  8.  9. ]]
+Dimension:  2
+
+ 0.3
+
+ [0.7 0.8 0.9]
+
+ 7.0
+
+
+Shape of an array
+import numpy as np
+sample = np.array 
+([
+  [[0.1, 0.2, 0.3 ],[0.4, 0.5, 0.6 ],[0.7, 0.8, 0.9 ]],
+[[1.0, 2.0, 3.0 ],[4.0, 5.0, 6.0],[7.0, 8.0, 9.0]],
+[[10.0, 20.0, 30.0 ],[40.0, 50.0, 60.0 ],[70.0, 80.0, 90.0]]
+])
+print(sample); print("\nShape: ", sample.shape)
+>>>
+[[[ 0.1  0.2  0.3]
+  [ 0.4  0.5  0.6]
+  [ 0.7  0.8  0.9]]
+
+    [[ 1.   2.   3. ]
+  [ 4.   5.   6. ]
+  [ 7.   8.   9. ]]
+
+ [[10.  20.  30. ]
+  [40.  50.  60. ]
+  [70.  80.  90. ]]]
+
+Shape:  (3, 3, 3)
+
+
+
+import numpy as np
+sample = np.array ([
+[0.1, 0.2, 0.3 ], [0.4, 0.5, 0.6 ], [0.7, 0.8, 0.9],
+[1.0, 2.0, 3.0 ], [4.0, 5.0, 6.0], [7.0, 8.0, 9.0],
+])
+print(sample); print("\nShape: ", sample.shape)
+>>>
+[[0.1 0.2 0.3]
+ [0.4 0.5 0.6]
+ [0.7 0.8 0.9]
+ [1.  2.  3. ]
+ [4.  5.  6. ]
+ [7.  8.  9. ]]
+Shape:  (6, 3)
+
+
+
+Reshaping the arrays
+import numpy as np
+sample = np.array(([1, 2, 3, 4], [5, 6, 7, 8]))
+print(sample)
+sample1 = sample.reshape(4, 2); print("\n",sample1)
+>>>
+[[1 2 3 4]
+ [5 6 7 8]]
+ [[1 2]
+ [3 4]
+ [5 6]
+ [7 8]]
+
+Improper reshape dimensions returns error. 
+import numpy as np; 
+sample = np.array([1, 2, 3, 4, 5, 6, 7, 8])
+sample1 = sample.reshape(3, 3); print(sample1)
+>>>
+Traceback (most recent call last):
+  File "C:\Users\...\file_name.py", line 3, in <module>
+    sample1 = sample.reshape(3, 3); print(sample1)
+ValueError: cannot reshape array of size 8 into shape (3,3)
+
+
+Slicing of arrays
+import numpy as np
+sample = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9])
+sample1 = sample.reshape(3, 3)
+print(sample1)
+print("\nSliced values with [1:]")
+print(sample1[1:])
+print("\nSliced values with [0:1]")
+print(sample1[0:1])
+print("\nSliced values with [1:2:2]")
+print(sample1[1:2:2])
+>>>
+[[1 2 3]
+ [4 5 6]
+ [7 8 9]]
+>>>
+Sliced values with [1:]
+[[4 5 6]
+ [7 8 9]]
+
+Sliced values with [0:1]
+[[1 2 3]]
+
+Sliced values with [1:2:2]
+[[4 5 6]]
+
+Iterating the arrays
+import numpy as np
+sample = np.array([
+[[0.1, 0.2]],
+[[1.0, 2.0]],
+[[10.0, 20.0]]
+])
+print(sample); 	print("Dimension: ",  sample.ndim)
+print("\n")
+for x in sample:	# iteration
+  for y in x:
+    for z in y:
+      print(z)
+>>>
+[[[ 0.1  0.2]]
+ [[ 1.   2. ]]
+ [[10.  20. ]]]
+Dimension:  3
+
+0.1
+0.2
+1.0
+2.0
+10.0
+20.0
+
+
+Entropy calculation for Beryllium compounds  
+# Entropy change, ds at the standard temperature, T is:  dS = (dH – dG)/T
+# dG is the Free energy change and dS is the Enthalpy change.
+# Standard temperature, T = 298 K
+# G and H in kJ/mol. and S in kJ/mol. K.
+# Algorithm for the estimation of dS from dG and dH
+# Separate dH and dG values as float.
+# Combine the dH and dG for each compound as a list.
+# Calculate dS based on indices of dH and dG. 
+
+import numpy as np
+sample = np.array([
+["Name", "Formula","Enthalpy", "Free energy"],
+["Beryllium chloride","BeCl2", -490.4, 445.6],
+["Beryllium fluoride","BeF2", -1026.8, -979.4],
+["Beryllium oxide","BeO", -609.4, -580.1],
+["Beryllium sulfate","BeSO4", -1205.2, -1093.8]
+])
+print(sample);	print("\t"); 
+print("Dimension: ",  sample.ndim)
+t = []; y1 = []; z1 = []		# creating separate lists
+for x in sample:
+  try:
+    y = float(x[2]) # to fetch dH value index is 2
+    y1.append(y)    # creating a list
+    z = float(x[3]) # to fetch dG value index is 3
+    z1.append(z)
+    t.append(x[1])
+  except:		# to avoid errors on str to float
+    next    # to skip the string values such as "Name"
+print("\n")
+print("Fetched dH & dG values from the given data")
+a = list(map(lambda y1, z1: [y1 , z1], y1, z1))
+        # to form a single list
+print(a)
+print("\n")
+print("List for dH & dG for individual elements")
+for x in a:
+  print(x)			# indentation space
+print("\n")
+print("dS for individual elements")
+n = 0
+for x in a:
+  print(t[n], ": ",round((x[0]-x[1])/298,3))
+  n = n+1 		# This demonstration is based on 2–D array.
+>>>
+[['Name' 'Formula' 'Enthalpy' 'Free energy']
+ ['Beryllium chloride' 'BeCl2' '-490.4' '445.6']
+ ['Beryllium fluoride' 'BeF2' '-1026.8' '-979.4']
+ ['Beryllium oxide' 'BeO' '-609.4' '-580.1']
+ ['Beryllium sulfate' 'BeSO4' '-1205.2' '-1093.8']]
+	
+Dimension:  2
+
+Fetched dH & dG values from the given data
+[[-490.4, 445.6], [-1026.8, -979.4], [-609.4, -580.1], [-1205.2, -1093.8]]
+List for dH & dG for individual elements
+[-490.4, 445.6]
+[-1026.8, -979.4]
+[-609.4, -580.1]
+[-1205.2, -1093.8]
+
+dS for individual elements
+BeCl2 :  -3.141
+BeF2 :  -0.159
+BeO :  -0.098
+BeSO4 :  -0.374
+
+Concatenating 1-D arrays
+import numpy as np
+sample1 = np.array(["Beryllium chloride", "Beryllium fluoride", "Beryllium oxide",
+"Beryllium sulfate"])
+print(sample1)
+print("Dimension: ",  sample1.ndim)
+sample2 = np.array(["BeCl2","BeF2", "BeO","BeSO4"])
+print(sample2)
+print("Dimension: ",  sample2.ndim)
+print("\n")
+sample3 = np.concatenate(([sample1],[sample2]), axis=0)
+print(sample3)
+print("Dimension: ",  sample3.ndim) 
+print("\n")
+>>>
+['Beryllium chloride' 'Beryllium fluoride' 'Beryllium oxide' 'Beryllium sulfate']
+Dimension:  1
+['BeCl2' 'BeF2' 'BeO' 'BeSO4']
+Dimension:  1
+
+[['Beryllium chloride' 'Beryllium fluoride' 'Beryllium oxide' 'Beryllium sulfate']
+ ['BeCl2' 'BeF2' 'BeO' 'BeSO4']]
+Dimension:  2
+
+Concatenating based on axis values
+import numpy as np
+sample1 = np.array(["Beryllium chloride""Beryllium fluoride", "Beryllium oxide",
+"Beryllium sulfate"])
+sample2 = np.array(["BeCl2","BeF2", "BeO","BeSO4"])
+sample3 = np.concatenate(([sample1],[sample2]), axis=1)
+print(sample3)
+print ("Dimension: ", sample3.ndim)
+>>>
+[['Beryllium chloride' 'Beryllium fluoride' 'Beryllium oxide' 'Beryllium sulfate' 'BeCl2' 'BeF2' 'BeO' 'BeSO4']]
+Dimension:  2
+
+np.stack() function with axis 0 and 1
+Syntax: np.vstack((arrays) axis value)
+import numpy as np
+sample1 = np.array(["Beryllium chloride", "Beryllium fluoride", "Beryllium oxide",
+"Beryllium sulfate"])
+sample2 = np.array(["BeCl2","BeF2", "BeO","BeSO4"])
+sample3 = np.stack((sample1, sample2), axis=0) # axis = 0
+print(sample3)
+print("Dimension: ",  sample3.ndim)
+print("\n")
+sample3 = np.stack((sample1, sample2), axis=1) # axis = 1
+print(sample3)
+print("Dimension: ",  sample3.ndim)
+>>>
+[['Beryllium chloride' 'Beryllium fluoride' 'Beryllium oxide'
+  'Beryllium sulfate']
+ ['BeCl2' 'BeF2' 'BeO' 'BeSO4']]
+Dimension:  2
+
+[['Beryllium chloride' 'BeCl2']
+ ['Beryllium fluoride' 'BeF2']
+ ['Beryllium oxide' 'BeO']
+ ['Beryllium sulfate' 'BeSO4']]
+Dimension:  2		# This syntax based on axis = 1 and is useful for rearranging.
+
+ Stacking arrays along rows, columns & height
+import numpy as np
+sample1 = np.array(["Beryllium chloride", "Beryllium fluoride", "Beryllium oxide",
+"Beryllium sulfate"])
+sample2 = np.array(["BeCl2","BeF2", "BeO","BeSO4"])
+sample3 = np.hstack((sample1, sample2))
+print("\n",sample3)
+print("\nDimension: ",  sample3.ndim)
+>>>
+
+['Beryllium chloride' 'Beryllium fluoride' 'Beryllium oxide' 'Beryllium sulfate' 'BeCl2' 'BeF2' 'BeO' 'BeSO4']
+
+Dimension:  1
+Following programs shows the stacking of arrays along columns and height
+Stacking arrays along columns   with np.vstack()
+import numpy as np
+sample1 = np.array(["Beryllium chloride","Beryllium fluoride", "Beryllium oxide", "Beryllium sulfate"])
+sample2 = np.array(["BeCl2","BeF2", "BeO","BeSO4"])
+sample3 = np.vstack((sample1, sample2))
+print(sample3)
+print("Dimension: ",  sample3.ndim)
+>>>
+[['Beryllium chloride' 'Beryllium fluoride' 'Beryllium oxide' 'Beryllium sulfate']
+ ['BeCl2' 'BeF2' 'BeO' 'BeSO4']]
+Dimension:  2
+
+Stacking arrays along height with np.dstack()
+import numpy as np
+sample1 = np.array(["Beryllium chloride","Beryllium fluoride", "Beryllium oxide",
+"Beryllium sulfate"])
+sample2 = np.array(["BeCl2","BeF2", "BeO","BeSO4"])
+sample3 = np.dstack((sample1, sample2))
+print(sample3)
+print("Dimension: ",  sample3.ndim)
+>>>
+[[['Beryllium chloride' 'BeCl2']
+  ['Beryllium fluoride' 'BeF2']
+  ['Beryllium oxide' 'BeO']
+  ['Beryllium sulfate' 'BeSO4']]]
+Dimension:  3
+
+ 
+Transpose of arrays
+import numpy as np
+sample = np.array((["BeCl2","BeF2"], ["BeO","BeSO4"]))
+sample1 = np.transpose(sample)
+print(sample)
+print("Dimension of sample: ",  sample.ndim)
+print("\n", sample1)
+print("Dimension of sample1: ",  sample1.ndim)
+>>>
+[['BeCl2' 'BeF2']
+ ['BeO' 'BeSO4']]
+Dimension of sample:  2
+
+ [['BeCl2' 'BeO']
+ ['BeF2' 'BeSO4']]
+Dimension of sample1:  2
+
+Distribution coefficient for phenol 
+import csv
+import numpy as np
+with open('part_coeff.csv') as file:
+    reader = csv.reader(file)
+    rows = list(reader)
+    print(rows)
+print("")
+a = np.transpose(rows)	# rows & columns transposed
+print(a)
+>>>
+[['Expt. #', '1', '2', '3', '4'], ['H2O', '0.094', '0.162', '0.255', '0.436'], ['CHCl3', '0.254', '0.753', '1.872', '5.462']]
+[['Expt. #' 'H2O' 'CHCl3']
+ ['1' '0.094' '0.254']
+ ['2' '0.162' '0.753']
+ ['3' '0.255' '1.872']
+ ['4' '0.436' '5.462']]
+
+
+
+Association factor of phenol in H2O & CHCl3
+import csv
+import numpy as np
+with open('part_coeff.csv') as file:
+reader = csv.reader(file)
+rows = list(reader)
+a=np.transpose(rows)	
+print(a)					# from previous program
+y = a.shape[0]
+z = a.shape[1]
+print(y)
+print(z)	
+# Note: Try to iterate the following indices from y & z
+print(a[1, 1], a[1, 2]) 
+print(a[2, 1], a[2, 2]) 
+print(a[3, 1], a[3, 2]) 
+print(a[4, 1], a[4, 2])
+>>>
+[['Expt. #' 'H2O' 'CHCl3']
+ ['1' '0.094' '0.254']
+ ['2' '0.162' '0.753']
+ ['3' '0.255' '1.872']
+ ['4' '0.436' '5.462']]
+5
+3
+0.094 0.254
+0.162 0.753
+0.255 1.872
+0.436 5.462
+
+
+
+import csv
+import numpy as np
+import math
+with open('part_coeff.csv') as file:
+    reader = csv.reader(file)
+    rows = list(reader)
+a = np.transpose(rows)			
+k1 = round(float(a[1, 1])/ float(a[1, 2]),4) 
+k2 = round(float(a[2, 1])/ float(a[2, 2]),4)  
+k3 = round(float(a[3, 1])/ float(a[3, 2]),4) 
+k4 = round(float(a[4, 1])/ float(a[4, 2]),4)
+list1 = list((k1, k2, k3, k4))
+print(list1)	
+# Average and Standard deviation for the list.
+print("Average: ", round(np.average(list1),4))
+print("Standard Deviation: ", round(np.std(list1),4))
+k5 = round(math.sqrt(float(a[1, 1]))/ float(a[1, 2]),4) 
+k6 = round(math.sqrt(float(a[2, 1]))/ float(a[2, 2]),4)  
+k7 = round(math.sqrt(float(a[3, 1]))/ float(a[3, 2]),4) 
+k8 = round(math.sqrt(float(a[4, 1]))/ float(a[4, 2]),4)  
+list2 = list((k5, k6, k7, k8))
+print("\n",list2)
+print("Average: ", round(np.average(list2),4))
+print("Standard Deviation: ", round(np.std(list2),4))
+k9 = round(float(a[1, 1])/ math.sqrt(float(a[1, 2])),4)
+k10 = round(float(a[2, 1])/ math.sqrt(float(a[2, 2])),4)
+k11 = round(float(a[3, 1])/ math.sqrt(float(a[3, 2])),4)
+k12 = round(float(a[4, 1])/ math.sqrt(float(a[4, 2])),4)
+list3 = list((k9, k10, k11, k12))
+print("\n",list3)
+print("Average: ", round(np.average(list3),4))
+print("Standard Deviation: ", round(np.std(list3),4))
+>>>
+[0.3701, 0.2151, 0.1362, 0.0798]
+Average:  0.2003
+Standard Deviation:  0.1092
+
+[1.2071, 0.5345, 0.2698, 0.1209]
+Average:  0.5331
+Standard Deviation:  0.4164
+
+[0.1865, 0.1867, 0.1864, 0.1866]
+Average:  0.1866
+Standard Deviation:  0.0001
+
+
+
+Important functions in NumPy
+a = np.array1; 	b = np.array2
+addition		a+b		or 	np.add(b, a)		
+subtraction 	a–b		or 	np.subtract(b,a)
+Division 		a/b		or 	np.divide(b,a)
+multiplication	a*b		or	np.multiply(b,a)
+exponentiation				np.exp(array)
+square root					np.sqrt(array)	
+log10						np.log10(a)
+loge						np.log(a)
+sine						np.sin(array)		# cos & tan also
+abs						abs(array)	# for absolute values
+
+Comparison operators: Arrays can be compared with comparison operators.
+
+import numpy as np
+a = np.array([(2,10,100)], dtype = float)
+b = np.array([(16,16,16)], dtype = float)
+print (a == b) 
+print (a > b) 
+print (a < b)
+>>>
+[[False False False]]
+[[False False  True]]
+[[ True True False]]
+
+
+import numpy as np
+a = np.array([(1,2),(3,4),(5,6),(7,8)], dtype = float)
+print (a.mean(axis = 0)); print(a.mean(axis=1))
+>>>
+[4. 5.]
+[1.5 3.5 5.5 7.5]
+
+import numpy as np
+a = np.array([(1,2), (3,4), (5,6), (7,8)], dtype = float)
+print (a.min(axis = 0)); print (a.max(axis = 1))	# along axes 1
+>>>
+[1. 2.]
+[2. 4. 6. 8.]
+
+
+import numpy as np
+a = np.array([(1,2),(3,4),(5,6),(7,8)], dtype = float)
+print (a.ndim); print (np.std(a))
+>>>
+2
+2.29128784747792
+
+Splitting an array: By using np.split(), arrays can be splitted.
+import numpy as np
+a = np.array([(1,2),(3,4),(5,6),(7,8)], dtype = float)
+print(a); b = np.split(a,2); print(b)
+>>>	 
+[[1. 2.]
+ [3. 4.]
+ [5. 6.]
+ [7. 8.]]
+[array([[1., 2.],[3., 4.]]), 
+array([[5., 6.],[7., 8.]])]
+
+import numpy as np
+a = np.array([(1,2),(3,4),(5,6),(7,8)], dtype = float)
+print(a); b = np.split(a,3); print(b)
+>>>
+[[1. 2.]
+ [3. 4.]
+ [5. 6.]
+ [7. 8.]]
+Traceback (most recent call last):
+  File "C:\Users\... file_name.py", line 3, in <module>
+    print(a); b = np.split(a,3); print(b)
+  File "<__array_function__ internals>", line 180, in split
+  File "C:\Users\...\AppData\Local\Programs\Python\Python310\lib\site-packages\numpy\lib\shape_base.py", line 872, in split
+    raise ValueError(
+ValueError: array split does not result in an equal division
+
+import numpy as np
+a = np.array([(1,2),(3,4),(5,6),(7,8)], dtype = float)
+print(a); b = np.split(a,4); print(b)
+>>>
+[[1. 2.]
+ [3. 4.]
+ [5. 6.]
+ [7. 8.]]
+[array([[1., 2.]]), array([[3., 4.]]), array([[5., 6.]]), array([[7., 8.]])]
+
+import numpy as np
+print(np.arange(2, 21, 3))	# from 2 with a space of 3 to 20
+>>>
+[ 2  5  8 11 14 17 20]
+
+
+import numpy as np
+a = np.array([(1,2), (3,4), (5,6), (7,8)], dtype = float)
+print (np.delete(a, 1, axis = 0))			# delete index 1
+>>>
+[[1. 2.]
+ [5. 6.]
+ [7. 8.]]
+
+import numpy as np
+a = np.array([(1,2),(3,4),(5,6)], dtype = float)
+print(a); b = np.append(a,[(10,11)]); print(b)
+>>>
+[[1. 2.]
+ [3. 4.]
+ [5. 6.]]
+[ 1.  2.  3.  4.  5.  6. 10. 11.]
+
+
+import numpy as np
+a = np.array([(1,2),(3,4),(5,6)], dtype = float)
+print(a); b = np.insert(a,1,(10,11)); print(b)		# at index  = 1
+>>>
+[[1. 2.]
+ [3. 4.]
+ [5. 6.]]
+[ 1. 10. 11.  2.  3.  4.  5.  6.]
+
+import numpy as np
+a = np.array([[(1,2),(3,4)],[(5,6),(7,8)]], dtype = float)
+print(a); b = a.tolist(); print("\n",b)
+>>>
+[[[1. 2.]
+  [3. 4.]]
+
+ [[5. 6.]
+  [7. 8.]]]
+
+ [[[1.0, 2.0], [3.0, 4.0]], [[5.0, 6.0], [7.0, 8.0]]]
+
+import numpy as np
+a = np.array([[(1,2),(3,4)],[(5,6),(7,8)]], dtype = float)
+print(a)
+print(a.ndim)
+b = a.flatten()
+print(b) 
+print(b.ndim)
+>>>
+[[[1. 2.]
+  [3. 4.]]
+ [[5. 6.]
+  [7. 8.]]]
+3
+[1. 2. 3. 4. 5. 6. 7. 8.]
+1
+
+import numpy as np
+a = np.array([(1,2), (3,4), (5,6), (7,8)], dtype = float)
+print(a); a[0] = 27, 58;  print("\n",a)		# at index 0
+>>>
+[[1. 2.]
+ [3. 4.]
+ [5. 6.]
+ [7. 8.]]
+
+ [[27. 58.]
+ [ 3.  4.]
+ [ 5.  6.]
+ [ 7.  8.]]
+
+
+import numpy as np
+a = np.array([(1,2), (3,4), (5,6), (7,8)], dtype = float)
+print(a); print("\n",np.multiply(a,(2,3))) 	# multiplication
+# np.divide() 		for division; 
+# np.power() 		for raising powers 
+# np.add() 		for addition 
+# np.subtract() 	for subtraction
+>>>
+[[1. 2.]
+ [3. 4.]
+ [5. 6.]
+ [7. 8.]]
+
+ [[ 2.  6.]
+ [ 6. 12.]
+ [10. 18.]
+ [14. 24.]]
+
+import numpy as np
+a = np.array([(1,2),(3,4),(5,6),(7,8)], dtype = float)
+print(a); print("\n",np.power(a,(3,2)))		# power function for arrays
+>>>
+[[1. 2.]
+ [3. 4.]
+ [5. 6.]
+ [7. 8.]]
+
+ [[  1.   4.]
+ [ 27.  16.]
+ [125.  36.]
+ [343.  64.]]
+
+
+import numpy as np
+a = np.array([(1,2), (3,4), (5,6), (7,8)], dtype = float)
+print(a.cumsum(axis = 0))
+print(a.cumsum(axis = 1))
+>>>
+[[ 1.  2.]
+ [ 4.  6.]
+ [ 9. 12.]
+ [16. 20.]]
+[[ 1.  3.]
+ [ 3.  7.]
+ [ 5. 11.]
+ [ 7. 15.]]
+
+NumPy has numerous functions and little bit faster and memory efficient than Pandas, for processing smaller amount of data. So, it can be deployed for simple data analysis. 
+
+ Balancing equation by matrix row echelon form
+C6H12S + O2 → H2CO3 + SO2
+Balanced equation is:		C6H12S + 10 O2 → 6 H2CO3 + SO2
+import numpy as np
+def re(M, v=0):
+    a, b = M.shape
+    x, y = 0, 0
+    M1 = []
+    while x < a and y < b:
+    # Index of largest element in the remainder of column y
+        k = np.argmax(np.abs(M[x:a, y])) + x
+        p = np.abs(M[k, y])
+        if p <= v:
+            # The column is negligible, zero it out
+            M[x:a, y] = 0.0
+            y += 1
+        else:
+            M1.append(y)
+            if x != k:
+                # exchange x & y rows
+                M[[x, k], y:b] = M[[k, x], y:b]
+            # Divide row x by the element M[x, y]
+            M[x, y:b] = M[x, y:b] / M[x, y]
+
+# Subtracting multiples of pivot row from all other rows
+            for k in range(a):
+                if k != x:
+                    M[k, y:b] -= M[k, y] * M[x, y:b]
+            x += 1
+            y += 1
+    return M, M1	# at the indent of while:
+M = np.array([
+        [6, 0, -1, 0],
+        [12, 0, -2, 0],
+        [0, 2, -3, -2],
+        [1, 0, 0, -1]
+    ], dtype=np.float_)
+
+Mred, M1 = re(M)
+print(Mred)
+>>>
+[[  1.   0.   0.  -1.]
+ [  0.   1.   0. -10.]
+ [  0.   0.   1.  -6.]
+ [  0.   0.   0.   0.]]
+
+ Solving systems of linear equations
+import numpy as np
+CoM = np.array([[0.35, 0.25], [0.15,-0.1]])
+CoMi = np.linalg.inv(CoM)
+# Inversion of Coefficient matrix
+CM = np.array([[0.15, 1.1]])
+VM = CoMi * CM
+print(VM.round())
+>>>
+[[ 0.  4.]
+ [ 0. -5.]]
+So the slope, dC/dT is 4 mol.K–1 and the decrease in the concentration of the compound at these two temperatures is 5 mol.
+
+ Equilibrium reactions & Quadratic equation
+import numpy as np
+coeff = []
+n = 1
+if n == 1:						
+    coeff1 = input ("Enter a: ")
+    coeff1 = float(coeff1)	
+    coeff.append(coeff1)
+    n = n+1
+    if n == 2:
+        coeff1 = input ("Enter b: ")
+        coeff1 = float(coeff1)
+        coeff.append(coeff1)
+        n = n + 1
+        if n == 3:				# nested loops 
+            coeff1 = input ("Enter c: ")
+            coeff1= float(coeff1)
+            coeff.append(coeff1)
+
+print(coeff)					
+roots = np.array([coeff])   
+print(np.roots(coeff))			
+>>>
+Enter a: 3
+Enter b: -36
+Enter c: 32
+[3.0, -36.0, 32.0]
+[11.03322296  0.96677704]
+
+ Coefficients for 3rd order polynomial equations
+import numpy.polynomial as poly
+import numpy as np
+x = [1, 4, 6, 7, 8]					# Time in hours
+y = [39.2, 129.2, 131.2, 96.8, 30.8]		# Concentration
+c = poly.Polynomial.fit(x, y, deg = 3)	# order = 3
+c = c.convert().coef
+print(np.flip(c)) # flipping the array with a, b, c, d
+>>>
+[-1.   5.2   25.  10. ]
+
+So, the 3rd order fit is: y = –x3 + 5.2x2 + 25x + 10.
+
+ Interpolations for unknown variables
+import numpy.polynomial as poly
+import numpy as np	
+x = [1, 4, 6, 7, 8]	# Time in hours
+y = [39.2, 129.2, 131.2, 96.8, 30.8]			# Concentration
+c = poly.Polynomial.fit(x, y, deg = 3)		# order = 3
+print(c(5))							# Interpolation at hour = 5 (x)
+print(c(7.2))							# Interpolation at hour = 7.2 (x)
+c = c.convert().coef
+print(np.flip(c)) 						# flipping the array with a, b, c, d
+>>>
+140.0
+86.32000000000002
+[-1.   5.2    25.  10. ]
+
+3rd order fit is: y = –x3 + 5.2x2 + 25x + 10.
+If x = 5 (hour) concentration is 140 millimoles.
+If x = 7.2 (hour) concentration is 86.32 millimoles.
+
+ Reading and writing .csv file
+import csv
+a = []
+b = []
+with open('sample.csv', 'r') as file:
+    reader = csv.reader(file)
+    for row in reader:
+            try:						# to remove header file
+                row[0] = float(row[0])
+                row[1] = float(row[1])
+                a.append(row[0])
+                b.append(row[1])
+            except:						# str data is skipped
+                next
+    print(a); print("\n",a[1:5]); print("\n",b);  print("\n",b[1:5])
+>>>
+[20.0, 25.0, 30.0, 35.0, 40.0, 45.0, 50.0, 55.0, 60.0, 65.0, 70.0, 75.0, 80.0, 85.0, 90.0, 95.0, 100.0]
+
+ [25.0, 30.0, 35.0, 40.0]
+[124.0, 129.0, 131.0, 145.0, 182.0, 185.0, 198.0, 215.0, 218.0, 220.0, 221.0, 238.0, 268.0, 280.0, 289.0, 293.0, 300.0]
+
+[129.0, 131.0, 145.0, 182.0]
+
+Fetching as single array by skipping header values
+Rows or headers can be skipped with genfromtxt() function.
+
+from numpy import genfromtxt
+data = genfromtxt('sample.csv', delimiter=',', skip_header = 1)	
+# skipping first row
+print(data)
+print("\n",data[2])					# index 2
+>>>
+[[ 20. 124.]
+ [ 25. 129.]
+ [ 30. 131.]
+ [ 35. 145.]
+ [ 40. 182.]
+ [ 45. 185.]
+ [ 50. 198.]
+ [ 55. 215.]
+ [ 60. 218.]
+ [ 65. 220.]
+ [ 70. 221.]
+ [ 75. 238.]
+ [ 80. 268.]
+ [ 85. 280.]
+ [ 90. 289.]
+ [ 95. 293.]
+ [100. 300.]]
+
+[ 30. 131.]						# returns at index = 2
+
+
+Skipping multiple rows:
+from numpy import genfromtxt
+data = genfromtxt('sample.csv', delimiter=',', skip_header = 11)		
+# skipping 11 rows including header
+print(data)
+>>>
+[[ 70. 221.]
+ [ 75. 238.]
+ [ 80. 268.]
+ [ 85. 280.]
+ [ 90. 289.]
+ [ 95. 293.]
+ [100. 300.]]
+
+Converting to str with np.loadtxt() function
+import numpy as np
+data = np.loadtxt("sample.csv", dtype = str)
+print(data)
+>>>
+['Temperature,Enthalpy' '20,124' '25,129' '30,131' '35,145' '40,182' '45,185' '50,198' '55,215' '60,218' '65,220' '70,221' '75,238' '80,268' '85,280' '90,289' '95,293' '100,300']
+
+import numpy as np
+data = np.loadtxt("sample.csv", delimiter =",", dtype = float)
+print(data)
+>>>
+Traceback (most recent call last):
+  File "C:\Users\...\sample.py", line 2, in <module>
+    data = np.loadtxt("sample.csv", delimiter=",", dtype=float)
+  File "C:\Users\...\Python310\lib\site-packages\numpy\lib\npyio.py", line 1163, in loadtxt
+    chunk.append(packer(convert_row(words)))
+  File "C:\Users\...\Python310\lib\site-packages\numpy\lib\npyio.py", line 1142, in convert_row
+    return [*map(_conv, vals)]
+  File "C:\Users\...\Python310\lib\site-packages\numpy\lib\npyio.py", line 725, in _floatconv
+    return float(x)  # The fastest path.
+ValueError: could not convert string to float: 'Temperature'
+
+import numpy as np
+data = np.loadtxt ("sample.csv", delimiter=",", dtype = float, skiprows=1)	
+# float format with skipping row 1.
+print(data)
+>>>
+[[ 20. 124.]
+ [ 25. 129.]
+ [ 30. 131.]
+ [ 35. 145.]
+ [ 40. 182.]
+ [ 45. 185.]
+ [ 50. 198.]
+ [ 55. 215.]
+ [ 60. 218.]
+ [ 65. 220.]
+ [ 70. 221.]
+ [ 75. 238.]
+ [ 80. 268.]
+ [ 85. 280.]
+ [ 90. 289.]
+ [ 95. 293.]
+ [100. 300.]]
+
+Separating columns with  str(header) as dictionary key:
+import numpy as np
+import csv
+with open('sample.csv') as f:
+    reader = csv.reader(f)
+    columns = next(reader)
+    colmap = dict(zip(columns, range(len(columns))))
+arr = np.matrix(np.loadtxt('glycerol.csv', delimiter=",", dtype=float, skiprows=1))
+x = (arr[:, colmap['Temperature']])			# header keys
+y = (arr[:, colmap['Enthalpy']])  			# separate columns
+print(y)								# to fetch column 2, enthalpy data only
+print("\nAt index = 7")
+print(x [7]) 							# with specific index of 7
+print(y [7])
+>>>
+[[622.]
+ [509.]
+ [423.]
+ [353.]
+ [296.]
+ [248.]
+ [201.]
+ [163.]
+ [134.]
+ [113.]]
+
+At index = 7
+[[93.]]
+[[163.]]
+
+from numpy import genfromtxt
+import numpy as np
+data = genfromtxt('sample.csv', delimiter=',',  dtype = float, skip_header = 1)
+n = 0
+x = []
+y = []
+print(len(data))
+while n<len(data):
+    x1 = data[n,0]
+    y1 = data[n,1]
+    n = n+1
+    x.append(x1)
+    y.append(y1)
+print(x); print("\n",np.array([x]))
+print("\n",np.array([x]).T); print("\n",np.array([x[2]]).T)
+>>>
+17
+[20.0, 25.0, 30.0, 35.0, 40.0, 45.0, 50.0, 55.0, 60.0, 65.0, 70.0, 75.0, 80.0, 85.0, 90.0, 95.0, 100.0]
+
+ [[ 20.  25.  30.  35.  40.  45.  50.  55.  60.  65.  70.  75.  80.  85.
+   90.  95. 100.]]
+
+ [[ 20.]
+ [ 25.]
+ [ 30.]
+ [ 35.]
+ [ 40.]
+ [ 45.]
+ [ 50.]
+ [ 55.]
+ [ 60.]
+ [ 65.]
+ [ 70.]
+ [ 75.]
+ [ 80.]
+ [ 85.]
+ [ 90.]
+ [ 95.]
+ [100.]]
+
+ [30.]
+
+Sorting minimum and maximum values: 
+from numpy import genfromtxt
+import numpy as np		sample.csv file is used 
+data = genfromtxt('sample.csv', delimiter=',',  dtype = float, skip_header = 1)
+n = 0
+x = []
+y = []
+while n<len(data):
+    x1 = data[n,0]
+    y1 = data[n,1]
+    n = n+1
+    x.append(x1)
+    y.append(y1)
+
+print(np.max(x))
+print(np.min(y))
+>>>
+100.0
+124.0
+
+Printing header as str: If the .csv file has the header values, it can be returned with max_rows = 1.
+
+import numpy as np
+header = np.genfromtxt('sample.csv', delimiter  = ',', dtype = str, max_rows = 1)
+print(header)
+>>>
+['Temperature' 'Enthalpy']
+
+# with max_rows=3:
+>>>
+[['Temperature' 'Enthalpy']
+ ['20' '124']
+ ['25' '129']]
+
+Lagrange interpolation – Viscosity of glycerol    
+from numpy import genfromtxt
+data = genfromtxt('Lagrange.csv', delimiter =',',  dtype = float, skip_header = 1) 
+# fetching x & y sets from .csv
+n = len(data)
+xL = input ("Enter the x data for Lagrange interpolation: ")
+xL = float (xL)	# ‘x’ value for interpolation
+a = 0
+x = []
+y = []
+yL = 0 							# value to be interpolated at xL 
+
+while a<len(data):				# creating a list for x & y data set
+    x.append(data[a,0])
+    y.append(data[a,1])
+    a =  a + 1
+print("x =", x); print("y =",y)
+
+for i in range(n):
+    L = 1
+    for j in range(n):
+        if i != j:
+            L = L * (xL - x[j])/(x[i] - x[j])
+    yL = yL + L * y[i]
+print("\n",yL)
+>>>
+Enter the x data for Lagrange interpolation: 22
+x = [21.0, 25.0, 26.0, 31.0]
+y = [0.3584, 0.4226, 0.4384, 0.515]
+
+0.3745639999999998
+
+Variation of relative viscosity (in mN⋅s⋅m–2) at 30 °C for aqueous glycerol solution at different concentration (in weight %) is given as glycerol.csv file. 
+Interpolate the viscosity at 95.5 % with Lagrange interpolation with glycerol.csv file.
+from numpy import genfromtxt
+data = genfromtxt('glycerol.csv', delimiter=',',  dtype = float, skip_header = 1)
+n = len(data)
+xL = input ("Enter the x data for Lagrange interpolation: ")
+xL = float (xL)
+a = 0
+x = []
+y = []
+yL = 0 # value to be interpolated 
+
+while a<len(data):
+    x.append(data[a,0])
+    y.append(data[a,1])
+    a =  a + 1
+print("x =", x);  print("y =",y)
+
+for i in range(n):
+    L = 1
+    for j in range(n):
+        if i != j:
+            L = L * (xL - x[j])/(x[i] - x[j])
+    yL = yL + L * y[i]
+print("\n",yL)
+>>>
+Enter the x data for Lagrange interpolation: 95.5
+x = [100.0, 99.0, 98.0, 97.0, 96.0, 95.0, 94.0, 93.0, 92.0, 91.0]
+y = [622.0, 509.0, 423.0, 353.0, 296.0, 248.0, 201.0, 163.0, 134.0, 113.0]
+
+271.5978698730469
+
+3rd order polynomial fit for viscosity of glycerol
+from numpy import genfromtxt
+import numpy.polynomial as poly
+import numpy as np
+data = genfromtxt('glycerol.csv', delimiter=',',  dtype = float, skip_header = 1)
+n = len(data)
+xL = input ("Enter the x data for Lagrange interpolation: ")
+xL = float (xL)
+a = 0
+x = []
+y = []
+yL = 0 # value to be interpolated 
+while a<len(data):
+    x.append(data[a,0])
+    y.append(data[a,1])
+    a =  a + 1
+print("x =", x)
+print("y =",y)
+
+c = poly.Polynomial.fit(x, y, deg = 3)	# order = 3
+print("\nInterpolated value is:", c(xL))		
+c = c.convert().coef
+print("coefficients: a  b  c & d")
+print(np.flip(c)) # flipping the array with a, b, c, d
+>>>
+Enter the x data for Lagrange interpolation: 95.5
+x = [100.0, 99.0, 98.0, 97.0, 96.0, 95.0, 94.0, 93.0, 92.0, 91.0]
+y = [622.0, 509.0, 423.0, 353.0, 296.0, 248.0, 201.0, 163.0, 134.0, 113.0]
+
+Interpolated value is: 266.4500000000007
+coefficients: a  b  c & d
+[ 3.37995338e-01 -9.20174825e+01  8.37718765e+03 -2.54921014e+05]

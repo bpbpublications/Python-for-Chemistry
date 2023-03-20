@@ -1,0 +1,1500 @@
+CHAPTER  1
+ 
+Dictionary for atomic numbers & atomic masses 
+# dictionary_name = {"symbol": [atomic number, atomic mass]}
+atomic_number_mass = { 
+"H" : [1, 1.007],	# "H" is key and [1, 1.007] are values.
+"He" : [2, 4.003],	
+"Li" : [3, 6.941],
+"Be" : [4, 9.012],
+"B" : [5, 10.812],
+"C" : [6, 12.011],
+"N" : [7, 14.007],
+"O" : [8, 15.999],
+"F" : [9, 18.998],
+"Ne" : [10, 20.18],
+"Na" : [11, 22.99],
+"Mg" : [12, 24.305],
+"Al" : [13, 26.982],
+"Si" : [14, 28.086],
+"P" : [15, 30.974],
+"S" : [16, 32.066],
+"Cl" : [17, 35.453],
+"Ar" : [18, 39.948],
+"K" : [19, 39.098],
+"Ca" : [20, 40.078],
+"Sc" : [21, 44.956],
+"Ti" : [22, 47.867],
+"V" : [23, 50.942],
+"Cr" : [24, 51.996],
+"Mn" : [25, 54.938],
+"Fe" : [26, 55.845],
+"Co" : [27, 58.933],
+"Ni" : [28, 58.693],
+"Cu" : [29, 63.546],
+"Zn" : [30, 65.382],
+"Ga" : [31, 69.723],
+"Ge" : [32, 72.631],
+"As" : [33, 74.922],
+"Se" : [34, 78.963],
+"Br" : [35, 79.904],
+"Kr" : [36, 83.798],
+"Rb" : [37, 85.468],
+"Sr" : [38, 87.621],
+"Y" : [39, 88.906],
+"Zr" : [40, 91.224],
+"Nb" : [41, 92.906],
+"Mo" : [42, 95.962],
+"Tc" : [43, 98],
+"Ru" : [44, 101.072],
+"Rh" : [45, 102.906],
+"Pd" : [46, 106.421],
+"Ag" : [47, 107.868],
+"Cd" : [48, 112.412],
+"In" : [49, 114.818],
+"Sn" : [50, 118.711],
+"Sb" : [51, 121.76],
+"Te" : [52, 127.603],
+"I" : [53, 126.904],
+"Xe" : [54, 131.294],
+"Cs" : [55, 132.905],
+"Ba" : [56, 137.328],
+"La" : [57, 138.905],
+"Ce" : [58, 140.116],
+"Pr" : [59, 140.908],
+"Nd" : [60, 144.242],
+"Pm" : [61, 145],
+"Sm" : [62, 150.362],
+"Eu" : [63, 151.964],
+"Gd" : [64, 157.253],
+"Tb" : [65, 158.925],
+"Dy" : [66, 162.5],
+"Ho" : [67, 164.93],
+"Er" : [68, 167.259],
+"Tm" : [69, 168.934],
+"Yb" : [70, 173.055],
+"Lu" : [71, 174.967],
+"Hf" : [72, 178.492],
+"Ta" : [73, 180.948],
+"W" : [74, 183.841],
+"Re" : [75, 186.207],
+"Os" : [76, 190.233],
+"Ir" : [77, 192.217],
+"Pt" : [78, 195.085],
+"Au" : [79, 196.967],
+"Hg" : [80, 200.592],
+"Tl" : [81, 204.383],
+"Pb" : [82, 207.21],
+"Bi" : [83, 208.98],
+"Po" : [84, 209],
+"At" : [85, 210],
+"Rn" : [86, 222],
+"Fr" : [87, 223],
+"Ra" : [88, 226],
+"Ac" : [89, 227],
+"Th" : [90, 232.038],
+"Pa" : [91, 231.036],
+"U" : [92, 238.029],
+"Np" : [93, 237],
+"Pu" : [94, 244],
+"Am" : [95, 243],
+"Cm" : [96, 247],
+"Bk" : [97, 247],
+"Cf" : [98, 251],
+"Es" : [99, 252],
+"Fm" : [100, 257],
+"Md" : [101, 258],
+"No" : [102, 259],
+"Lr" : [103, 266],
+"Rf" : [104, 267],
+"Db" : [105, 268],
+"Sg" : [106, 269],
+"Bh" : [107, 270],
+"Hs" : [108, 277],
+"Mt" : [109, 278],
+"Ds" : [110, 281],
+"Rg" : [111, 282],
+"Cn" : [112, 285],
+"Nh" : [113, 286],
+"Fl" : [114, 289],
+"Mc" : [115, 290],
+"Lv" : [116, 293],
+"Ts" : [117, 294],
+"Og" : [118, 294]
+}
+x = input ("Enter symbol: ")	#user input for symbol (key)
+print("Atomic number for ", x, "is: ")
+print(atomic_number_mass.get(x)[0]) #index[0] atomic number
+print("Atomic mass for ", x, "is: ")
+print(atomic_number_mass.get(x)[1]) #index[1] atomic mass
+>>>
+Enter symbol: F
+Atomic number for F is: 
+9
+Atomic mass for F is: 
+18.998
+
+Adding elements to the dictionary
+Adding new elements (keys) into the existing dictionary.
+atomic_number_mass = {
+"H" : [1, 1.007],
+"He" : [2, 4.003],
+"Li" : [3, 6.941],
+"Be" : [4, 9.012],
+"B" : [5, 10.812],
+"C" : [6, 12.011],
+"N" : [7, 14.007] 					 
+}
+print(len(atomic_number_mass))			
+atomic_number_mass["O"] = [8, 15.999] 
+print(atomic_number_mass)	# display new dictionary
+print(len(atomic_number_mass))	
+>>>
+7
+{'H': [1, 1.007], 'He': [2, 4.003], 'Li': [3, 6.941], 'Be': [4, 9.012], 'B': [5, 10.812], 'C': [6, 12.011], 'N': [7, 14.007], 'O': [8, 15.999]}
+8
+
+Updating elements in the dictionary
+Modifying  the keys and their values in the existing keys of the dictionary and their values is depicted as following:
+
+atomic_number_mass = {
+"H" : [1, 1.007],
+"He" : [2, 4.003],
+"Li" : [3, 6.941],
+"Be" : [4, 9.012],
+"B" : [5, 10.812],
+"C" : [6, 12.011],
+"N" : [7, 14.007]							# intentionally limited to "N"
+}
+atomic_number_mass["C"] = [6, 13.013] 	# updating the key "C" values.
+print(atomic_number_mass)
+>>>
+{‘H’: [1, 1.007], ‘He’: [2, 4.003], ‘Li’: [3, 6.941], ‘Be’: [4, 9.012], ‘B’: [5, 10.812], ‘C’: [6, 13.013], ‘N’: [7, 14.007]}
+
+Deleting elements from the dictionary
+atomic_number_mass = {
+"H" : [1, 1.007],
+"He" : [2, 4.003],
+"Li" : [3, 6.941],
+"Be" : [4, 9.012],
+"B" : [5, 10.812],
+"C" : [6, 12.011],
+"N" : [7, 14.007]					# intentionally limited to 'N'
+}
+del atomic_number_mass[“N”] 		# removes 'N' and its values
+print(atomic_number_mass)
+>>>
+{'H': [1, 1.007], 'He': [2, 4.003], 'Li': [3, 6.941], 'Be': [4, 9.012], 'B': [5, 10.812], 'C': [6, 12.011]}
+
+Deleting a key can also be executed by pop command as: atomic_number_mass.pop ("N") also gives the same output. Using the keyword, del the dictionary can be deleted.
+del atomic_number_mass	# This deletes the dictionary
+
+Atomic mass percentage from molecular formula
+# Creating a dictionary for each element with atomic numbers and atomic masses.
+# With RegEx module, segregating atoms and their counts  for the given compound.
+# Splitting of atoms as string from the user input of molecular formula via Uppercase.
+# Counting of individual atoms followed by multiplication with its atomic mass fetched from dictionary. 
+# Interconversion of float and string followed by summation of the individual atomic masses.
+# Loop to calculate atomic mass and atomic mass % of atoms.
+
+loop_value = 0						# for infinite loop
+while loop_value == 0:				# indentation for loop
+    atomic_number_mass = { 		# dictionary
+    "H" : [1, 1.007],	
+    "He" : [2, 4.003],	
+    "Li" : [3, 6.941],
+    "Be" : [4, 9.012],
+    "B" : [5, 10.812],
+    "C" : [6, 12.011],
+    "N" : [7, 1.007],
+    "O" : [8, 15.999],
+    "F" : [9, 18.998],
+    "Ne" : [10, 20.18],
+    "Na" : [11, 22.99],
+    "Mg" : [12, 24.305],
+    "Al" : [13, 26.982],
+    "Si" : [14, 28.086],
+    "P" : [15, 30.974],
+    "S" : [16, 32.066],
+    "Cl" : [17, 35.453],
+    "Ar" : [18, 39.948],
+    "K" : [19, 39.098],
+    "Ca" : [20, 40.078],
+    "Sc" : [21, 44.956],
+    "Ti" : [22, 47.867],
+    "V" : [23, 50.942],
+    "Cr" : [24, 51.996],
+    "Mn" : [25, 54.938],
+    "Fe" : [26, 55.845],
+    "Co" : [27, 58.933],
+    "Ni" : [28, 58.693],
+    "Cu" : [29, 63.546],
+    "Zn" : [30, 65.382],
+    "Ga" : [31, 69.723],
+    "Ge" : [32, 72.631],
+    "As" : [33, 74.922],
+    "Se" : [34, 78.963],
+    "Br" : [35, 79.904],
+    "Kr" : [36, 83.798],
+    "Rb" : [37, 85.468],
+    "Sr" : [38, 87.621],
+    "Y" : [39, 88.906],
+    "Zr" : [40, 91.224],
+    "Nb" : [41, 92.906],
+    "Mo" : [42, 95.962],
+    "Tc" : [43, 98],
+    "Ru" : [44, 101.072],
+    "Rh" : [45, 102.906],
+    "Pd" : [46, 106.421],
+    "Ag" : [47, 107.868],
+    "Cd" : [48, 112.412],
+    "In" : [49, 114.818],
+    "Sn" : [50, 118.711],
+    "Sb" : [51, 121.76],
+    "Te" : [52, 127.603],
+    "I" : [53, 126.904],
+    "Xe" : [54, 131.294],
+    "Cs" : [55, 132.905],
+    "Ba" : [56, 137.328],
+    "La" : [57, 138.905],
+    "Ce" : [58, 140.116],
+    "Pr" : [59, 140.908],
+    "Nd" : [60, 144.242],
+    "Pm" : [61, 145],
+    "Sm" : [62, 150.362],
+    "Eu" : [63, 151.964],
+    "Gd" : [64, 157.253],
+    "Tb" : [65, 158.925],
+    "Dy" : [66, 162.5],
+    "Ho" : [67, 164.93],
+    "Er" : [68, 167.259],
+    "Tm" : [69, 168.934],
+    "Yb" : [70, 173.055],
+    "Lu" : [71, 174.967],
+    "Hf" : [72, 178.492],
+    "Ta" : [73, 180.948],
+    "W" : [74, 183.841],
+    "Re" : [75, 186.207],
+    "Os" : [76, 190.233],
+    "Ir" : [77, 192.217],
+    "Pt" : [78, 195.085],
+    "Au" : [79, 196.967],
+    "Hg" : [80, 200.592],
+    "Tl" : [81, 204.383],
+    "Pb" : [82, 207.21],
+    "Bi" : [83, 208.98],
+    "Po" : [84, 209],
+    "At" : [85, 210],
+    "Rn" : [86, 222],
+    "Fr" : [87, 223],
+    "Ra" : [88, 226],
+    "Ac" : [89, 227],
+    "Th" : [90, 232.038],
+    "Pa" : [91, 231.036],
+    "U" : [92, 238.029],
+    "Np" : [93, 237],
+    "Pu" : [94, 244],
+    "Am" : [95, 243],
+    "Cm" : [96, 247],
+    "Bk" : [97, 247],
+    "Cf" : [98, 251],
+    "Es" : [99, 252],
+    "Fm" : [100, 257],
+    "Md" : [101, 258],
+    "No" : [102, 259],
+    "Lr" : [103, 266],
+    "Rf" : [104, 267],
+    "Db" : [105, 268],
+    "Sg" : [106, 269],
+    "Bh" : [107, 270],
+    "Hs" : [108, 277],
+    "Mt" : [109, 278],
+    "Ds" : [110, 281],
+    "Rg" : [111, 282],
+    "Cn" : [112, 285],
+    "Nh" : [113, 286],
+    "Fl" : [114, 289],
+    "Mc" : [115, 290],
+    "Lv" : [116, 293],
+    "Ts" : [117, 294],
+    "Og" : [118, 294]
+    }
+
+    x = input("\nEnter molecular formula:  ")
+						# User input – molecular formula of the compound
+    import re				# RegEx module
+    y = re.findall('[a–zA–Z][^A–Z]*', x) 
+    # This separates the molecular formula by Uppercase.
+    # It leads to create key values. 
+    z = [re.split(r'(\d+)', s)[0:2] for s in (y)]
+    # Lists for each atom as str and its count in float.
+    # Number of each element is counted.	
+    n = 0   # for scrutinizing each atom one by one
+    molar_mass = 0
+    while len(z) > n:	
+        for formula in (z[n]):
+            a = formula.split(',')	# conversion to list
+            b = " ".join(str(x) for x in a)
+            try:
+                c = float(b)
+            except ValueError:	# Error handler str to float
+                atom = str(b)
+                c = 1
+                d = atomic_number_mass.get(atom)[1]
+        molar_mass = molar_mass + (c*d)
+        n = n + 1	# go to next atom
+        c = 1; d = 0
+    print(“Molar mass of ", x, "is ", round(molar_mass,3))
+    n = 0   
+    while len(z) > n:
+        for formula in (z[n]):
+            a = formula.split(',')	# conversion to list
+            b = " ".join(str(x) for x in a)
+            try:
+                c = float(b)
+            except ValueError:	# Error handler str to float
+                atom = str(b)
+                c = 1
+                d = atomic_number_mass.get(atom)[1]
+        elemental_mass =(c*d)
+        elemental_mass = (elemental_mass*100/molar_mass)
+        print("Atomic mass % of ", atom, "is ", round(elemental_mass,3))
+        n = n + 1	
+        c = 1; d = 0
+>>> 
+Enter molecular formula:    C8H9NO2			# HOC6H4NHCOCH3 # acetaminophen
+Molar mass of  C8H9NO2 is  151.156
+Atomic mass % of  C is  63.569
+Atomic mass % of  H is  5.996
+Atomic mass % of  N is  9.267
+Atomic mass % of  O is  21.169
+
+>>>
+Enter molecular formula:  Mo2Ti2C3		# Mo2Ti2C3
+Molar mass of  Mo2Ti2C3 is  323.691
+Atomic mass % of  Mo is  59.292
+Atomic mass % of  Ti is  29.576
+Atomic mass % of  C is  11.132
+
+>>>
+Enter molecular formula:  K4FeC6N6H6O3	# K4Fe(CN)6.3H2O
+Molar mass of  K4FeC6N6H6O3 is  422.384
+Atomic mass % of  K is  37.026
+Atomic mass % of  Fe is  13.221
+Atomic mass % of  C is  17.062
+Atomic mass % of  N is  19.897
+Atomic mass % of  H is  1.43
+Atomic mass % of  O is  11.363
+
+>>>
+Enter molecular formula:  C10H18N2Na2O10 	# Na2EDTA.2H2O
+Molar mass of  C10H18N2Na2O10 is  372.22
+Atomic mass % of  C is  32.269
+Atomic mass % of  H is  4.87
+Atomic mass % of  N is  7.526
+Atomic mass % of  Na is  12.353
+Atomic mass % of  O is  42.983
+
+>>>
+Enter molecular formula:  C17H18FN3O3	# Ciprofloxacin
+Molar mass of  C17H18FN3O3 is  331.329
+Atomic mass % of  C is  61.627
+Atomic mass % of  H is  5.471
+Atomic mass % of  F is  5.734
+Atomic mass % of  N is  12.683
+Atomic mass % of  O is  14.486
+Enter molecular formula:  CoMn2CdSe3O4H6S21
+
+>>>							# CoMn2CdSe3O4H6S21
+Molar mass of  CoMn2CdSe3O4H6S21 is  1261.534
+Atomic mass % of  Co is  4.672
+Atomic mass % of  Mn is  8.71
+Atomic mass % of  Cd is  8.911
+Atomic mass % of  Se is  18.778
+Atomic mass % of  O is  5.073
+Atomic mass % of  H is  0.479
+Atomic mass % of  S is  53.378
+Data module for physical & chemical constants
+# Algorithm for def module 
+# Following module is saved as, constants.py
+# Keys are strings (within " "), mapped against their values.
+value = {
+  "R" : 0.082057366,     	# Molar gas constant, L⋅atm⋅K−1⋅mol.−1
+  "c" : 299792458,      	# speed of light in vacuum, m/s 
+  "F" : 96485.3321233,  	# Faraday’s constant, C/mol.
+  "k" : 1.380649e-23,  	# Boltzmann’s constant, J/K
+  "h" : 6.62607015e-34, 	# Planck’s constant, Js
+  "C" : 1.602176634e-19,	# elementary charge, C
+  "N" : 6.02214076e23,  	# Avogadro number, /mol.
+  "g" : 9.80665,   		# acceleration due to gravity, m/s^2
+  "V" : 22.41396,  		# Standard molar volume of ideal gas, L
+  "e": 9.109383e-31,    	# mass of an electron, kg 
+  "p": 1.6726219e-27,   	# mass of a proton, kg
+  "n": 1.6749275e-27,   	# mass of a neutron, kg
+  "ep" : 8.8541878e-12, 	# vacuum electric permittivity, F/m
+  "mp" : 1.2566371e-6, 	# vacuum magnetic permeability, N/A^2
+  "a" : 5.2917721e-11,  	# Bohr radius, m
+  "A" : 1e-10,         	# 1 Angstrom to m
+  "mu" : 1e-6,         	# 1 micron to m
+  "nm" : 1e-9          	# 1 nano meter to m
+  }
+Molar gas constant from Boltzmann’s constant
+Code to compute the molar gas constant value in J.k.mol–1 from Avogadro Number:
+import constants			# importing from def module from section 1.6
+R = constants.value["k"] * constants.value["N"]
+print("Gas Constant = ", R, "J/(K.mol.)")
+>>>
+Gas Constant =  8.31446261815324 J/(K.mol.)
+
+Estimation of volume of an ideal gas
+# Formula to estimate the volume of an ideal gas is: v = (m/M)RT/P
+# v = volume of an ideal gas, L
+# m/M = number of moles 
+# m = mass, g & M = molar mass, g.mol.–1
+# R = Molar gas constant, 0.082057366 L⋅atm⋅K−1⋅mol.−1
+# T = Temperature, K and P = Pressure, atm.
+# n = number of molecules, m/M*N (under standard conditions)
+# N = Avogadro number, 6.02214076×1023 /mol.	
+
+import constants			# importing def module from section 1.6
+							# This file and constant.py must be in same directory.
+m = input("Enter mass of the gas, g: ")
+m = float (m)
+M = input("Enter molar mass of the gas, g/mol: ")
+M = float (M)
+T = input("Enter temperature, K: "); T = float (T)
+P = input("Enter pressure, atm.: "); P = float (P)
+v = (m/M)*constants.value["R"]*T/P
+print("\nVolume of the gas, L :",v)
+n = (m/M)*constants.value["N"]
+print("Number of molecules: ",n)
+>>>
+Enter mass of the gas, g: 88
+Enter molar mass of the gas, g/mol: 44
+Enter temperature, K: 298
+Enter pressure, atm.: 3.4
+
+Volume of the gas, L : 14.384173569411766
+Number of molecules:  1.204428152e+24
+
+Quantum efficiency of photochemical reactions
+# This program is based on Stark–Einstein’s law on quanta:		
+# Quantum yield, phi = mol / E
+# mol = number of moles of product formed
+# E = 1 Einstein = Nhc/lam 
+# N = Avogadro number, 6.02214076×1023 /mol.	
+# h = Planck’s constant, 6.62607015e–34 Js
+# c = velocity of light, 299792458 m/s
+# lam = wavelength of the radiation, m
+
+import constants			# importing def module from section 1.6
+# This file and constant.py must be in same directory.
+mol = input("Enter number of moles of product formed: ")
+mol = float (mol)
+lam = input("Enter wavelength of radiation in Angstroms: ")
+lam = float (lam)
+lam = lam*constants.value["A"]
+E = constants.value["N"]*constants.value["h"]* constants.value["c"]/lam
+print("\nEinstein absorbed  (J): " ,round (E,4))
+phi = mol*100/E
+print("\nQuantum yield, % :" ,round (phi,4))
+>>>
+Enter number of moles of product formed: 1e4
+Enter wavelength of radiation in Angstroms: 4310
+
+Einstein absorbed  (J): 277555.8367
+
+Quantum yield, % : 3.6029
+
+Fetching Rf data of amino acids from .csv file
+
+#	Name	Rf	Molar mass	Symbol	Letter	Formula	Structure
+1	Alanine	0.30	89.09	Ala	A	C3H7NO2	CH3-CH(NH2)-COOH
+2	Arginine	0.16	174.2	Arg	R	C6H14N4O2	HN=C(NH2)-NH-(CH2)3-CH(NH2)-COOH
+3	Asparagine	0.21	132.12	Asn	N	C4H8N2O3	H2N-CO-CH2-CH(NH2)-COOH
+4	Aspartic Acid	0.24	133.1	Asp	D	C4H7NO4	HOOC-CH2-CH(NH2)-COOH
+5	Cysteine	0.37	121.16	Cys	C	C3H7NO2S	HS-CH2-CH(NH2)-COOH
+6	Glutamic Acid	0.31	147.13	Glu	E	C5H9NO4	HOOC-(CH2)2-CH(NH2)-COOH
+7	Glutamine	0.25	146.14	Gln	Q	C5H10N2O3	H2N-CO-(CH2)2-CH(NH2)-COOH
+8	Glycine	0.25	75.07	Gly	G	C2H5NO2	NH2-CH2-COOH
+9	Histidine	0.12	155.15	His	H	C6H9N3O2	NH-CH=N-CH=C-CH2-CH(NH2)-COOH
+10	Isoleucine	0.53	131.17	Lle	I	C6H13NO2	CH3-CH2-CH(CH3)-CH(NH2)-COOH
+11	Leucine	0.61	131.18	Leu	L	C6H13NO2	(CH3)2-CH-CH2-CH(NH2)-COOH
+12	Lysine	0.12	146.19	Lys	K	C6H14N2O2	H2N-(CH2)4-CH(NH2)-COOH
+13	Methionine	0.51	149.21	Met	M	C5H11NO2S	CH3-S-(CH2)2-CH(NH2)-COOH
+14	Phenylalanine	0.62	165.19	Phe	F	C9H11NO2	Ph-CH2-CH(NH2)-COOH
+15	Proline	0.24	115.13	Pro	P	C5H9NO2	NH-(CH2)3-CH-COOH
+16	Serine	0.26	105.09	Ser	S	C3H7NO3	HO-CH2-CH(NH2)-COOH
+17	Threonine	0.3	119.12	Thr	T	C4H9NO3	CH3-CH(OH)-CH(NH2)-COOH
+18	Tryptophan	0.61	204.23	Trp	W	C11H12N2O2	Ph-NH-CH=C-CH2-CH(NH2)-COOH
+19	Tyrosine	0.55	181.19	Tyr	Y	C9H11NO3	HO-Ph-CH2-CH(NH2)-COOH
+20	Valine	0.44	117.15	Val	V	C5H11NO2	(CH3)2-CH-CH(NH2)-COOH
+
+# This program demonstrates to fetch the data from a .csv file.
+import csv							# built-in module for csv
+with open('amino_acids.csv') as file: 
+    reader = csv.reader(file)			# indentation space
+    rows = list(reader)
+    print(rows[0])					# Header values as list
+    print(rows[2])					# fetching rows 2 & 7 as list
+    print(rows[7])
+>>>
+['No', 'Name', 'Rf ', 'Molar mass', 'Symbol', 'Letter', 'Formula', 'Structure']
+['2', 'Arginine', '0.16', '174.2', 'Arg', 'R', 'C6H14N4O2', 'HN=C(NH2)-NH-(CH2)3-CH(NH2)-COOH']
+['7', 'Glutamine', '0.25', '146.14', 'Gln', 'Q', 'C5H10N2O3', 'H2N-CO-(CH2)2-CH(NH2)-COOH']
+
+Fetching selective data for amino acids from .csv file
+import csv		# based on previous program using 'amino_acids.csv' file.
+with open('amino_acids.csv', 'r') as file:
+    reader = csv.reader(file)
+    for row in reader:	
+        print(row[(1)]," ", row[(2)])	# printing columns 2 and 3 in .csv
+>>>
+Name   Rf 
+Alanine   0.3
+Arginine   0.16
+Asparagine   0.21
+Aspartic Acid   0.24
+Cysteine   0.37
+Glutamic Acid   0.31
+Glutamine   0.25
+Glycine   0.25
+Histidine   0.12
+Isoleucine   0.53
+Leucine   0.61
+Lysine   0.12
+Methionine   0.51
+Phenylalanine   0.62
+Proline   0.24
+Serine   0.26
+Threonine   0.3
+Tryptophan   0.61
+Tyrosine   0.55
+Valine   0.44
+Converting 'amino_acids.csv' to dictionary
+
+import csv
+d = {}
+with open('amino_acids.csv', mode='r') as f:
+    data = csv.reader(f)
+    d = {rows[1]:rows[2] for rows in data}		# Note for braces & brackets  
+					# returns data from coloumns 2 and 3
+print(d)
+>>>
+{'Name': 'Rf ', 'Alanine': '0.3', 'Arginine': '0.16', 'Asparagine': '0.21', 'Aspartic Acid': '0.24', 'Cysteine': '0.37', 'Glutamic Acid': '0.31', 'Glutamine': '0.25', 'Glycine': '0.25', 'Histidine': '0.12', 'Isoleucine': '0.53', 'Leucine': '0.61', 'Lysine': '0.12', 'Methionine': '0.51', 'Phenylalanine': '0.62', 'Proline': '0.24', 'Serine': '0.26', 'Threonine': '0.3', 'Tryptophan': '0.61', 'Tyrosine': '0.55', 'Valine': '0.44'}
+
+Estimation of rate constant with data as a list 
+
+rate.csv file is given in Table
+No	Time (min.)	Volume of N2 (ml)
+1	10	6.28
+2	15	8.99
+3	20	11.44
+4	25	13.65
+5	infinite	35.05
+
+# Rate constant, k = 1/t(loge [Vinf/{Vinf – Vt}])
+# Vt = Observed volume at the given time, t (in min.)
+# Vinf = Volume at infinite time (here, maximum value)
+# Algorithm for the determination of rate constant
+# Fetch the .csv file data as a list in IDLE.
+# Fetch volumes to find the maximum volume at infinite time.
+# Substitute ‘t’ and ‘V’ in formula based on their indices.
+# Estimating the rate constant for each time and volume.
+# Averaging the rate constant data
+
+import csv						# built-in .csv module
+import math					# math module for natural logarithm 
+vol = [] 
+# creating a list for volume to find volume at infinite time
+with open('rate.csv','r') as file:
+    for data in csv.reader(file):
+        try:    				# indentation tabs must be followed
+# error handler for conversion of str to float
+          vol1 = (float(data[2])) 	# separating the volume by index
+          vol.append(vol1) 		# collecting volume data as a list
+          print(t1)
+          print(vol)
+        except:
+            next					# indentation tabs must be followed
+print("\nObserved volumes, ml: ", vol)  	# Volumes at successive time values          
+print("\nVolume at infinite time: ",max(vol))         
+k = []            
+# creating a list of rate constants (k), by append function
+with open('rate.csv','r') as file:
+    for data in csv.reader(file):
+        try:
+          t = 1/(float(data[1])) 		# reciprocal for time values
+          k1 = max(vol)/(max(vol) - float(data[2]))
+          k2 = round(t* math.log(k1),6) 	# calculating rate constants
+# collecting rate constants, k2 in k by append
+          k.append(k2) 
+        except:	# error handler to collect string values
+            next					# indentation space must be noted
+print("\nRate constant values, /min: ", k)  
+# rate constants at successive time values          
+print("\nAverage rate constant, /min.: ",(sum(k)/len(k)))
+>>>
+['No', 'Time (min.)', 'Volume of N2 (ml)']
+['1', '10', '6.28']
+['2', '15', '8.99']
+['3', '20', '11.44']
+['4', '25', '13.65']
+['5', 'infinite', '35.05']
+Observed volumes, ml:  [6.28, 8.99, 11.44, 13.65, 35.05]
+
+Volume at infinite time:  35.05
+Rate constant values, /min:  [0.019744, 0.019758, 0.019755, 0.019735]
+
+Average rate constant, /min.:  0.019748
+ Exporting rate constant data to .csv
+# Analyzed rate constant values along with the time and volume of nitrogen gas exported into a new .csv file.
+# csv.writer(file_name)command is used with new .csv file.
+# And write.writerows (zip(list1, list2)) function is used.
+# zip function combines all the lists created in # 13.
+# .csv file is created with 3 columns and the data is printed row by row.
+# Input .csv data file based on previous program.
+# Output .csv file is stored in the same directory 
+
+import csv
+import math					# to get natural logarithm 
+with open('rate.csv','r') as file:
+    for data in csv.reader(file):
+        print (data)        		# printing the given data from .csv file
+vol = [] 						# creating a list for volume time
+with open('rate.csv','r') as file:
+    for data in csv.reader(file):
+        try:
+          vol1 = (float(data[2])) 	# error handler for conversion of str to float
+          vol.append(vol1) 		# separating the volume from data
+          print(t1)				# collecting volume data as a separate list
+          print(vol)
+        except:
+            next
+print("\nObserved volumes, ml: ", vol)  	# Volumes at successive time values          
+print("\nVolume at infinite time: ",max(vol))         
+time1 = []            
+k = [] # creating a list of rate constants
+rate_const =[]
+with open('rate.csv','r') as file:
+    for data in csv.reader(file):
+        try:
+          t = 1/(float(data[1]))
+          time1.append(1/t)			# reciprocal for time values
+          k1 = max(vol)/(max(vol) - float(data[2]))
+          k2 = round(t* math.log(k1),6) 	# calculating rate constants
+          k.append(k2) # collecting rate constants as a list
+          rate_const.append([k2])
+        except:						# indentation tabs must be followed
+            next
+print("\nTime duration, min: ", time1) 
+print("\nRate constant values, /min: ", k) 	
+# rate constants at successive time values          
+print("\nAverage rate constant, /min.: ",(sum(k)/len(k)))
+# writing the processed rate constant data
+file = open('rate_constants.csv', 'w+', newline ='') 
+with file:     
+# .csv file "rate_constants" is created in same directory.
+    write = csv.writer(file)
+    write.writerow(["Time (min.)", "Volume (ml)", "Rate Constants"])								# Header lists
+    write.writerows(zip(time1,vol, k))	# Data lists
+    			# zip function for printing the three lists
+    write.writerow([" ", " ", " "])	# for empty rows
+    write.writerow(["", "Rate Constant = ", (sum(k)/len(k))])
+>>>
+
+
+Time (min.)	Volume (ml)	Rate Constants
+10	6.28	0.019744
+15	8.99	0.019758
+20	11.44	0.019755
+25	13.65	0.019735
+		
+	Rate Constant =	0.019748
+Estimation of rate constant for the formation of N2 by the decomposition of NH4NO2
+
+>>>
+['No', 'Time (min.)', 'Volume of N2 (ml)']
+['1', '10', '6.28']
+['2', '15', '8.99']
+['3', '20', '11.44']
+['4', '25', '13.65']
+['5', 'infinite', '35.05']
+
+Observed volumes, ml:  [6.28, 8.99, 11.44, 13.65, 35.05]
+
+Volume at infinite time:  35.05
+
+Time duration, min:  [10.0, 15.0, 20.0, 25.0]
+
+Rate constant values, /min:  [0.019744, 0.019758, 0.019755, 0.019735]
+
+Average rate constant, /min.:  0.019748
+math module
+Functions without math module
+x = 2.3; y = 8.2; z = -4.3
+print(min(x,y,z))	# returns the minimum value
+print(max(x,y,z))	# returns the maximum value
+print(abs(z))		# returns the value without sign
+print(pow(4,2)) 	# returns power of 2 over 4
+>>>
+-4.3
+8.2
+4.3
+16
+
+List of few mathematical functions
+ceil(x)		# returns smallest integer >= to x.
+copysign(x, y)	# returns x with the sign of y
+fabs(x)		# returns absolute value of x
+factorial(x)	# returns factorial of x
+floor(x)		# returns largest integer <= x
+fmod(x, y)		# returns remainder when x is divided by y
+isfinite(x)	# returns True if x is neither an infinity nor a NaN (Not a Number)
+isinf(x)		# returns True if x is a positive or negative infinity
+isnan(x)		# returns True if x is a NaN (Not a Number)
+ldexp(x, i)	# returns x * (2**i)
+modf(x)		# returns fractional and integer parts of x
+log(x[, b])	# returns  logarithm of x to the base b 	(default value is e)
+exp(x)		# returns e**x
+log2(x)		# returns base-2 logarithm of x
+log10(x)		# returns base-10 logarithm of x
+pow(x, y)		# returns x raised to the power y
+sqrt(x)		# returns square root of x
+cos(x)		# returns  cosine of x
+sin(x)		# returns sine of x
+tan(x)		# returns tangent of x
+degrees(x)		# converts angle x from radians to degrees
+radians(x)		# converts angle x from degrees to radians
+erf(x)		# returns error function at x
+pi			# returns pi value (22/7)
+e			# returns value of e (2.71828...)
+
+ Power of 10 (e) 
+import math
+print(round(1.4e–3,4))	# round to 4 decimals
+print(round(math.e**–6.5711,4))
+>>>
+0.0014
+0.0014
+
+import math
+N = 6.023e23; print(N)
+k = 2.813e-27
+print(N/k)
+print (math.isnan(N/k)) # if it is a number returns False
+>>>
+6.023e+23
+2.1411304656949877e+50
+False
+
+pH metric acid-base titration
+# Addition of base to known volume of acid
+# pH = –log10 [H+]
+
+import math
+a = input ("Enter normality of acid ")
+a = float (a)
+b = input ("Enter normality of base ")
+b = float (b)
+v = input ("Enter total volume of acid " )
+v = float(v)
+v2 = 0 							# aliquot for addition of base
+pH = 0
+while pH < 8:   
+    conc = a - (b * v2 / v)			# concentration of remaining acid
+    v2 = v2 + 1
+    if conc > 0:
+        pH = -(math.log10(conc))
+    elif round(conc,4) == 0:
+        pH = 7						# at neutralization point
+    else:
+        conc = (b * v2)/(v+v2)			# concentration of excess base
+        pH = 14 + (math.log10(conc)) 	# pH = 14 – pOH
+# Should be modified with correction factors to get the concentration of excess base.
+    print("Volume = ", (v2-1),"ml", " pH =", round(pH,2), " Conc. =", round(conc,4))
+>>>
+Enter normality of acid 0.1
+Enter normality of base 0.2
+Enter total volume of acid 20
+Volume =  0 ml  pH = 1.0  Conc. = 0.1
+Volume =  1 ml  pH = 1.05  Conc. = 0.09
+Volume =  2 ml  pH = 1.1  Conc. = 0.08
+Volume =  3 ml  pH = 1.15  Conc. = 0.07
+Volume =  4 ml  pH = 1.22  Conc. = 0.06
+Volume =  5 ml  pH = 1.3  Conc. = 0.05
+Volume =  6 ml  pH = 1.4  Conc. = 0.04
+Volume =  7 ml  pH = 1.52  Conc. = 0.03
+Volume =  8 ml  pH = 1.7  Conc. = 0.02
+Volume =  9 ml  pH = 2.0  Conc. = 0.01
+Volume =  10 ml  pH = 7  Conc. = 0.0
+Volume =  11 ml  pH = 12.88  Conc. = 0.075
+
+R.M.S & average velocity of ideal gas molecules 
+# average velocity (m.s–1) = (8RT/πM)0.5
+# root mean square velocity (m.s–1) = (3RT/M)0.5
+# R is Gas constant = 8.314 kg⋅m2⋅s−2⋅K−1⋅mol−1
+# T is temperature in K
+# π is 22/7				
+# M is molecular weight of the gas in kg/mol
+import math			# math module is fetched
+M = input ("Enter molecular weight of the gas = ")
+M = float (M)/1000
+T = input ("Enter the temperature = ")
+T = float (T)
+ave_vel = (8 * 8.314 * T) / (math.pi * M)
+rms = (3 * 8.314 * T) / M
+ave_vel = math.sqrt(ave_vel)
+rms = math.sqrt(rms)
+print("Average velocity = ", round(ave_vel, 4), " m/s")
+print("R.M.S. velocity = ", round(rms, 4), " m/s")
+>>>
+Enter molecular weight of the gas = 32
+Enter the temperature = 303
+Average velocity = 447.7354  m/s
+R.M.S. velocity = 485.9728  m/s
+
+
+Rate constant from activation energy
+Arrhenius equation: Rate constant, k = A e^(–Ea/RT)
+‘A’ – Arrhenius (pre-exponential) factor in M–1.s–1
+‘Ea’ – Energy of activation in J.mol–1
+‘R’ – Gas constant = 8.314 J.K–1.mol–1
+‘T’ – Temperature in K
+‘k’ – Rate constant in M–1.s–1	(Unit for second order reaction)
+Unit for ‘A’ depends on order of the reaction
+
+import math
+A = input ("Enter Arrhenius factor = "); A = float (A)
+E = input ("Enter energy of activation = ")
+E = float (E)
+T = input ("Enter temperature = "); T = float (T)
+k = A * math.e**(-E/(8.314*T))
+print("\nRate constant for the reaction = ", k)
+>>>
+Enter Arrhenius factor = 10
+Enter energy of activation = 1e5
+Enter temperature = 300
+Rate constant for the reaction =  3.87101163488511e-17
+
+Calculating sine (angle) from radians
+
+import math
+angle = input ("Enter the angle in degrees: ")
+angle = float (angle)			# float conversion to avoid errors
+angle = math.radians(angle) 		# to convert radian to degree 
+angle = math.sin(angle)			# returns sine value
+print("Sine value of the angle = ", round (angle, 4))
+>>>
+Enter the angle in degrees: 72
+Sine value of the angle =  0.9511
+
+
+Estimating bond length from the bond angle
+# Assume three atoms ‘x’, ‘y’ and ‘z’ are arranged in right triangle fashion. Atom ‘x’ is bonded with both atom ‘y’ and atom ‘z’. The bond length between atoms x and y is 5 Å, the acute angle between ∠xyz is 31° and ∟yxz is the right angle. Find the bond length between atoms x and z.
+acute angle, ∠xyz = 31° and ∟yxz = 90° (right triangle).
+ tan (∠xyz) = bond length of x & z / bond length of x & y
+ tan (31) = bond length of x & z (to be calculated) / 5 Å
+ Code to calculate tan (angle) and the bond length
+
+import math
+angle = input ("Enter the bond angle (degrees): "); angle = float (angle)
+angle = math.radians(angle) 		# to convert radian – degree 
+angle = math.tan(angle)			# returns tan value
+bond_length1 = input ("Enter the bond length (between x & y in Angstroms): ")
+bond_length1 = float(bond_length1)
+bond_length2 = angle * bond_length1
+print("\nBond length (between x & z in Angstroms): ", round(bond_length2,0))
+>>>
+Enter the bond angle (degrees): 31
+Enter the bond length (between x & y in Angstroms): 5
+
+Bond length (between x & z in Angstroms):  3.0
+Priority for arithmetical operators
+
+
+print (4+3*2)
+>>>
+10					# output as integer
+
+print (4/3*2)			# all integers
+>>>
+2.6666666666666665		# output as float
+
+print (4/(3*2))
+>>>
+0.6666666666666666
+
+print (5+4*3**2)  		#3**2 is 2 raised over 3 – first priority 
+>>>
+41
+
+print ((5+4)*3**2)		# (5+4) is having the first priority
+>>>
+81
+
+print (5+(4*3)**2)		# (4*3) is having the first priority
+>>>
+149
+Quotient and modulo operators
+
+print (17.0//2)		# float and integer
+>>>
+8.0				# output as float
+
+print (17.0%2)		# float and integer
+>>>
+1.0				# output as float
+
+Assignment operators
+a = 2; a += 8; print (a)	# increment	a = a+8
+>>>
+10
+
+a = 2; a *= 8; print (a)
+>>>
+16
+
+a = 3; a –= 8; print (a)	#decrement a = a–8
+>>>
+–5
+
+a = 3; a //= 2; print(a)
+>>>
+1
+
+Comparison operators 
+
+a = 1; b = 2; print (a == b)
+>>>
+False
+
+a = 1; b = 2; print (a != b)
+>>>
+True
+
+a = 1; b = 2; print (a <= b)
+>>>
+True
+
+Logical operators
+
+a = 1; b = 2; print (a > 8 or b < 5)
+>>>
+True
+
+a = 1; b = 2; print (a > 8 or b < a)
+>>>
+False
+
+a = 1; b = 2; print (not (a > 8 or b < a))
+>>>
+True
+
+a = "ZnS"; b = "MnS"; c = "MnS" 
+print (not (a == c or b == c))
+>>>
+False
+
+ Identity operators
+a = ["FeO", "ZnO"]; b = ["FeO", "ZnO"]; print (a is b)
+						# Comparing two lists, a & b
+>>> 					
+False 
+
+a = ["FeO", "ZnO"]; b = ["FeO", "ZnO"]; print (a == b)
+# key difference from ‘is’ operator
+>>>
+True		
+
+a = ["FeO", "ZnO"]; b = a; print (a is b)
+>>>
+True
+
+a = ["FeO", "ZnO"]; b = ["FeO", "ZnO"]; print (a is not b)
+>>>
+True
+
+ Membership operators
+a = ["FeO", "ZnO"]; print ("ZnO" in a)
+>>>
+True
+
+a = ["FeO", "ZnO"]; print ("NiO" in a)
+>>>
+False
+
+a = ["FeO", "ZnO"]; print ("NiO" not in a)
+>>>
+True
+
+a = ["FeO", "ZnO"]; print ("ZnO" not in a)
+>>>
+False
+
+cmath module 
+import cmath; import math  
+a = 2 + 5j; b = 3 - 1j; c = [a, b] 		# converts into a list
+d = a/0.5j + 2j
+e = (d.real)  						# extracts the real part from complex number
+print(type(a))						# returns the type
+print(type(c)); print(d); print(e)
+print (cmath.sqrt(a))
+print (cmath.phase(a))  				# returns phase of a complex number
+print (cmath.polar(a))  				# returns the polar coordinates
+print (cmath.cos(a)) 
+print (math.cos(a.real)) 				# cos with math module  
+>>>
+<class 'complex'>
+<class 'list'>
+(10-2j)
+10.0
+(1.921609326467597+1.3009928530039094j)
+1.1902899496825317
+(5.385164807134504, 1.1902899496825317)
+(-30.88223531891674-67.47278844058752j)
+-0.4161468365471424
+
+# Scrutinizing user input data
+# Calculating equivalent weight from molecular weight:
+# Equivalent weight = Molecular weight / Valence
+
+mol_wt = input ("Enter the molecular weight:  ")
+mol_wt = float(mol_wt) # to convert into float number format
+valence = input ("Enter the valence:  ")
+valence = float(valence); equ_wt = (mol_wt)/ valence
+print ("\nEquivalent weight is: ", equ_wt)
+
+# Output without error
+>>>
+Enter the molecular weight:  126
+Enter the valence:  2
+>>>
+Equivalent weight is:  63.0
+
+# Output with error
+Enter the molecular weight:  benzene
+>>>
+Traceback (most recent call last):
+  File "C:\Users\...", line 2, in <module>
+    mol_wt = float(mol_wt)
+ValueError: could not convert string to float: 'benzene'
+
+# Handling errors in user input:
+mol_wt = input ("Enter the molecular weight:  ")
+try:							# indentation space is given before.
+    mol_wt = float(mol_wt)		# to convert into float number format
+    valence = input ("Enter the valence:  ")
+    valence = float(valence) 
+    equ_wt = (mol_wt)/ valence
+    print ("\nEquivalent weight is: ", equ_wt)
+except   ValueError:				# indentation space is given before.
+	print("\nYou have not entered a number for molecular weight.")
+>>>
+Enter the molecular weight:  benzene
+
+You have not entered a number for molecular weight.
+
+
+mol_wt = input ("Enter the molecular weight:  ")
+try:
+    mol_wt = float(mol_wt); valence = input ("Enter the valence:  ")
+    valence = float(valence) # to convert into integer number format
+    equ_wt = (mol_wt)/ valence
+    print ("\nEquivalent weight is: ", equ_wt)
+except ZeroDivisionError:
+    print("\nError. Value is divided by zero. Valence is not zero.")
+>>>
+Enter the molecular weight:  126
+Enter the valence:  0.0
+
+Error: Value is divided by zero. Valence is not zero.
+
+# Previous program without suppressing the zero division error.
+mol_wt = input ("Enter the molecular weight:  ")
+mol_wt = float(mol_wt)	
+valence = input ("Enter the valence:  ")
+valence = float(valence) # to convert into integer 
+equ_wt = (mol_wt)/ valence
+print ("\nEquivalent weight is: ", equ_wt)
+>>>
+Enter the molecular weight:  126
+Enter the valence:  0.0
+Traceback (most recent call last):
+  File "C:\Users\...", line 5, in <module>
+    equ_wt = (mol_wt)/ valence
+ZeroDivisionError: float division by zero
+
+Number of electrons transferred in a redox reaction
+n1 = input("Oxidation state of the element before the reaction: = ")
+n1 = float (n1); n1 = int(n1)
+n2 = input("Oxidation state of the element after the reaction: = ")
+n2 = float (n2); n2 = int(n2)
+electrons = n2 - n1
+if (n2 - n1)> 0:				# logical comparison
+    print("\nOxidation reaction")
+if (n2 - n1) < 0:	
+    print("\nReduction reaction")
+if (n2 - n1) == 0:
+    print("No change in oxidation state")
+print ("\nNumber of electrons involved = ", abs(electrons))
+>>>
+Oxidation state of the element before the reaction: = 7
+Oxidation state of the element after the reaction: = 2
+Reduction reaction
+Number of electrons involved =  5  
+. 
+
+
+if ... elif ... else statements  
+# Comparing the molar masses of compounds
+mm1 = input("Enter the molar mass of compound #1: ")
+mm1 = float(mm1); mm2 = input("Enter the molar mass of compound #2: ")
+mm2 = float(mm2)
+if mm1 > mm2:		
+  print("\nCompound #1 has higher molar mass.")
+elif mm1 == mm2:
+  print("\nMolar masses of both compounds are same.")
+else:
+  print("\nCompound #2 has higher molar mass.")
+>>>
+Enter the molar mass of compound #1: 256.27
+Enter the molar mass of compound #2: 286.26
+
+Compound #2 has higher molar mass.
+
+# Output with different molar masses.  
+>>>
+Enter the molar mass of compound #1: 286.27
+Enter the molar mass of compound #2: 286.27
+
+Molar masses of both compounds are same.
+
+Error handling with if ... else loops
+# Equivalent mass = Molar mass / Valency
+import math
+mm = input("Enter the molar mass of compound #1: "); mm = float(mm)
+valency = input("Enter the valency of compound #1: ")
+valency = float(valency)
+if valency > 0:
+  print("Equivalent mass: ", mm/valency)
+else:
+  pass
+>>>
+Enter the molar mass of compound #1: 126
+Enter the valency of compound #1: 0
+>>>										(No output)
+
+#Nested loops
+mm1 = input("Enter the molar mass of compound #1: ")
+mm1 = float(mm1)
+if mm1 <= 100:
+  if mm1 >= 50:	# second if statement
+    print("Molar mass is between 50 to 100")
+  else:
+    print("Molar mass is less than 50")
+else:
+   print("Molar mass is greater than 100")
+
+# Outputs with different molar mass inputs. 
+>>>
+Enter the molar mass of compound #1: 113
+Molar mass is greater than 100
+
+>>>
+Enter the molar mass of compound #1: 43
+Molar mass is less than 50
+
+>>>
+Enter the molar mass of compound #1: 82
+Molar mass is between 50 to 100
+
+
+# while loops
+n = input("enter an integer less than 10: ")
+n = int(n)
+while n <= 10:
+  print(n);   n += 1
+  if n == 10:			# nested loop
+    break 				# to stop the loop execution
+else:
+      print("It is instructed to enter a number below 10.")
+>>>
+enter an integer less than 10: -1
+-1
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+>>>
+enter an integer less than 10: 13
+It is instructed to enter a number below 10.
+
+# Infinite loop for continuous user input:
+x = 0
+while x == 0:  				# This creates an endless loop
+  n = input("Enter a number : ")
+  print ("You entered: ", n)
+
+# for loops
+list1 = ["nitrobenzene", "chlorobenzene", "phenol"]
+for x in list1:				# Note for the indentation space
+  print (x)
+>>>
+nitrobenzene
+chlorobenzene
+phenol
+Following list contains the compounds with their molecular formula:
+list1 = ["ZnS", "ZnO", "ZnSO4", "ZnCl2", "Zn(OH)2", "Zn(NO3)2"]
+n=len(list1) 				# n (number of elements in the list1) = 6
+for x in list1:				# indentation space after :
+  n = n-1					# from 6–1, 5–1, 4–1 and goes on...
+  if n < 0:					# (n = –1) Index for ZnS is 0
+    break
+  else: 						# print based on max. index
+    print (list1[n])
+>>>
+Zn(NO3)2
+Zn(OH)2
+ZnCl2
+ZnSO4
+ZnO
+ZnS
+
+# for x in "5278":
+    y = float(x); print (y*2)
+>>>
+10.0
+4.0
+14.0
+16.0
+
+# separating elements from molecular formula to calculate molar mass
+MF = input ("Enter molecular formula: ")    	# C2H5NH2 ethylamine
+a =[]; b = []
+for x in MF:
+    try:
+        y = float(x); a.append(y)   # separates numbers
+    except:
+        z = str(x); b.append(z)     # separates string
+print(a); print(b) 
+>>>
+Enter molecular formula: C2H5N1H2	C2H5NH2 input as C2H5N1H2
+[2.0, 5.0, 1.0, 2.0]
+['C', 'H', 'N', 'H']
+
+list1 = [-1.30, 2.87, -4.13]
+for x in list1:
+  print (x+0.004)
+>>>
+-1.296
+2.874
+-4.126
+list1 = [-3.1, -1.4, -4.4, -3.3, -1.1]
+for x in list1:
+  print(x)
+  if x == -4.4:
+    break				# to stop the execution
+>>>
+-3.1
+-1.4
+-4.4
+
+range() function
+for x in range(8):
+  print(x)
+  if x == 6:			#from 0 to 6
+    break
+>>>
+0
+1
+2
+3
+4
+5
+6 
+
+for x in range(-3, 3):
+  print(x)	from –3 
+>>>
+-3
+-2
+-1
+0
+1
+2
+for x in range(-4, 3, 2):	# from –4 with increment 2 to 3
+  print(x)
+>>>
+-4			# –4 + 2 = –2
+-2			# –2 + 2 = 0
+0			# 0 + 2 =2
+2	
+
+
+for x in range(0.2,8,2):
+  print(x)	
+# Expected output 0.2, 2.2, 6.2. 
+# But it gives the following error, because of the float, 0.2.
+>>>
+Traceback (most recent call last):
+  File "C:\Users\... file_name.py", line 1, in <module>
+    for x in range(0.2,8,2):
+TypeError: 'float' object cannot be interpreted as an integer
+
+
+for x in range(0,8,2):	
+# int 0 is used, instead of float 0.2 
+print(x + 0.2)		# addition of 0.2
+>>>
+0.2
+2.2
+4.2
+6.2
+
+# Fetching selective rows of amino_acid.csv file 
+
+n = input ("Number of rows: ")			# to return number of rows
+n = float(n); n = int(n)				# to convert float to integer
+for x in range(n):
+    import csv						# from section 1.10
+    with open('amino_acids.csv') as file:
+        reader = csv.reader(file)
+        rows = list(reader)
+        print(rows[x])
+>>>
+Number of rows: 6.5			# Note: intentionally entered in fraction
+['No', 'Name', 'Rf ', 'Molar mass', 'Symbol', 'Letter', 'Formula', 'Structure']
+['1', 'Alanine', '0.3', '89.09', 'Ala', 'A', 'C3H7NO2', 'CH3-CH(NH2)-COOH']
+['2', 'Arginine', '0.16', '174.2', 'Arg', 'R', 'C6H14N4O2', 'HN=C(NH2)-NH-(CH2)3-CH(NH2)-COOH']
+['3', 'Asparagine', '0.21', '132.12', 'Asn', 'N', 'C4H8N2O3', 'H2N-CO-CH2-CH(NH2)-COOH']
+['4', 'Aspartic Acid', '0.24', '133.1', 'Asp', 'D', 'C4H7NO4', 'HOOC-CH2-CH(NH2)-COOH']
+['5', 'Cysteine', '0.37', '121.16', 'Cys', 'C', 'C3H7NO2S', 'HS-CH2-CH(NH2)-COOH']
+
+
+timer() function
+
+import time						# importing time function
+for x in range(3):					# 3 counts using for loop
+     time.sleep(20)  				# wait for 20 seconds to process
+     print(x+1)						# 3 counts in 1 min. duration
+>>>
+1
+2
+3
+
+# timer function with for and if statements
+n = 0
+list1 = ["CH4", "C2H6", "C3H8", "C4H10", "C5H12","C6H14"]
+import time	    # importing time function
+for y in list1:     
+    time.sleep(2)   		# wait for 2 s to process and to print
+    if n < 3:       		# 3 counts using, if condition (3 values only)
+        print(n+1, y)	# if condition to break >3
+        n = n + 1
+    else:
+        break
+print("First ", n, "alkanes printed.")
+>>>
+1 CH4
+2 C2H6
+3 C3H8
+First  3 alkanes printed.	
+
+
+# Recording concentration with time (reaction rate)
+t = input ("Enter time interval, s: ")
+t = float(t); t = int(t)
+n = input ("Enter number of measurements: ")
+n = float(n); n = int(n)
+timing = 0
+interval = []
+concentration = []   				# values stored in a list
+import time						# importing time function
+for x in range(n):					# n counts using for loop
+     time.sleep(t)   				# wait for t seconds to process
+     conc = input("Enter concentration: ")
+     conc = float(conc)
+     timing = t + timing
+     interval.append(timing)
+     concentration.append(conc) 		# adding to list
+print (interval, concentration)   		# returns the list
+>>>
+Enter time interval, s: 3
+Enter number of measurements: 4
+Enter concentration: 0.11
+Enter concentration: 0.13
+Enter concentration: 0.14
+Enter concentration: 0.21
+[3, 6, 9, 12] [0.11, 0.13, 0.14, 0.21]
+
+# Recursion to return factorial 
+def fact1(x):
+    if x == 1:
+        return 1
+    elif x == 0:
+        return 1
+    else:
+        return (x * fact1(x-1))
+int1 = input("Enter an integer:  ")
+int1 = float (int1) 	# converting to float
+int1 = int(int1) 	# converting to integer
+int1 = abs(int1)	# converting to positive integer
+print("Factorial of", int1, "=", fact1(int1))
+>>>
+Enter an integer:  –5.7 	# entered negative float
+Factorial of 5 = 120		# –5.7 converted to 5
+
+# However, the factorial can be easily returned with math module as math.factorial(int).
+import math
+int1 = input("Enter an integer:  ")			# int1 is chosen since int is a keyword
+int1 = float (int1) 			# converting to float
+int1 = int(int1) 			# converting to integer
+int1 = abs(int1)			# converting to positive integer
+print("Factorial of", int1, "=", math.factorial(int1))
+>>>
+Enter an integer:  -5.7
+Factorial of 5 = 120
+
+# Predicting spin–spin coupling in NMR spectra
+def pascal(n):  
+    if n == 1:  
+        return [1]  
+    else:  
+        line = [1]  
+        previous_line = pascal(n-1)  
+        for i in range(len(previous_line)-1):  
+            line.append(previous_line[i] + previous_line[i+1])  
+        line += [1]  
+    return line  
+N = int(input("Enter number of equivalent nuclei (N): "))
+N = N+1
+print(pascal(N))
+print("Number of peaks observed :", len(pascal(N)))
+>>>
+Enter number of equivalent nuclei (N): 5
+[1, 5, 10, 10, 5, 1]
+Number of peaks observed : 6
+
+# Lambda function
+list1 = [13,16, 9,2,11,3,4,5,6, 7, 1]
+y = list (x for x in list1 if x % 2 != 0)
+print(y)
+y.sort()		# sorting
+print(y)
+>>>
+[13, 9, 11, 3, 5, 7, 1]
+[1, 3, 5, 7, 9, 11, 13]
+
+#lambda with map function
+# Combining two lists
+list1 = [1.0, 2.0, 3.0]; list2 = [-3.0, 8.0, -4.0]
+print(list(map(lambda x, y: [x , y], list1, list2)))
+>>>
+[[1.0, -3.0], [2.0, 8.0], [3.0, -4.0]]

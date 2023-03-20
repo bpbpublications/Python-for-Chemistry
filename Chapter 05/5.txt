@@ -1,0 +1,343 @@
+CHAPTER 5
+Interactive Chemical Plotting with Matplotlib
+
+
+2D line graph
+import matplotlib.pyplot as plt
+time = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]
+Temperature = [21, 27, 33, 44, 58, 69, 72, 82, 90, 97]
+plt.plot(time, Temperature); plt.xlabel("Time (s)"); plt.ylabel("Temperature (C)")
+plt.show()
+
+# If the number of ‘x’ and ‘y’ data points are not equal, it returns errors.
+import matplotlib.pyplot as plt
+time = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]			# 10 points
+Temperature = [21, 27, 33, 44, 58, 69, 72, 82, 90]		# 9 points
+plt.plot(time, Temperature)
+plt.xlabel("Time (s)"); plt.ylabel("Temperature (C)")
+plt.show()
+>>>
+Traceback (most recent call last):
+  File "C:\Users\...name.py", line 4, in <module>
+    plt.plot(time, Temperature)
+  File "C:\Users\,,,\lib\site-packages\matplotlib\pyplot.py", line 2757, in plot
+    return gca().plot(
+  ...  File "C:\Users\...\lib\site-packages\matplotlib\axes\_base.py", line 312, in __call__    yield from self._plot_args(this, kwargs)
+  File "C:\...\lib\site-packages\matplotlib\axes\_base.py", line 498, in _plot_args
+    raise ValueError(f"x and y must have same first dimension, but "
+ValueError: x and y must have same first dimension, but have shapes (10,) and (9,)
+
+Optimizing marker styles
+
+import matplotlib.pyplot as plt
+time = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20]; Temperature = [21, 27, 33, 44, 58, 69, 72, 82, 90, 97]
+plt.plot(time, Temperature, marker = '+', markersize = 8) # marker '+' with size 8.
+# markersize = 8 can also be given as ms = 8.
+plt.xlabel("Time (s)"); plt.ylabel("Temperature (C)")
+plt.show()
+
+Some of the built-in marker symbols are:
+'o'	'*'	'.'	','	'x'	'X'	'+'	'P'	's'	'D'	'd'	'p'	'H'	'h'	'v'	'^'	'<'	'>'	'1'	'2'	'3'	'4'	'|'	'_'
+Marker face color and marker edge color fixed with the keyword  mfc and mec respectively.
+About 140 color names are available and they can be given in Hexadecimal color code also.
+Following codes and the respective output is shown in Figure 5.4.
+
+import matplotlib.pyplot as plt
+time = [10, 30, 50, 70, 90, 110, 130]
+Concentration = [0.11, 0.13, 0.31, 0.34, 0.41, 0.60, 0.95]
+plt.plot(time, Concentration, marker = '<', ms = 11, mfc = 'yellow', mec = 'red')
+# mfc – marker fill color, mec – marker border color
+plt.xlabel("Time (min.)"); plt.ylabel("Concentration (mol.)")
+plt.show()
+
+5.4 Optimizing line styles
+Available line styles are: 
+'solid' (default) 	'-'
+'dotted'	':'
+'dashed'	'- -'
+'dashdot'	'- .'
+'None'
+import matplotlib.pyplot as plt
+Vol_NaOH = [2.5, 5.0, 7.5, 10.0, 12.5, 15.0, 17.5, 20.0]
+Conductance = [43.1, 40.1, 33.3, 28.5, 21.4, 15.6, 27.8, 33.3]
+plt.plot(Vol_NaOH, Conductance, marker = 'o', color = 'DarkRed', linestyle = 'dashed', linewidth = '7', ms = 14, mfc = 'yellow', mec = 'Blue')
+plt.xlabel("Volume of NaOH (ml)"); plt.ylabel("Specific conductance (S/cm)")
+plt.show()
+
+Font style
+import matplotlib.pyplot as plt
+# Dictionaries for the font styles to be used in the plot.
+font_1 = {'family':'Arial','color':'red','size':16}
+font_2 = {'family':'Courier New','color':'blue','size':16}
+font_3 = {'family':'Georgia','color':'Green','size':21}
+
+Vol_NaOH = [2.5, 5.0, 7.5, 10.0, 12.5, 15.0, 17.5, 20.0]
+Conductance = [43.1, 40.1, 33.3, 28.5, 21.4, 15.6, 27.8, 33.3]
+plt.plot(Vol_NaOH, Conductance, marker = '<', color = 'blue', linestyle = 'dashdot', linewidth = '4', ms = 11, mfc = 'yellow', mec = 'Red')
+
+# loc is used for the position of the labels
+plt.xlabel("Volume of NaOH (ml)", fontdict = font_1, loc = 'right');
+plt.ylabel("Conductance, m.mho/cm", fontdict = font_2, loc = 'top')
+# Title for the plot
+plt.title("Conductometric Acid-Base Titration", fontdict = font_3, loc = 'center')
+plt.show()
+
+5.6 Grid lines 
+import matplotlib.pyplot as plt
+font_1 = {'family':'Arial','color':'red','size':16}
+font_2 = {'family':'Courier New','color':'blue','size':16}
+font_3 = {'family':'Georgia','color':'Green','size':21}
+Vol_NaOH = [2.5, 5.0, 7.5, 10.0, 12.5, 15.0, 17.5, 20.0]
+Conductance = [43.1, 40.1, 33.3, 28.5, 21.4, 15.6, 27.8, 33.3]
+plt.plot(Vol_NaOH, Conductance, marker = '<', color = 'blue', linestyle = 'dashdot', linewidth = '4', ms = 11, mfc = 'yellow', mec = 'Red')
+plt.xlabel("Volume of NaOH (ml)", fontdict = font_1, loc = 'right');
+plt.ylabel("Conductance, m.mho/cm", fontdict = font_2, loc = 'top')
+plt.title("Conductometric Acid-Base Titration", fontdict = font_3, loc = 'center')
+
+# Grid values for x axis
+plt.grid(axis = 'x', color = 'brown', linestyle = 'solid', linewidth = '1')  
+
+# Grid values for y axis
+plt.grid(axis = 'y', color = 'green', linestyle = 'dotted', linewidth = '2') 
+
+plt.show()
+
+Tick marks
+import matplotlib.pyplot as plt
+font_1 = {'family':'Arial','color':'red','size':16}
+font_2 = {'family':'Courier New','color':'blue','size':18}
+font_3 = {'family':'Georgia','color':'Green','size':21}
+Vol_NaOH = [2.5, 5.0, 7.5, 10.0, 12.5, 15.0, 17.5, 20.0]
+Conductance = [43.1, 40.1, 33.3, 28.5, 21.4, 15.6, 27.8, 33.3]
+plt.grid(axis = 'x', color = 'brown', linestyle = 'solid', linewidth = '1')  
+plt.grid(axis = 'y', color = 'green', linestyle = 'dotted', linewidth = '2') 
+plt.plot(Vol_NaOH, Conductance, marker = '<', color = 'blue', linestyle = 'dashdot', linewidth = '4', ms = 11, mfc = 'yellow', mec = 'Red')
+plt.xlabel("Volume of NaOH (ml)", fontdict = font_1, loc = 'right', fontweight = "bold");
+plt.ylabel("Conductance, m.mho/cm", fontdict = font_2, loc = 'top', fontweight = "bold")
+plt.title("Conductometric Acid-Base Titration", fontdict = font_3, loc = 'center', fontweight = "bold")
+
+# Direction types in, out, inout	
+# in for inside the plot area. Similar to inside in MS Excel
+# out for outside the plot area. Similar to outside in MS Excel
+# inout is similar to cross in MS Excel
+# width value, fixes the width of the tick.
+
+plt.tick_params(axis = "x", direction = "out", length = 14, width = 8, color = "orange", labelrotation = 45)
+plt.tick_params(axis = "y", direction ="inout",length = 7, width = 7, color = "black", labelrotation = 40)
+
+# font styles can also be modified.
+# Note: fontweight = "bold" is used for bold fonts.
+
+plt.xticks(family = 'Courier New', color = 'blue', fontsize = 16, fontweight = "bold")
+plt.yticks(family = 'Arial', color = 'red', fontsize = 16, fontweight = "bold")
+plt.show()
+Tick mark intervals
+import matplotlib.pyplot as plt
+font_1 = {'family':'Arial','color':'red','size':16}
+font_2 = {'family':'Courier New','color':'blue','size':18}
+font_3 = {'family':'Georgia','color':'Green','size':21}
+Vol_NaOH = [0, 2.5, 5.0, 7.5, 10.0, 12.5, 15.0, 17.5, 20.0]
+Conductance = [44.1, 41.3, 40.1, 33.3, 28.5, 21.4, 15.6, 27.8, 33.3]
+plt.grid(axis = 'x', color = 'brown', linestyle = 'solid', linewidth = '1')  
+plt.grid(axis = 'y', color = 'green', linestyle = 'dotted', linewidth = '2') 
+plt.plot(Vol_NaOH, Conductance, marker = '<', color = 'blue', linestyle = 'dashdot', linewidth = '4', ms = 11, mfc = 'yellow', mec = 'Red')
+plt.xlabel("Volume of NaOH (ml)", fontdict = font_1, loc = 'right', fontweight = "bold");
+plt.ylabel("Conductance, m.mho/cm", fontdict = font_2, loc = 'top', fontweight = "bold")
+plt.title("Conductometric Acid-Base Titration", fontdict = font_3, loc = 'center', fontweight = "bold")
+plt.tick_params(axis = "x", direction = "in", length = 14, width = 8, color = "orange", labelrotation = 45)		# direction kept as in
+plt.tick_params(axis = "y", direction ="inout",length = 13, width = 7, color = "black", labelrotation = 40)	# length is changed to 13
+plt.xticks(family = 'Courier New', color = 'blue', fontsize = 16, fontweight = "bold")
+plt.yticks(family = 'Arial', color = 'red', fontsize = 16, fontweight = "bold")
+
+# x-axis tick Minimum 0 to 21 with an interval of 3.
+plt.xticks(range(0,24,3))
+
+# y-axis tick Minimum 10 to 50 with an interval of 5.
+plt.yticks(range(10,55,5))
+
+plt.show()
+# Note the plot for the change in the plt.tick_params
+
+
+Subplot
+import matplotlib.pyplot as plt
+font_1 = {'family':'Arial','color':'blue','size':10}
+font_2 = {'family':'Times New Roman','color':'red','size':13}
+font_3 = {'family':'Georgia','color':'brown','size':13}
+
+#  x & y data for plot 1
+Temperature = [10, 20, 30, 40, 50]
+Rate_constant = [0.9, 1.1, 1.3, 2.1, 2.3]
+
+plt.subplot(1, 2, 1) 
+# Entire plot has 1 row, 2 columns and this is the first (1) plot  in I coloumn.
+plt.plot(Temperature, Rate_constant, marker = '>', color = 'blue', linestyle = 'dotted', linewidth = '3', ms = 11, mfc = 'white', mec = 'Black')
+plt.grid(axis = 'x', color = 'blue', linestyle = 'dotted', linewidth = '1')  
+plt.grid(axis = 'y', color = 'red', linestyle = 'dotted', linewidth = '1') 
+plt.xlabel("Temperature (C)", fontdict = font_2, loc = 'right', fontweight = "bold");
+plt.ylabel("Rate Constant (/min.)", fontdict = font_1, loc = 'center', fontweight = "bold")
+plt.title("Effect of Temperature", fontdict = font_3, loc = 'center', fontweight = "bold")
+plt.tick_params(axis = "x", direction = "out", length = 10, width = 7, color = "blue", labelrotation = 30)		
+plt.tick_params(axis = "y", direction ="in",length = 10, width = 7, color = "red", labelrotation = 30)
+plt.xticks(family = 'Courier New', color = 'red', fontsize = 9, fontweight = "bold")
+plt.yticks(family = 'Arial', color = 'blue', fontsize = 9, fontweight = "bold")
+
+#  x & y data for plot 2
+
+Concentration = [0.1,0.2,0.3,0.4,0.5]
+Rate_const = [2.1, 2.3, 2.8, 3.1, 3.3]
+
+plt.subplot(1, 2, 2)  
+# Entire plot has 1 row, 2 columns and this is the second (2) plot in  II coloumn.
+plt.plot(Concentration, Rate_const, marker = 'o', color = 'red', linestyle = 'dashdot', linewidth = '4', ms = 11, mfc = 'yellow', mec = 'Red')
+plt.grid(axis = 'x', color = 'red', linestyle = 'dotted', linewidth = '2')  
+plt.grid(axis = 'y', color = 'blue', linestyle = 'dotted', linewidth = '2') 
+plt.xlabel("Concentration (M)", fontdict = font_1, loc = 'center', fontweight = "bold");
+plt.ylabel("Rate Constant (/min.)", fontdict = font_2, loc = 'top', fontweight = "bold")
+plt.title("Effect of Concentration", fontdict = font_3, loc = 'center', fontweight = "bold")
+plt.tick_params(axis = "x", direction = "inout", length = 9, width = 7, color = "red", labelrotation = 45)		
+plt.tick_params(axis = "y", direction ="inout",length = 9, width = 7, color = "blue", labelrotation = 45)
+plt.xticks(family = 'Arial', color = 'blue', fontsize = 9, fontweight = "bold")
+plt.yticks(family = 'Courier New', color = 'red', fontsize = 9, fontweight = "bold")
+
+# Super title for the two plots
+plt.suptitle("Effect of Temperature and Concentration on Rate constant",family = 'Verdana', color = 'Violet', fontsize = 14, fontweight = "bold")
+plt.show()
+
+
+Multiple data sets in a plot
+import matplotlib.pyplot as plt
+font_1 = {'family':'Courier New','color':'red','size':16}
+font_2 = {'family':'Times New Roman','color':'blue','size':16}
+font_3 = {'family':'Verdana','color':'brown','size':18}
+
+# Data set 1
+Temperature1 = [10, 20, 30, 40, 50]; Rate_const1 = [0.9, 1.1, 1.3, 2.1, 2.3]
+plt.plot(Temperature1, Rate_const1, marker = '>', color = 'blue', linestyle = 'dotted', linewidth = '3', ms = 15, mfc = 'white', mec = 'red')
+
+# Data set 2
+Temperature2 = [5, 10, 15, 20, 25]; Rate_const2 = [2.1, 2.3, 2.8, 3.1, 3.3]
+plt.plot(Temperature2, Rate_const1, marker = '<', color = 'green', linestyle = 'dashed', linewidth = '4', ms = 15, mfc = 'red', mec = 'white')
+
+plt.grid(axis = 'x', color = 'blue', linestyle = 'dotted', linewidth = '1')  
+plt.grid(axis = 'y', color = 'red', linestyle = 'dotted', linewidth = '1') 
+plt.xlabel("Temperature (C)", fontdict = font_2, loc = 'right', fontweight = "bold");
+plt.ylabel("Rate Constant (/min.)", fontdict = font_1, loc = 'center', fontweight = "bold")
+plt.title("Effect of Temperature on Rate constants", fontdict = font_3, loc = 'center', fontweight = "bold")
+plt.tick_params(axis = "x", direction = "out", length = 11, width = 6, color = "blue", labelrotation = 30)		
+plt.tick_params(axis = "y", direction ="inout",length = 11, width = 6, color = "red", labelrotation = 90)
+plt.xticks(family = 'Courier New', color = 'red', fontsize = 14, fontweight = "bold")
+plt.yticks(family = 'Arial', color = 'blue', fontsize = 14, fontweight = "bold")
+plt.show()
+
+Data legend
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as font      # Font manager is imported
+
+# Font manager is used to set font styles and dictionary is not used. 
+font1 = font.FontProperties(family = 'Courier New', weight = 'bold', style = 'italic', size = 16)
+font2 = font.FontProperties(family = 'Verdana', weight = 'bold', style = 'normal', size = 14)
+font3 = font.FontProperties(family = 'Georgia', weight = 'bold', style = 'italic', size = 21)
+font4 = font.FontProperties(family = 'Arial', weight = 'bold', style = 'normal', size = 13)
+
+# Data set 1
+Temperature1 = [10, 20, 30, 40, 50]; Rate_const1 = [0.9, 1.1, 1.3, 2.1, 2.3]
+# Data set 2
+Temperature2 = [5, 10, 15, 20, 25]; Rate_const2 = [2.1, 2.3, 2.8, 3.1, 3.3]
+
+# Labels for legends each data set is specified.
+plt.plot(Temperature1, Rate_const1,label = "Press. = 2 atm.", marker = '<', ms = 13, mfc = 'brown', mec = 'white', linestyle = 'dotted', linewidth = '2', color = 'blue')
+plt.plot(Temperature2, Rate_const2,label = "Press. = 0.5 atm.", marker = 'o', ms = 10, mfc = 'yellow', mec = 'DarkRed',linestyle = 'dashed', linewidth = '3', color = 'red')
+
+plt.grid(axis = 'x', color = 'blue', linestyle = 'dotted', linewidth = '1')
+plt.grid(axis = 'y', color = 'red', linestyle = 'dashed', linewidth = '1')
+
+# Font properties
+plt.xlabel("Temperature (C)", color = 'blue', loc = 'right', font = font1)	
+plt.ylabel("Rate Constant (/min.)", color = 'red', loc = 'center', font = font2)
+plt.title("Effect of Temperature on Rate constants", color = 'green', loc = 'center', font = font3)
+
+plt.tick_params(axis = "x", direction = "inout", length = 13, width = 6, color = "blue", labelrotation = 30)
+plt.tick_params(axis = "y", direction = "in",length = 13, width = 6, color = "red", labelrotation = 90)
+plt.xticks(family = 'Courier New', color = 'red', fontsize = 14, fontweight = "bold")
+plt.yticks(family = 'Arial', color = 'blue', fontsize = 14, fontweight = "bold")
+
+# Position of the legend and font properties
+# Location set upper right & property as font4
+plt.legend(loc = 'upper right', prop = font4) 
+
+plt.show()
+
+
+Bar charts
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as font      # Font manager is imported
+molar_mass = [111.3, 231.4, 333.1, 131.4]
+vapor_pres1 = [1.34, 2.41, 1.01, 0.99]; vapor_pres2 = [2.31, 2.87, 1.43, 1.44]
+
+# Font manager is used to set font styles 
+font1 = font.FontProperties(family = 'Courier New', weight = 'bold', style = 'italic', size = 16)
+font2 = font.FontProperties(family = 'Verdana', weight = 'bold', style = 'normal', size = 14)
+font3 = font.FontProperties(family = 'Georgia', weight = 'bold', style = 'italic', size = 21)
+font4 = font.FontProperties(family = 'Arial', weight = 'bold', style = 'normal', size = 13)
+
+plt.bar(molar_mass,vapor_pres1, width = 15, color = 'b', label = "Temp. 30 C" )
+plt.bar(molar_mass,vapor_pres2, width = 5, color = 'r', label = "Temp. 40 C" )
+
+plt.xlabel("Molar mass", color = 'blue', loc = 'right', font = font1)	
+plt.ylabel("Vapor Pressure (atm.)", color = 'red', loc = 'top', font = font2)
+plt.title("Vapor pressure data", color = 'green', loc = 'center', font = font3)
+plt.legend(loc = 'upper right', prop = font4)
+plt.show()
+
+
+ Bar chart for thermodynamic parameters 
+import numpy as np      # NumPy imported
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as font      # Font manager is imported
+font1 = font.FontProperties(family = 'Courier New', weight = 'bold', style = 'normal', size = 13)
+
+# Data for y–axis (Height of the bars)
+Enthalpy = [-127.1, -635.1, -99.9, -350.9, -410.9, 7.1, -348.3]
+Entropy = [96.2, 38.2, 60.3, 74.1, 72.4, 225.7, 43.6]
+Free_energy = [-109.8, -603.5, -100.4, -341.6, -384.0,-24.3, -318.3]
+
+# Width of the bar
+W = 0.2
+ 
+# Bar position along x-axis
+H = np.arange(len(Enthalpy))	# H – Enthalpy
+S = H + W 					# S – Entropy
+G = S + W 					# G – Free energy
+
+plt.bar(H, Enthalpy, color ='b', width = W, edgecolor ='w', label = 'Enthalpy')
+plt.bar(S, Entropy, color ='r', width = W, edgecolor ='w', label = 'Entropy')
+plt.bar(G, Free_energy, color ='g', width = W, edgecolor ='w', label ='Free Energy')
+plt.title("Thermodynamic data for compounds", loc = 'center', family = 'Georgia', color = 'g', fontsize = 21, fontweight = "bold")
+
+# Optimizing x-ticks
+plt.xlabel('Compounds', family = 'Arial',fontweight ='bold', fontsize = 20, color = 'b',)
+plt.ylabel('dH, dS, dG', family = 'Arial', fontweight ='bold', fontsize = 17, color = 'r')
+plt.xticks([n + W for n in range(len(Enthalpy))], ['AgCl', 'CaO', 'FeS', 'LiBr', 'NaCl','SiF', 'ZnO'])
+plt.xticks(family = 'Verdana', color = 'b', fontsize = 15, fontweight = "bold")
+plt.yticks(family = 'Times New Roman', color = 'r', fontsize = 18, fontweight = "bold")
+plt.tick_params(axis = "x", direction = "inout", length = 13, width = 6, color = "r", labelrotation = 45)
+plt.tick_params(axis = "y", direction = "inout", length = 13, width = 6, color = "b", labelrotation = 90)
+
+plt.legend(loc = 'lower right', prop = font1)
+plt.show()
+
+Pie chart – Composition of electrodeposited Ni-Co magnetic alloy
+
+import matplotlib.pyplot as plt
+Metals = ['Mn', 'Co', 'Ni', 'Zn', 'Fe']; Wt = [14.1, 72.8, 78.2, 33.3, 11.1]
+clr = ["Beige", "aqua", "pink", "SpringGreen", 'yellow']
+
+explode1 = [0.2, 0.05, 0.15, 0.1, 0]  # explode function to separate the components
+
+#autopct function to get the percentage values
+plt.pie(Wt, labels = Metals, autopct = '%1.2f%%', textprops={'fontsize':14, 'family': 'Georgia', 'fontweight': "bold",'color' : "b"  }, colors = clr, explode = explode1, shadow = True)
+plt.title("Composition of electrodeposited Ni-Co magnetic alloy", loc = 'center', family = 'Courier New', color = 'DarkRed', fontsize = 15, fontweight = "bold")
+plt.show()
+>>>
+

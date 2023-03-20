@@ -1,0 +1,155 @@
+CHAPTER 12 - Basics of stk module
+
+Structures from SMILES
+SMILES structures can be returned as .mol file with the function, stk.BuildingBlock(SMILES). Suitable .mol viewer program should be used to view the output.
+# Getting the .mol structure of 5-chloropyridine-3-sulfonic acid
+# SMILES for 5-chloropyridine-3-sulfonic acid is : OS(=O)(=O)c1cncc(Cl)c1
+# Output as .mol file can be done by stk.MolWriter().write(moleucle, 'file_name.mol')
+import stk
+x = stk.BuildingBlock('OS(=O)(=O)c1cncc(Cl)c1')
+stk.MolWriter().write(x, 'x.mol')
+>>>
+Output as x.mol	
+
+Molecule with a specific functional group more than one
+# Molecule: 2-(2-hydroxyethyl)-4-(hydroxymethyl)phenol.
+# It contains 3 –OH groups.
+# SMILES with stk.AlcoholFactory() is used to specify the location of OH groups.
+# SMILES for 2-(2-hydroxyethyl)-4-(hydroxymethyl)phenol is: Oc1ccc(cc1CCO)CO.
+import stk
+x = stk.BuildingBlock('Oc1ccc(cc1CCO)CO', [stk.AlcoholFactory()])
+stk.MolWriter().write(x, 'x.mol')
+>>>
+Output as x.mol	
+
+
+# Molecule: 4-(2-methyl-3-oxopropyl)-3-(2-oxoethyl)benzaldehyde.
+# It contains 3 –CHO groups.
+# one –CHO in benzene ring and the other two in side chains
+# SMILES for 4-(2-methyl-3-oxopropyl)-3-(2-oxoethyl)benzaldehyde is: O=CCc1cc(ccc1CC(C)C=O)C=O.
+# SMILES with stk.AldehydeFactory() is used to specify the location of OH groups.
+import stk
+x = stk.BuildingBlock('O=CCc1cc(ccc1CC(C)C=O)C=O', [stk.AldehydeFactory()])
+stk.MolWriter().write(x, 'x.mol') 
+>>>
+Output as x.mol 
+Constructing polymeric reaction from monomers
+import stk
+# Polymer chain formed by the reaction between Urea & Dihydroxylamine with three repeating units.
+# Building block A - Urea, SMILES:NC(N)=O 
+a = stk.BuildingBlock('NC(N)=O', [stk.PrimaryAminoFactory()])
+stk.MolWriter().write(a, 'a.mol') 		# Output of monomer A
+
+# Building block B - Dihydroxyamine, SMILES:ONO 
+b = stk.BuildingBlock('ONO', [stk.AlcoholFactory()])
+stk.MolWriter().write(b, 'b.mol') 		# Output of monomer B
+
+# Constructing the polymer chain from monomers A and B
+x = stk.ConstructedMolecule(topology_graph=stk.polymer.Linear(building_blocks=(a, b), repeating_unit='BA', num_repeating_units=3),)	# Repeating units = 3
+stk.MolWriter().write(x, 'x.mol')
+>>>
+Output for Monomer A, Urea and Monomer B, Dihydroxyamine 
+
+# Polymer chain formed from single monomer.
+# Building block A - methylpropanedioic acid, SMILES:O=C(O)C(C)C(=O)O 
+import stk
+a = stk.BuildingBlock('O=C(O)C(C)C(=O)O', [stk.CarboxylicAcidFactory()])
+stk.MolWriter().write(a, 'a.mol') 		# Output of monomer 
+
+# Constructing the polymer chain from this monomer
+x = stk.ConstructedMolecule(topology_graph=stk.polymer.Linear(building_blocks=(a, a), repeating_unit='BA', num_repeating_units=3),)	# Repeating units = 3
+stk.MolWriter().write(x, 'x.mol')
+>>>
+a.mol (methylpropanedioic acid) as monomer and the polymeric chain as x.mol.
+
+
+
+
+Constructing cage structures
+# Cage structured molecule from ethane-1,1,2-tricarbaldehyde and ethane-1,2-diamine
+# SMILES: ethane-1,1,2-tricarbaldehyde: O=CC(C=O)CC=O 
+# SMILES: ethane-1,2-diamine: NCCN  
+import stk
+a = stk.BuildingBlock('O=CC(C=O)CC=O', [stk.AldehydeFactory()])
+b = stk.BuildingBlock(smiles='NCCN',functional_groups=[stk.PrimaryAminoFactory()],)
+stk.MolWriter().write(a, 'a.mol')
+stk.MolWriter().write(b, 'b.mol')
+# cage structure Two Plus Three
+x = stk.ConstructedMolecule(topology_graph=stk.cage.TwoPlusThree(building_blocks=(a, b),optimizer=stk.MCHammer(),),)
+stk.MolWriter().write(x, 'x.mol')
+
+Optimizing the structure of molecules with rdkit
+import stk
+# Polymer chain formed by the reaction between Urea & N-bromohypobromous amide with four repeating units.
+
+# Building block A - Urea, SMILES:NC(N)=O 
+a = stk.BuildingBlock('NC(N)=O', [stk.PrimaryAminoFactory()])
+stk.MolWriter().write(a, 'a.mol') 		# Output of monomer A
+
+# Building block B - N-bromohypobromous amide, SMILES:BrNBr 
+b = stk.BuildingBlock('BrNBr', [stk.BromoFactory()])
+stk.MolWriter().write(b, 'b.mol') 		# Output of monomer B
+
+# Constructing the polymer chain from monomers A and B
+x = stk.ConstructedMolecule(topology_graph=stk.polymer.Linear(building_blocks=(a, b), repeating_unit='BA', num_repeating_units=4),)	# Repeating units = 4
+stk.MolWriter().write(x, 'x.mol')
+
+# Optimization of this polymeric structure with rdkit
+import rdkit.Chem.AllChem as rdkit
+y = x.to_rdkit_mol()			# Refer: rdkit functions in chapter 6.0
+rdkit.SanitizeMol(y)
+rdkit.MMFFOptimizeMolecule(y)
+
+z = x.with_position_matrix(position_matrix=y.GetConformer().GetPositions(),)
+stk.MolWriter().write(z, 'z.mol')
+>>>
+Output for Urea and N-bromohypobromous amide.
+ 
+Covalent organic frameworks
+import stk
+# Honeycomb  COF from 1,2-dibromoethane and 1,3-dibromo-2-(bromomethyl)propane
+# Molecule A: 1,2-dibromoethane; SMILES:BrCCBr
+a = stk.BuildingBlock('BrCCBr', [stk.BromoFactory()])
+stk.MolWriter().write(a, 'a.mol')
+
+# Molecule B: 1,3-dibromo-2-(bromomethyl)propane; SMILES:BrCC(CBr)CBr
+b = stk.BuildingBlock('BrCC(CBr)CBr', [stk.BromoFactory()])
+stk.MolWriter().write(b, 'b.mol')
+
+x = stk.ConstructedMolecule(topology_graph=stk.cof.Honeycomb((a, b), (3, 3, 1)),)
+stk.MolWriter().write(x, 'x.mol')
+>>>
+Output for 1,2-dibromoethane and 1,3-dibromo-2-(bromomethyl)propane. 
+
+import stk
+# Square COF from 2-(hydroxymethyl)propane-1,2,3-triol and ethane-1,2-diol
+# Molecule A: 2-(hydroxymethyl)propane-1,2,3-triol; SMILES:OCC(O)(CO)CO
+a = stk.BuildingBlock('OCC(O)(CO)CO', [stk.AlcoholFactory()])
+stk.MolWriter().write(a, 'a.mol')
+
+# Molecule B: ethane-1,2-diol; SMILES:OCCO
+b = stk.BuildingBlock('OCCO', [stk.AlcoholFactory()])
+stk.MolWriter().write(b, 'b.mol')
+
+x = stk.ConstructedMolecule(topology_graph=stk.cof.Square((a, b), (3, 3, 3)),)
+stk.MolWriter().write(x, 'x.mol')
+>>>
+Output of the a.mol and b.mol 
+
+Metal complexes
+# Octahedral complex formed between the metal Mn(II) and oxydimethanamine.
+# SMILES for oxydimethanamine is NCOCN.
+
+import stk
+metal = stk.BuildingBlock(smiles='[Mn+2]', functional_groups=(stk.SingleAtom(stk.Mn(0, charge=2))for i in range(6)),
+    position_matrix=[[0, 0, 0]],)
+
+lignad = stk.BuildingBlock('NCOCN', [stk.PrimaryAminoFactory()])
+stk.MolWriter().write(lignad, 'lignad.mol')
+
+complex = stk.ConstructedMolecule(topology_graph = stk.metal_complex.OctahedralLambda (metals = metal,ligands = lignad, optimizer = stk.MCHammer(), ),)
+
+stk.MolWriter().write(complex, 'complex.mol')
+>>>
+Output for the (ligand.mol) oxydimethanamine as ligand. 
+

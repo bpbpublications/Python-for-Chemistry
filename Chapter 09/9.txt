@@ -1,0 +1,317 @@
+CHAPTER 9 - BASICS OF CHEMPY
+
+Fetching molar mass of compounds
+# Molar mass of Ammonium ferrous sulfate hexa hydrate	
+from chempy import Substance
+x = Substance.from_formula('FeSO4.(NH4)2SO4.6H2O')
+print(x.mass)
+>>>
+392.12500000000006
+
+LaTeX, Unicode and .html formats
+from chempy import Substance
+x = Substance.from_formula('FeSO4.(NH4)2SO4.6H2O')
+print("Unicode")
+print(x.unicode_name)
+print("\nLaTeX")
+print(x.latex_name)
+print("\nhtml")
+print(x.html_name)
+>>>
+Unicode
+FeSO₄·(NH₄)₂SO₄·6H₂O
+
+LaTeX
+FeSO_{4}\cdot (NH_{4})_{2}SO_{4}\cdot 6H_{2}O
+
+html
+FeSO<sub>4</sub>&sdot;(NH<sub>4</sub>)<sub>2</sub>SO<sub>4</sub>&sdot;6H<sub>2</sub>O
+This can be used to publish webpages.
+
+Balancing the chemical equation
+# Example: 2 K3Fe(CN)6 + 6 H2SO4 → 3 K2SO4 + Fe2(SO4)3 + 12 HCN
+from chempy import balance_stoichiometry
+R1 = "K3Fe(CN)6"  # Potassium ferricyanide
+R2 = "H2SO4"  
+P1 = "K2SO4"
+P2 = "Fe2(SO4)3"   # Fe2(SO4)3 
+P3 = "HCN"
+reactants, products = balance_stoichiometry( {R1, R2}, {P1, P2,  P3})
+print(reactants)
+print(products)
+>>>
+OrderedDict([('H2SO4', 6), ('K3Fe(CN)6', 2)])
+OrderedDict([('Fe2(SO4)3', 1), ('HCN', 12), ('K2SO4', 3)])
+
+
+# Returns ValueError: Failed to balance reaction for the reactions that are not possible to balance stoichiometrically. Unreal reactions cannot be balanced.
+from chempy import balance_stoichiometry
+R1 = "K4Fe(CN)6"  # Potassium ferrocyanide
+R2 = "H2SO4"  
+P1 = "K2SO4"
+P2 = "Fe2(SO4)3"   # Fe2(SO4)3 
+P3 = "HCN"
+reactants, products = balance_stoichiometry( {R1, R2}, {P1, P2,  P3})
+print(reactants)
+print(products)
+>>>
+Traceback (most recent call last):
+  File "C:\Users\...", line 7, in <module>
+    reactants, products = balance_stoichiometry( {R1, R2}, {P1, P2,  P3})
+  File "C:\Users\...\AppData\Roaming\Python\Python310\site-packages\chempy\chemistry.py", line 1569, in balance_stoichiometry
+    raise ValueError("Failed to balance reaction")
+ValueError: Failed to balance reaction
+
+Stoichiometric molar mass fractions
+Example: 2 K3Fe(CN)6 + 6 H2SO4 → 3 K2SO4 + Fe2(SO4)3 + 12 HCN
+from chempy import balance_stoichiometry
+R1 = "K3Fe(CN)6"  # Potassium ferricyanide
+R2 = "H2SO4"  
+P1 = "K2SO4"
+P2 = "Fe2(SO4)3"   # Fe2(SO4)3 
+P3 = "HCN"
+reactants, products = balance_stoichiometry( {R1, R2}, {P1, P2,  P3})
+from chempy import mass_fractions
+r = mass_fractions(reactants)
+p = mass_fractions(products)
+print(r)
+print(p)
+>>>
+{'H2SO4': 0.471905430290350, 'K3Fe(CN)6': 0.528094569709650}
+{'Fe2(SO4)3': 0.320674541060036, 'HCN': 0.260088835937413, 'K2SO4': 0.419236623002551}
+
+# Balaning the equation to get the stoichiometric coefficients (n).
+from chempy import balance_stoichiometry
+R1 = "K3Fe(CN)6"  # Potassium ferricyanide
+R2 = "H2SO4"; P1 = "K2SO4"; P2 = "Fe2(SO4)3"; P3 = "HCN"reactants, products = balance_stoichiometry( {R1, R2}, {P1, P2,  P3})
+print(reactants); print(products); print(reactants[R1])		
+# from the key of the dictionary, "n" can be fetched.
+print(reactants[R2]); print(products[P1]); print(products[P2]); print(products[P3])
+# Getting molar masses of the reactants & products
+from chempy import Substance
+r1 = Substance.from_formula(R1); r2 = Substance.from_formula(R2)
+p1 = Substance.from_formula(P1); p2 = Substance.from_formula(P2)
+p3 = Substance.from_formula(P3); print (r1.unicode_name, r1.mass); print(r2.unicode_name, r2.mass); print(p1.unicode_name, p1.mass); print(p2.unicode_name, p2.mass); print(p3.unicode_name, p3.mass)
+
+# Calculating molar fractions of each reactant and product from the balanced equation
+print(""); print(r1.unicode_name)print((reactants[R1]*r1.mass)/((reactants[R1]*r1.mass) + (reactants[R2]*r2.mass)))
+print("");print(r2.unicode_name)
+print((reactants[R2]*r2.mass)/((reactants[R1]*r1.mass) + (reactants[R2]*r2.mass)))
+print("");print(p1.unicode_name)
+print((products[P1]*p1.mass)/((products[P1]*p1.mass) + (products[P2]*p2.mass) + (products[P3]*p3.mass)))
+print(""); print(p2.unicode_name)
+print((products[P2]*p2.mass)/((products[P1]*p1.mass) + (products[P2]*p2.mass) + (products[P3]*p3.mass)))
+print(""); print(p3.unicode_name)
+print((products[P3]*p3.mass)/((products[P1]*p1.mass) + (products[P2]*p2.mass) + (products[P3]*p3.mass)))
+>>>
+OrderedDict([('H2SO4', 6), ('K3Fe(CN)6', 2)])
+OrderedDict([('Fe2(SO4)3', 1), ('HCN', 12), ('K2SO4', 3)])
+2
+6
+3
+1
+12
+K₃Fe(CN)₆ 329.2479
+H₂SO₄ 98.072
+K₂SO₄ 174.2526
+Fe₂(SO₄)₃ 399.858
+HCN 27.025999999999996
+
+K₃Fe(CN)₆
+0.528094569709650
+H₂SO₄
+0.471905430290350
+
+K₂SO₄
+0.419236623002551
+
+Fe₂(SO₄)₃
+0.320674541060036
+
+HCN
+0.260088835937413
+
+Balancing equations of ionic equilibria
+# 8 H+ +  MnO4- + 5 e- = Mn2+ + 4H2O
+from chempy import Equilibrium
+from sympy import symbols		# SymPy is imported
+x, y, z = symbols('x y z')
+a = Equilibrium({'H+': 8, 'e-': 5, 'MnO4-': 1}, {'H2O': 4, 'Mn+2': 1}, x)
+b = Equilibrium({'H2O': 2, 'O2': 1, 'e-': 4}, {'OH-': 4}, y)
+n = Equilibrium.eliminate([a, b], 'e-')
+r1 = a*n[0] + b*n[1]
+print(n)
+print(r1)
+c = Equilibrium({'H2O': 1}, {'H+': 1, 'OH-': 1}, z)
+n = r1.cancel(c)
+print(n)
+r2 = r1 + n*c
+print(r2)
+>>>
+[4, -5]
+32 H+ + 4 MnO4- + 20 OH- = 26 H2O + 4 Mn+2 + 5 O2; x**4/y**5
+20
+12 H+ + 4 MnO4- = 6 H2O + 4 Mn+2 + 5 O2; x**4*z**20/y**5
+
+4 Cd(OH)2(s)  + 4 H2O = Cd4(OH)44+ + 4 H+ + 8 OH– 	 7.94×10–91
+H2O = H+ + OH– 	10–14
+4 Cd2+ + 4 H2O = Cd4(OH)44+ + 4 H+  	 10–32.5
+Cd(OH)2(s) = Cd2+ + OH– = 10–14.4
+
+from chempy import Equilibrium
+a = Equilibrium({'H2O': 4, 'Cd+2': 4}, {'H+': 4, 'Cd4(OH)4+4': 1}, 10**-32.5)
+b = Equilibrium({'Cd(OH)2(s)': 1}, {'OH-': 2, 'Cd+2': 1}, 10**-14.4)
+Equilibrium.eliminate([a, b], 'Cd+2')
+print(1*a + 4*b)
+
+a = Equilibrium({'H2O': 4, 'Cd(OH)2(s)': 4}, {'H+': 4,'OH-': 8,'Cd4(OH)4+4': 1}, 7.94e-91)
+b = Equilibrium({'H2O': 1}, {'OH-': 1, 'H+': 1}, 10**-14)
+a.cancel(b)
+print(a - 4*b)
+>>>
+4 Cd(OH)2(s) + 4 H2O = Cd4(OH)4+4 + 4 H+ + 8 OH-; 7.94e-91
+4 Cd(OH)2(s) = Cd4(OH)4+4 + 4 OH-; 7.94e-35
+
+Ionic strength
+from chempy.electrolytes import ionic_strength
+a = ionic_strength({'K+': 0.5, 'SO42-': 1})
+print(a)
+>>>
+Warning (from warnings module):
+  File "C:\Users\...\AppData\Roaming\Python\Python310\site-packages\chempy\electrolytes.py", line 84
+    warnings.warn("Molalities not charge neutral: %s" % str(net))
+UserWarning: Molalities not charge neutral: -0.5
+0.75
+.chemistry.Reaction module
+# Example: 2 K3Fe(CN)6 + 6 H2SO4 → 3 K2SO4 + Fe2(SO4)3 + 12 HCN
+import chempy
+a = chempy.chemistry.Reaction({'K3Fe(CN)6': 2, 'H2SO4': 6}, {'K2SO4': 3,'Fe2(SO4)3': 1,'HCN': 12 })
+print(a)
+print(a.net_stoich(['K3Fe(CN)6', 'H2SO4', 'K2SO4', 'Fe2(SO4)3', 'HCN']))
+print(a.order())
+>>>
+6 H2SO4 + 2 K3Fe(CN)6 -> Fe2(SO4)3 + 12 HCN + 3 K2SO4
+(-2, -6, 3, 1, 12)
+8
+
+Web publishing the reaction
+import chempy
+from chempy import Substance
+from chempy import Reaction
+keys_values = 'H2SO4 K3Fe(CN)6 Fe2(SO4)3 HCN K2SO4'.split()
+x = {k: Substance.from_formula(k) for k in keys_values}
+a = Reaction.from_string("6 H2SO4 + 2 K3Fe(CN)6 -> Fe2(SO4)3 + 12 HCN + 3 K2SO4", x)
+print(a.html(x))
+>>>
+6 H<sub>2</sub>SO<sub>4</sub> + 2 K<sub>3</sub>Fe(CN)<sub>6</sub> &rarr; Fe<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub> + 12 HCN + 3 K<sub>2</sub>SO<sub>4</sub>
+
+So, the .html tag is:
+<html>
+6 H<sub>2</sub>SO<sub>4</sub>+2 K<sub>3</sub>Fe(CN)<sub>6</sub> &rarr; Fe<sub>2</sub>(SO<sub>4</sub>)<sub>3</sub>+12 HCN + 3 K<sub>2</sub>SO<sub>4 </sub></html>
+
+LaTeX form for reactions
+import chempy
+from chempy import Substance
+from chempy import Reaction
+keys_values = 'H2SO4 K3Fe(CN)6 Fe2(SO4)3 HCN K2SO4'.split()
+x = {k: Substance.from_formula(k) for k in keys_values}
+a = Reaction.from_string("6 H2SO4 + 2 K3Fe(CN)6 -> Fe2(SO4)3 + 12 HCN + 3 K2SO4", x)
+print(a.latex(x))
+>>>
+6 H_{2}SO_{4} + 2 K_{3}Fe(CN)_{6} \rightarrow Fe_{2}(SO_{4})_{3} + 12 HCN + 3 K_{2}SO_{4}
+
+Unicode form for reactions
+import chempy
+from chempy import Substance
+from chempy import Reaction
+keys_values = 'H2SO4 K3Fe(CN)6 Fe2(SO4)3 HCN K2SO4'.split()
+x = {k: Substance.from_formula(k) for k in keys_values}
+a = Reaction.from_string("6 H2SO4 + 2 K3Fe(CN)6 -> Fe2(SO4)3 + 12 HCN + 3 K2SO4", x)
+print(a.unicode(x))
+>>>
+6 H₂SO₄ + 2 K₃Fe(CN)₆ → Fe₂(SO₄)₃ + 12 HCN + 3 K₂SO₄
+
+Number of phases
+from chempy import Species
+a = Species.from_formula('H2O')
+b = Species.from_formula('H2O(l)')
+c = Species.from_formula('H2O(g)')
+d = Species.from_formula('NaCl(aq)', ['(aq)'],default_phase_idx=None)
+print(a.phase_idx)
+print(b.phase_idx)
+print(c.phase_idx)
+print(d.phase_idx)
+>>>
+0
+2
+3
+1
+
+Reaction rates
+With import ReactionSystem and .rates reaction rates can be returned.
+# Reaction: 3 x -> y  k = 10
+from chempy import Reaction
+from chempy import ReactionSystem
+a = Reaction({'x': 3}, {'y': 1}, 10.0)
+r = ReactionSystem([a])
+k = r.rates({'x': 2, 'y': 7})
+print(abs(k['x']))
+print(k['y'])
+>>>
+240.0
+80.0
+
+Segregating elements with atomic number 
+Example: Formula for an precipitated compound is: CoO2.MnO.Fe(OH)2.
+This compound has 1 – Co, 5 – O, 1 – Mn, 1 – Fe, 1 – H
+Atomic numbers: Co – 27, O – 8, Mn – 25, Fe – 26, H – 1
+from chempy import Substance
+x = Substance.from_formula('K3Fe(CN)6')
+print(x.composition) 
+x = Substance.from_formula('CoO2.MnO.Fe(OH)2')
+print(x.composition)
+print(x.composition.get(8))	# O has atomic number 8
+>>>
+{19: 3, 26: 1, 6: 6, 7: 6}
+{27: 1, 8: 5, 25: 1, 26: 1, 1: 2}
+5
+
+Derived units 
+SI_base_registry = {
+        'length': default_units.metre,
+        'mass': default_units.kilogram,
+        'time': default_units.second,
+        'current': default_units.ampere,
+        'temperature': default_units.kelvin,
+        'luminous_intensity': default_units.candela,
+        'amount': default_units.mole
+    }
+
+And the keys for the permitted derived units are listed following: 
+'diffusion',
+'electrical_mobility',
+'permittivity',
+'charge',
+'energy',
+'concentration',
+'density',
+'radiolytic_yield'
+
+import chempy
+A, s, kg = chempy.units.default_units.meter, chempy.units.default_units.second, chempy.units.default_units.kilogram
+print(chempy.units.get_derived_unit(chempy.units.SI_base_registry, 'electrical_mobility'))
+m, s = chempy.units.default_units.meter, chempy.units.default_units.second
+print(chempy.units.get_derived_unit(chempy.units.SI_base_registry, 'diffusion'))
+>>>
+1.0 s**2*A/kg
+1.0 m**2/s
+
+ .kinetics.arrhenius module
+Calculate the rate constant for a hypothetical reaction, at 313 K if the Arrhenius factor 3×1010 and the energy of activation is 11×102 J.
+k =  A.e(–Ea/RT) = 3×1010 × e(–11×102 / (8.314 × 313)) = 1.9658 ×1010.
+
+import chempy
+k = chempy.kinetics.arrhenius.ArrheniusParam(3e10, 11e2)
+print('%.5g' % k(313.3))	# % for decimals
+>>>
+1.9667e+10

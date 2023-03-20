@@ -1,0 +1,212 @@
+CHAPTER 7 - Working with molecular formulas
+
+
+Formats for molecular formula 
+# Molecule: Ciprofloxacin;	Formula: C17H18FN3O3
+from chemformula import ChemFormula
+x = ChemFormula("C17H18FN3O3")
+print("Formula:")
+print(x.formula) 		# or x.sum_formula or x.text_formula
+print("\nUnicode:")
+print(x.unicode) 		# or x.sum_formula.unicode
+print("\n HTML (Web publishing code):")
+print(x.html)
+print("\nLATEX:")
+print(x.latex)
+print("\nHILL:")
+print(x.hill_formula)
+print("\nHILL in LATEX:")
+print(x.hill_formula.latex)
+>>>
+Formula:
+C17H18FN3O3
+
+Unicode:
+C₁₇H₁₈FN₃O₃
+
+HTML (Web publishing code):
+<span class='ChemFormula'>C<sub>17</sub>H<sub>18</sub>FN<sub>3</sub>O<sub>3</sub></span>
+
+LATEX:
+\textnormal{C}_{17}\textnormal{H}_{18}\textnormal{F}\textnormal{N}_{3}\textnormal{O}_{3}
+
+HILL:
+C17H18FN3O3
+
+HILL in LATEX:
+\textnormal{C}_{17}\textnormal{H}_{18}\textnormal{F}\textnormal{N}_{3}\textnormal{O}_{3}
+
+from chemformula import ChemFormula
+x = ChemFormula("H2C2O4.H2O") # oxalic acid monohydrate
+print(x.formula); print(x.sum_formula)
+print(x.unicode); print(x.sum_formula.unicode) 
+>>>
+H2C2O4.H2O
+H4C2O5
+H₂C₂O₄.H₂O
+H₄C₂O₅
+
+To check radioactivity (Boolean)
+from chemformula import ChemFormula
+x = ChemFormula("UO2(CH3CO2)2") 	# uranyl acetate
+y = ChemFormula("H2PtCl6")      	# chloroplatinic acid
+z = ChemFormula("GdCl3.6H2O")   	# gadolinium(III) chloride hexahydrate
+print(x.radioactive); print(y.radioactive); print(z.radioactive)
+>>>
+True
+False
+False
+
+To check the charge 
+Using .charge and .charged (Boolean) charge over the molecule can be known.
+from chemformula import ChemFormula
+x = ChemFormula("[Ni(CN)4]",-2)
+y = ChemFormula("[Zn(H2O)6]",+2)
+z = ChemFormula("C6H12O6")	# dextrose
+
+if x.charged == True:
+    print(x.charge)
+    print(x.text_charge)
+    print(x.unicode)
+else:
+    print ("Neutral")
+print(" ")
+
+if y.charged == False:
+    print ("Neutral")
+else:
+    print(y.charge)
+    print(y.text_charge)
+    print(y.unicode)
+print(" ")    
+
+if z.charged == False:
+    print ("Neutral")
+    print(z.unicode)
+else:
+    print(z.charge)
+    print(z.text_charge)
+>>>
+-2
+2-
+[Ni(CN)₄]²⁻
+ 
+2
+2+
+[Zn(H₂O)₆]²⁺
+ 
+Neutral
+C₆H₁₂O₆
+
+Fetching number of individual elements
+From the given molecular formula, total number of individual elements can be fetched with  formula.element ["symbol"].
+from chemformula import ChemFormula
+x = ChemFormula("C6H5CH2COOCH3")
+print("C: ", x.element ["C"], "  H: ", x.element["H"], "   O: ", x.element["O"])
+print(x.sum_formula)
+>>>
+C:  9   H:  10    O:  2
+C9H10O2
+
+Estimation of molar / atomic mass
+Molar mass can be returned from the molecular formula with formula.formula_weight.
+# Molecule: Methyl phenylacetate
+from chemformula import ChemFormula
+x = ChemFormula("C6H5CH2COOCH3") 
+print(x.formula_weight)
+>>>
+150.177
+
+# Atomic mass of the individual elements can also be fetched.
+from chemformula import ChemFormula
+x = ChemFormula("C") 
+print(x.formula_weight)
+x = ChemFormula("H") 
+print(x.formula_weight)
+x = ChemFormula("O") 
+print(x.formula_weight)    
+>>>
+12.011
+1.008
+15.999
+
+# Molecule: Methyl phenylacetate
+from chemformula import ChemFormula
+x = ChemFormula("C6H5CH2COOCH3")
+print("Molar mass: ",x.formula_weight)
+print("C: ", x.element ["C"], "  H: ", x.element["H"], "   O: ", x.element["O"])
+C = x.element ["C"]*ChemFormula("C").formula_weight
+H = x.element ["H"]*ChemFormula("H").formula_weight
+O = x.element ["O"]*ChemFormula("O").formula_weight
+print(C + H + O)
+Molar mass:  150.177
+C:  9   H:  10    O:  2
+150.177
+
+
+Mass fraction / atomic percentage
+# Molecule: Methyl phenylacetate
+from chemformula import ChemFormula
+x = ChemFormula("C6H5CH2COOCH3")
+y = x.mass_fraction
+print(y)
+print(y.get("C"))
+print(y.get("H"))
+print(y.get("O"))
+>>>
+{'C': 0.7198106234643121, 'H': 0.06712079745899839, 'O': 0.21306857907668952}
+0.7198106234643121
+0.06712079745899839
+0.21306857907668952
+
+Calculating elemental fractions in %
+Molecule: Methyl phenylacetate
+Formula: C6H5CH2COOCH3
+Atomic mass of C: 12.011 mass unit; 	Number of C: 9
+Atomic mass of H: 1.008 mass unit; 	Number of H: 10
+Atomic mass of O: 15.999 mass unit; 	Number of O: 2
+Net mass of C = 12.011 × 9 = 108.099 mass unit
+Net mass of H = 1.008 × 10 = 10.08 mass unit
+Net mass of O = 15.999 × 2 = 31.998 mass unit
+Molar mass of C6H5CH2COOCH3 = 108.099 + 10.08 + 31.998 = 150.177 mass unit
+% C = (108.099/150.177) × 100 = 71.98 % 	(Fraction 0.7198)
+% H = (10.08 /150.177) × 100 = 6.71 %	(Fraction 0.0671)
+% O = (31.998 /150.177) × 100 = 21.31 % 	(Fraction 0.2131)
+
+# Molecule: Methyl phenylacetate
+from chemformula import ChemFormula
+x = ChemFormula("C6H5CH2COOCH3")
+print(x.mass_fraction)  		# dictionary, x
+print("")
+print("Converted to list")
+y = x.mass_fraction.items()  
+z = list((y))				# to convert dictionary, y into list, z
+print(z)
+print(len(z))
+# Separating atomic fraction and converting into atomic percentage
+i = 0
+while i < len(z):
+    print("")
+    print(z[i])
+    print(z[i][0])				# index 0 for the element
+    print(round(z[i][1]*100,2))	# converting to atomic percent
+    i = i+1
+>>>
+{'C': 0.7198106234643121, 'H': 0.06712079745899839, 'O': 0.21306857907668952}
+
+Converted into list
+[('C', 0.7198106234643121), ('H', 0.06712079745899839), ('O', 0.21306857907668952)]
+3
+
+('C', 0.7198106234643121)
+C
+71.98
+
+('H', 0.06712079745899839)
+H
+6.71
+
+('O', 0.21306857907668952)
+O
+21.31
+
